@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "543342118784",
+    "firebase_url": "https://faithconnect-jephter-default-rtdb.firebaseio.com",
+    "project_id": "faithconnect-jephter",
+    "storage_bucket": "faithconnect-jephter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543342118784:android:9c36dfd42399bf918ee365",
+        "android_client_info": {
+          "package_name": "com.glamour.faithconnect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "543342118784-iid24fgifam437l0bn917ab6up40tuv1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.glamour.faithconnect",
+            "certificate_hash": "c4adb92dd27e37722a5ec61bd98e2fc2b69968a8"
+          }
+        },
+        {
+          "client_id": "543342118784-3opetgn6t31403i12md0n2j519a7d8i5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDieCOSGZJ5LL-Q5oPTMMQbglW6Ce2SDxs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "543342118784-3opetgn6t31403i12md0n2j519a7d8i5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

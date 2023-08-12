@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.glamour.faithconnect">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+
+    <queries>
+        <intent>
+            <action android:name="com.google.android.youtube.api.service.START" />
+        </intent>
+    </queries>
+
+    <application
+        android:name="com.glamour.faithconnect.live.AgoraApplication" android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:replace="android:theme">
+        <activity android:name="com.glamour.faithconnect.pages.CommentPagesActivity"/>
+        <activity android:name="com.glamour.faithconnect.pages.CreatePageActivity"/>
+        <activity android:name="com.glamour.faithconnect.pages.CreatePostPagesActivity"/>
+        <activity android:name="com.glamour.faithconnect.pages.EditPagesActivity"/>
+        <activity android:name="com.glamour.faithconnect.pages.PagesActivity"/>
+        <activity android:name="com.glamour.faithconnect.pages.PagesProfileActivity"/>
+        <activity android:name="com.glamour.faithconnect.admin.DeleteUserActivity" />
+        <activity android:name="com.glamour.faithconnect.admin.ReportedProductActivity" />
+        <activity
+            android:name="com.glamour.faithconnect.podcast.PodcastActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.post.ReplyActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.podcast.GoPodacstAudienceActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.podcast.GoPodcastBroadcastActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.podcast.PodcastBroadcasterActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.podcast.PodcastAudienceActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.menu.TranslationActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.menu.InviteActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.menu.WithdrawActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.menu.TermsActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.admin.RemoveVerifiedActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.group.JoinRequestActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.live.activities.AudienceActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.live.activities.GoAudienceActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.live.activities.GoBroadcastActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.live.activities.BroadcasterActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.live.activities.LiveActivity"
+            
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name="com.glamour.faithconnect.StickersPost"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.SendStickerActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.Stickers"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.admin.WarnGroupActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.admin.WarnUserActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.admin.VerificationRequestActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.admin.ReportedPostActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.admin.ReportedReelsActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.admin.ReportedGroupsActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.admin.ReportedUserActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.admin.AdminActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.menu.PrivacyActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.group.AddGroupActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.group.GroupMembersActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.menu.EditNumberActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.menu.EditEmailActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.menu.EditPasswordActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.menu.VerificationActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.menu.SavedActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.menu.MenuActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.who.FollowersActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.who.FollowingActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.notifications.NotificationScreen"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.who.ReelLikedActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.who.ViewedActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.story.ChatStoryViewActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.story.HighViewActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.search.LocationActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.who.LikedActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.story.StoryViewActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.story.AddStoryActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.reel.ViewReelActivity"
+            
+            android:theme="@style/ReelTheme" />
+        <activity
+            android:name="com.glamour.faithconnect.reel.ReelCommentActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.reel.ReelActivity"
+            
+            android:theme="@style/ReelTheme" />
+        <activity
+            android:name="com.glamour.faithconnect.send.ImageEditingActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.send.VideoEditingActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.reel.PostReelActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.reel.VideoEditActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.send.SendToGroupActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.send.SendToUserActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.send.SendMediaActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.send.MediaSelectActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.faceFilters.FaceFilters"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.marketPlace.ProductDetailsActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.marketPlace.MarketPlaceActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.marketPlace.PostProductActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.watchParty.StartYouTubeActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.watchParty.StartPartyActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.watchParty.YouTubePartyActivity"
+            
+            android:theme="@style/Party" />
+        <activity
+            android:name="com.glamour.faithconnect.watchParty.InviteMoreActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.watchParty.ChangeWatchPartyActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.watchParty.WatchPartyActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenLayout|screenSize"
+            
+            android:theme="@style/Party" />
+        <activity
+            android:name="com.glamour.faithconnect.watchParty.PartyPostActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.watchParty.PartyPrivacyActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.watchParty.InviteActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.watchParty.StartWatchPartyActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.meeting.MeetingActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.groupVideoCall.openvcall.ui.VideoGroupCallActivity"
+            
+            android:theme="@style/FullScreenVideoTheme" />
+        <activity
+            android:name="com.glamour.faithconnect.groupVideoCall.CallingGroupVideoActivity"
+            
+            android:theme="@style/SplashScreen" />
+        <activity
+            android:name="com.glamour.faithconnect.groupVideoCall.RingingGroupVideoActivity"
+            
+            android:theme="@style/SplashScreen" />
+        <activity
+            android:name="com.glamour.faithconnect.groupVoiceCall.RingingGroupVoiceActivity"
+            
+            android:theme="@style/SplashScreen" />
+        <activity
+            android:name="com.glamour.faithconnect.groupVoiceCall.CallingGroupVoiceActivity"
+            
+            android:theme="@style/SplashScreen" />
+        <activity
+            android:name="com.glamour.faithconnect.groupVoiceCall.openacall.ui.VoiceCallGroupActivity"
+            
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/SplashScreen"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name="com.glamour.faithconnect.group.GroupChatActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.group.CommentGroupActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.group.CreateGroupPostActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.group.EditGroupActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.group.GroupFragment"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.group.GroupProfileActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.group.AddMemberActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.group.StepThreeActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.group.StepTwoActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.group.StepOneActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.calling.VoiceChatViewActivity"
+            
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/SplashScreen"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name="com.glamour.faithconnect.calling.VideoChatViewActivity"
+            
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/FullScreenVideoTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name="com.glamour.faithconnect.calling.RingingActivity"
+            
+            android:theme="@style/SplashScreen" />
+        <activity
+            android:name="com.glamour.faithconnect.calling.CallingActivity"
+            
+            android:theme="@style/SplashScreen" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDF9NisUWrgCiRYUI3hSUThTVKLttUzK18" />
+
+        <activity
+            android:name="com.glamour.faithconnect.chat.ChatActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.chat.CreateChatActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.MediaViewActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.post.CommentActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.search.SearchActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.search.TrendingActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.post.CreatePostActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.profile.UserProfileActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.profile.EditProfileActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.emailAuth.ForgotPasswordActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.Check"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.phoneAuth.RegisterActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.phoneAuth.VerifyOTPActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.phoneAuth.GenerateOTPActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.emailAuth.SignUpActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.emailAuth.LoginActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.welcome.IntroLast"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.welcome.IntroActivity"
+             />
+        <activity
+            android:name="com.glamour.faithconnect.welcome.SplashScreenActivity"
+            
+            android:theme="@style/SplashScreen"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.glamour.faithconnect.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="www.app.myfriend.com"
+                    android:scheme="https" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="www.app.myfriend.com"
+                    android:scheme="http" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="www.app.myfriend.com"
+                    android:scheme="app" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-8957916229862289~8996479428" />
+
+        <service
+            android:name="com.glamour.faithconnect.notifications.FirebaseMessaging"
+            android:enabled="true"
+            android:exported="true"
+            tools:ignore="ExportedService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>
