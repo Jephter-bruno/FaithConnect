@@ -61,11 +61,12 @@ public class FollowingActivity extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference("Ads").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (Objects.requireNonNull(snapshot.child("type").getValue()).toString().equals("on")){
+                /*if (Objects.requireNonNull(snapshot.child("type").getValue()).toString().equals("on")){
                     mAdView.setVisibility(View.VISIBLE);
                 }else {
                     mAdView.setVisibility(View.GONE);
-                }
+                }*/
+                mAdView.setVisibility(View.VISIBLE);
             }
 
             @Override

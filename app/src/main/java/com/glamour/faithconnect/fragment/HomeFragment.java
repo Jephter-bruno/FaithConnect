@@ -92,7 +92,10 @@ public class HomeFragment extends Fragment {
         post = v.findViewById(R.id.post);
         post.setLayoutManager(new LinearLayoutManager(getContext()));
         modelPosts = new ArrayList<>();
-        checkFollowing();
+       checkFollowing();
+        readLive();
+        readPod();
+        readStory();
 
         more = v.findViewById(R.id.more);
         v.findViewById(R.id.more).setOnClickListener(view -> {
@@ -205,13 +208,14 @@ public class HomeFragment extends Fragment {
                             modelPosts.clear();
                             for (DataSnapshot ds: snapshot.getChildren()){
                                 ModelPost modelPost = ds.getValue(ModelPost.class);
-                                for (String id : followingList){
+                                modelPosts.add(modelPost);
+                                /*for (String id : followingList){
                                     if (Objects.requireNonNull(modelPost).getId().equals(id)){
                                         modelPosts.add(modelPost);
                                     }
 
 
-                                }
+                                }*/
                             }
                             Collections.reverse(modelPosts);
                             adapterPost = new AdapterPost(getActivity(), modelPosts);
@@ -270,11 +274,12 @@ public class HomeFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         int i = 0;
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                            for (String s : followingList){
+                            i++;
+                            /*for (String s : followingList){
                                 if (Objects.requireNonNull(snapshot.child("id").getValue()).toString().equals(s)){
                                     i++;
                                 }
-                            }
+                            }*/
                         }
                         initial = i;
                         getAllPost();
@@ -304,10 +309,10 @@ public class HomeFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 long timecurrent = System.currentTimeMillis();
                 modelStories.clear();
-                for (String id : followingList){
+                /*for (String id : followingList){*/
                     int countStory = 0;
                     ModelStory modelStory = null;
-                    for (DataSnapshot snapshot1 : snapshot.child(id).getChildren()){
+                    for (DataSnapshot snapshot1 : snapshot.getChildren()){
                         modelStory = snapshot1.getValue(ModelStory.class);
                         if (timecurrent > Objects.requireNonNull(modelStory).getTimestart() && timecurrent < modelStory.getTimeend()){
                             countStory++;
@@ -315,7 +320,7 @@ public class HomeFragment extends Fragment {
                     }
                     if (countStory > 0){
                         modelStories.add(modelStory);
-                    }
+                    /*}*/
                 }
                 adapterStory = new AdapterStory(getContext(), modelStories);
                 storyView.setAdapter(adapterStory);
@@ -340,11 +345,12 @@ public class HomeFragment extends Fragment {
                 for (DataSnapshot ds: dataSnapshot.getChildren()){
                     if (ds.hasChild("userid")){
                         ModelLive modelLive = ds.getValue(ModelLive.class);
-                        for (String id : followingList){
+                        modelLiveList.add(modelLive);
+                        /*for (String id : followingList){
                             if (!Objects.requireNonNull(firebaseUser).getUid().equals(Objects.requireNonNull(modelLive).getUserid()) && Objects.requireNonNull(modelLive).getUserid().equals(id)){
                                 modelLiveList.add(modelLive);
                             }
-                        }
+                        }*/
                     }
                     podcast = new AdapterPodcast(getActivity(), modelLiveList);
                     podView.setAdapter(podcast);
@@ -369,11 +375,12 @@ public class HomeFragment extends Fragment {
                 for (DataSnapshot ds: dataSnapshot.getChildren()){
                     if (ds.hasChild("userid")){
                         ModelLive modelLive = ds.getValue(ModelLive.class);
-                        for (String id : followingList){
+                        modelLives.add(modelLive);
+                       /* for (String id : followingList){
                             if (!Objects.requireNonNull(firebaseUser).getUid().equals(Objects.requireNonNull(modelLive).getUserid()) && Objects.requireNonNull(modelLive).getUserid().equals(id)){
                                 modelLives.add(modelLive);
                             }
-                        }
+                        }*/
                     }
                     live = new AdapterLive(getActivity(), modelLives);
                     liveView.setAdapter(live);

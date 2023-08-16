@@ -459,7 +459,7 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-8957916229862289~8996479428" />
+            android:value="ca-app-pub-8221169478042876~3297783694" />
 
         <service
             android:name="com.glamour.faithconnect.notifications.FirebaseMessaging"

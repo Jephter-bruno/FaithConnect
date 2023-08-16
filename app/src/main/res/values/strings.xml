@@ -214,13 +214,14 @@
     <string name="feeling_activity">Feeling / Activity</string>
     <string name="add_reels">Add Bites</string>
     <string name="go_live">Go Live</string>
+
     <string name="create_podcast">Create Podcast</string>
     <string name="add_stories">Add stories</string>
     <string name="views">Views</string>
     <string name="podcast">Podcast</string>
     <string name="paste_video_link_from_web">Paste video link from web</string>
     <string name="supports_youtube_amp_dailymotion">Supports YouTube &amp; DailyMotion</string>
-    <string name="link">Link</string>
+    <string name="link">Website</string>
     <string name="upload_any_video_you_want">Upload any video you want</string>
     <string name="textview">TextView</string>
     <string name="paste_the_meeting_id">Paste the meeting Id</string>
@@ -288,12 +289,12 @@
     <string name="politics">Politics</string>
     <string name="highlight">Highlight</string>
     <string name="profile_photo">Profile Photo</string>
-    <string name="upload_group_photo">Upload group photo</string>
+    <string name="upload_group_photo">Upload Church photo</string>
     <string name="upload">Upload</string>
     <string name="skip">Skip</string>
     <string name="cover_photo">Cover Photo</string>
-    <string name="upload_group_cover">Upload group cover</string>
-    <string name="create_group">Create Group</string>
+    <string name="upload_group_cover">Upload Church cover</string>
+    <string name="create_group">Create Church</string>
     <string name="fill_details_to_continue">Fill details to continue</string>
     <string name="watch_party">Watch Party</string>
     <string name="web">Web</string>

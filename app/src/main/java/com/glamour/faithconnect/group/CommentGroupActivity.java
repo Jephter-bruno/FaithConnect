@@ -1369,7 +1369,7 @@ public class CommentGroupActivity extends AppCompatActivity implements View.OnCl
             gif = view.findViewById(R.id.gif);
             gif.setOnClickListener(this);
             camera = view.findViewById(R.id.camera);
-            camera.setOnClickListener(this);
+           /* camera.setOnClickListener(this);*/
             comment_more = new BottomSheetDialog(this);
             comment_more.setContentView(view);
         }
