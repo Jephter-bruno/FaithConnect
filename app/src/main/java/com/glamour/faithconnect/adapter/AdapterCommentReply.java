@@ -22,6 +22,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.github.pgreze.reactions.ReactionPopup;
 import com.github.pgreze.reactions.ReactionsConfig;
 import com.github.pgreze.reactions.ReactionsConfigBuilder;
+import com.google.android.ads.nativetemplates.TemplateView;
+import com.google.android.gms.ads.AdLoader;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -74,6 +78,9 @@ public class AdapterCommentReply extends RecyclerView.Adapter<AdapterCommentRepl
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
+       if (position>1 && (position+1) % 3 == 0) {
+            holder.ad.setVisibility(View.VISIBLE);
+        }
 
         //UserInfo
         FirebaseDatabase.getInstance().getReference().child("Users").child(modelComments.get(position).getId()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -626,7 +633,7 @@ public class AdapterCommentReply extends RecyclerView.Adapter<AdapterCommentRepl
         final ImageView wow;
         final ImageView angry;
         final ImageView sad;
-
+        final RelativeLayout ad;
         public MyHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -644,12 +651,28 @@ public class AdapterCommentReply extends RecyclerView.Adapter<AdapterCommentRepl
             play = itemView.findViewById(R.id.play);
             media_layout = itemView.findViewById(R.id.media_layout);
             dp = itemView.findViewById(R.id.dp);
+            ad = itemView.findViewById(R.id.ad);
             name = itemView.findViewById(R.id.name);
             comment = itemView.findViewById(R.id.username);
             verified = itemView.findViewById(R.id.verified);
             likeText  = itemView.findViewById(R.id.likeText);
             noLikes  = itemView.findViewById(R.id.noLikes);
-        }
+
+ MobileAds.initialize(itemView.getContext(), initializationStatus -> {
+
+        });
+        AdLoader.Builder builder = new AdLoader.Builder(itemView.getContext(), itemView.getContext().getString(R.string.native_ad_unit_id));
+            builder.forUnifiedNativeAd(unifiedNativeAd -> {
+            TemplateView templateView = itemView.findViewById(R.id.my_template);
+            templateView.setNativeAd(unifiedNativeAd);
+        });
+
+        AdLoader adLoader = builder.build();
+        AdRequest adRequest = new AdRequest.Builder().build();
+            adLoader.loadAd(adRequest);
 
     }
+
 }
+    }
+

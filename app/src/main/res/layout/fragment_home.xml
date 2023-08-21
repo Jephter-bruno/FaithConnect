@@ -166,8 +166,8 @@
                             app:layout_constraintTop_toTopOf="@+id/circleImageView"
                            tools:ignore="ContentDescription" />
                         <LinearLayout
+                            android:id="@+id/bible"
                             android:fontFamily="@font/bold_roboto"
-                            android:text="@string/what_s_on_your_mind"
                             app:layout_constraintBottom_toBottomOf="@+id/what"
                             app:layout_constraintStart_toEndOf="@+id/what"
                             app:layout_constraintTop_toTopOf="@+id/what"
@@ -175,19 +175,21 @@
                             android:layout_margin="6dp"
                             android:layout_weight="1"
                             android:orientation="horizontal"
-                            android:backgroundTint="#FCEAE6"
+                            android:backgroundTint="#E6F0FF"
                             android:background="@drawable/btn_round"
                             android:layout_width="wrap_content"
                             android:layout_height="35dp">
+
                             <ImageView
-                                android:padding="1dp"
-                                android:src="@drawable/ic_live"
-                                android:background="@drawable/circle"
-                                android:backgroundTint="#F4A792"
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"
+                                android:background="@drawable/circle"
+                                android:backgroundTint="#85B6FD"
+                                android:padding="1dp"
+                                android:src="@drawable/chatlogo"
 
                                 tools:ignore="ContentDescription" />
+
                             <TextView
                                 android:layout_margin="6dp"
                                 android:textSize="14sp"

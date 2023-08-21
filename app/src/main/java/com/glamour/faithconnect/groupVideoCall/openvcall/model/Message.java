@@ -1,6 +1,7 @@
 package com.glamour.faithconnect.groupVideoCall.openvcall.model;
 
 public class Message {
+
     private final User mSender;
 
     private final String mContent;

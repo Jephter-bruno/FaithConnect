@@ -13,9 +13,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.facebook.ads.AudienceNetworkAds;
+import com.glamour.faithconnect.Bible_Tutor_Activity;
 import com.glamour.faithconnect.menu.MenuActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -80,7 +83,7 @@ public class HomeFragment extends Fragment {
     private int currentPage = 1;
     Button more;
     long initial;
-
+ LinearLayout bible;
     @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -90,12 +93,15 @@ public class HomeFragment extends Fragment {
 
         //Post
         post = v.findViewById(R.id.post);
+        bible = v.findViewById(R.id.bible);
+        v.findViewById(R.id.bible).setOnClickListener(v1 -> startActivity(new Intent(getActivity(), Bible_Tutor_Activity.class)));
         post.setLayoutManager(new LinearLayoutManager(getContext()));
         modelPosts = new ArrayList<>();
        checkFollowing();
         readLive();
         readPod();
         readStory();
+        AudienceNetworkAds.initialize(getContext());
 
         more = v.findViewById(R.id.more);
         v.findViewById(R.id.more).setOnClickListener(view -> {

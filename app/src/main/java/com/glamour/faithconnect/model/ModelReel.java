@@ -1,13 +1,16 @@
 package com.glamour.faithconnect.model;
 
+import android.content.Context;
+
 public class ModelReel {
 
     String id,pId,text,comment,video,privacy,pTime;
-
+Context context;
     public ModelReel() {
     }
 
-    public ModelReel(String id, String pId, String text, String comment, String video, String privacy, String pTime) {
+    public ModelReel(Context context,String id, String pId, String text, String comment, String video, String privacy, String pTime) {
+        this.context = context;
         this.id = id;
         this.pId = pId;
         this.text = text;

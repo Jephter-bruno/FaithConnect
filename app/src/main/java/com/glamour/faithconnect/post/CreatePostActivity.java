@@ -17,6 +17,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -29,6 +30,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.DialogFragment;
 
 import com.bumptech.glide.Glide;
+import com.facebook.ads.AdOptionsView;
+import com.facebook.ads.AudienceNetworkAds;
+import com.facebook.ads.MediaView;
+import com.facebook.ads.NativeAd;
+import com.facebook.ads.NativeAdLayout;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
@@ -123,7 +129,9 @@ public class CreatePostActivity extends AppCompatActivity implements PrivacyPick
 
     @SuppressLint("SetTextI18n")
     NightMode sharedPref;
-
+LinearLayout customAdview;
+NativeAdLayout nativeAdLayout;
+NativeAd nativeAd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sharedPref = new NightMode(this);
@@ -134,9 +142,38 @@ public class CreatePostActivity extends AppCompatActivity implements PrivacyPick
         }else setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_post);
+        AudienceNetworkAds.initialize(this);
+        nativeAd = new NativeAd(this, "VID_HD_16_9_15S_APP_INSTALL#102713349600103_102714542933317");
+        nativeAdLayout =findViewById(R.id.native_ad_container);
+        customAdview = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.native_ad_container, nativeAdLayout,false);
+        nativeAdLayout.addView(customAdview);
+
+
+
+
 
         main = findViewById(R.id.main);
+        MediaView nativeAdIcon = findViewById(R.id.native_ad_icon);
+        TextView nativeAdTitle = findViewById(R.id.native_ad_title);
+        MediaView nativeAdMedia = findViewById(R.id.native_ad_media);
+        TextView nativeAdSocialContext = findViewById(R.id.native_ad_social_context);
+        TextView nativeAdBody = findViewById(R.id.native_ad_body);
+        TextView sponsoredLabel = findViewById(R.id.native_ad_sponsored_label);
+        LinearLayout ad_choices_container = findViewById(R.id.ad_choices_container);
+        Button nativeAdCallToAction = findViewById(R.id.native_ad_call_to_action);
+        MediaView native_ad_media = findViewById(R.id.native_ad_media);
 
+        nativeAdTitle.setText(nativeAd.getAdvertiserName());
+        nativeAdBody.setText(nativeAd.getAdBodyText());
+        nativeAdSocialContext.setText(nativeAd.getAdSocialContext());
+        nativeAdCallToAction.setVisibility(nativeAd.hasCallToAction() ? View.VISIBLE : View.INVISIBLE);
+        nativeAdCallToAction.setText(nativeAd.getAdCallToAction());
+        sponsoredLabel.setText(nativeAd.getSponsoredTranslation());
+
+
+        AdOptionsView adchoices = new AdOptionsView(this,nativeAd,nativeAdLayout);
+        ad_choices_container.addView(adchoices);
+        nativeAd.registerViewForInteraction(customAdview,native_ad_media);
         //SetUserInfo
         FirebaseDatabase.getInstance().getReference().child("Users").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid()).addValueEventListener(new ValueEventListener() {
             @Override
