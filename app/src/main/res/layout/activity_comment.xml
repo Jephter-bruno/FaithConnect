@@ -290,15 +290,15 @@
                            android:id="@+id/media"
                            android:layout_marginTop="10dp"
                            android:layout_width="match_parent"
-                           android:layout_height="wrap_content">
+                           android:layout_height="250dp">
 
                            <ImageView
                                android:visibility="gone"
-                               android:scaleType="fitCenter"
+                               android:scaleType="centerCrop"
                                android:id="@+id/mediaView"
                                android:layout_centerInParent="true"
                                android:layout_width="match_parent"
-                               android:layout_height="wrap_content"
+                               android:layout_height="250dp"
 
                               tools:ignore="ContentDescription" />
 
@@ -308,7 +308,7 @@
                                android:visibility="gone"
                                android:layout_centerInParent="true"
                                android:layout_width="wrap_content"
-                               android:layout_height="350dp"/>
+                               android:layout_height="250dp"/>
 
                            <me.jagar.chatvoiceplayerlibrary.VoicePlayerView
                                android:visibility="gone"

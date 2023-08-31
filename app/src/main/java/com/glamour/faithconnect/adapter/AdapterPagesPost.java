@@ -28,10 +28,12 @@ import com.bumptech.glide.Glide;
 import com.github.pgreze.reactions.ReactionPopup;
 import com.github.pgreze.reactions.ReactionsConfig;
 import com.github.pgreze.reactions.ReactionsConfigBuilder;
+import com.google.android.ads.nativetemplates.NativeTemplateStyle;
 import com.google.android.ads.nativetemplates.TemplateView;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.nativead.NativeAd;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -1243,18 +1245,21 @@ public class AdapterPagesPost extends RecyclerView.Adapter<AdapterPagesPost.MyHo
             line = itemView.findViewById(R.id.line);
             more = itemView.findViewById(R.id.more);
 
-            MobileAds.initialize(itemView.getContext(), initializationStatus -> {
+            MobileAds.initialize(itemView.getContext());
+            AdLoader adLoader = new AdLoader.Builder(itemView.getContext(), itemView.getContext().getString(R.string.native_ad_unit_id))
+                    .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
+                        @Override
+                        public void onNativeAdLoaded(NativeAd nativeAd) {
+                            NativeTemplateStyle styles = new
+                                    NativeTemplateStyle.Builder().build();
+                            TemplateView template = itemView.findViewById(R.id.my_template);
+                            template.setStyles(styles);
+                            template.setNativeAd(nativeAd);
+                        }
+                    })
+                    .build();
 
-            });
-            AdLoader.Builder builder = new AdLoader.Builder(itemView.getContext(), itemView.getContext().getString(R.string.native_ad_unit_id));
-            builder.forUnifiedNativeAd(unifiedNativeAd -> {
-                TemplateView templateView = itemView.findViewById(R.id.my_template);
-                templateView.setNativeAd(unifiedNativeAd);
-            });
-
-            AdLoader adLoader = builder.build();
-            AdRequest adRequest = new AdRequest.Builder().build();
-            adLoader.loadAd(adRequest);
+            adLoader.loadAd(new AdRequest.Builder().build());
 
 
         }

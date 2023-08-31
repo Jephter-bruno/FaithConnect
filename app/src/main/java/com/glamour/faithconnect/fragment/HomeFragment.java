@@ -13,12 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.facebook.ads.AudienceNetworkAds;
-import com.glamour.faithconnect.Bible_Tutor_Activity;
 import com.glamour.faithconnect.menu.MenuActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -79,11 +76,11 @@ public class HomeFragment extends Fragment {
     TextView nothing;
 
 
-    private static final int TOTAL_ITEM_EACH_LOAD = 5;
+    private static final int TOTAL_ITEM_EACH_LOAD = 18;
     private int currentPage = 1;
     Button more;
     long initial;
- LinearLayout bible;
+
     @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -93,15 +90,13 @@ public class HomeFragment extends Fragment {
 
         //Post
         post = v.findViewById(R.id.post);
-        bible = v.findViewById(R.id.bible);
-        v.findViewById(R.id.bible).setOnClickListener(v1 -> startActivity(new Intent(getActivity(), Bible_Tutor_Activity.class)));
         post.setLayoutManager(new LinearLayoutManager(getContext()));
         modelPosts = new ArrayList<>();
-       checkFollowing();
+       // checkFollowing();
         readLive();
         readPod();
         readStory();
-        AudienceNetworkAds.initialize(getContext());
+        getAllPost();
 
         more = v.findViewById(R.id.more);
         v.findViewById(R.id.more).setOnClickListener(view -> {
@@ -215,13 +210,13 @@ public class HomeFragment extends Fragment {
                             for (DataSnapshot ds: snapshot.getChildren()){
                                 ModelPost modelPost = ds.getValue(ModelPost.class);
                                 modelPosts.add(modelPost);
-                                /*for (String id : followingList){
+/*
+                                for (String id : followingList){
                                     if (Objects.requireNonNull(modelPost).getId().equals(id)){
                                         modelPosts.add(modelPost);
                                     }
-
-
-                                }*/
+                                }
+*/
                             }
                             Collections.reverse(modelPosts);
                             adapterPost = new AdapterPost(getActivity(), modelPosts);
@@ -280,12 +275,11 @@ public class HomeFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         int i = 0;
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                            i++;
-                            /*for (String s : followingList){
+                            for (String s : followingList){
                                 if (Objects.requireNonNull(snapshot.child("id").getValue()).toString().equals(s)){
                                     i++;
                                 }
-                            }*/
+                            }
                         }
                         initial = i;
                         getAllPost();
@@ -315,10 +309,28 @@ public class HomeFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 long timecurrent = System.currentTimeMillis();
                 modelStories.clear();
-                /*for (String id : followingList){*/
+                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                     int countStory = 0;
                     ModelStory modelStory = null;
-                    for (DataSnapshot snapshot1 : snapshot.getChildren()){
+
+                    for (DataSnapshot storySnapshot : snapshot1.getChildren()) {
+                        modelStory = storySnapshot.getValue(ModelStory.class);
+
+                        if (timecurrent > Objects.requireNonNull(modelStory).getTimestart() && timecurrent < modelStory.getTimeend()) {
+                            countStory++;
+                        }
+                    }
+
+                    if (countStory > 0) {
+                        modelStories.add(modelStory);
+                    }
+                }
+
+/*
+                for (String id : followingList){
+                    int countStory = 0;
+                    ModelStory modelStory = null;
+                    for (DataSnapshot snapshot1 : snapshot.child(id).getChildren()){
                         modelStory = snapshot1.getValue(ModelStory.class);
                         if (timecurrent > Objects.requireNonNull(modelStory).getTimestart() && timecurrent < modelStory.getTimeend()){
                             countStory++;
@@ -326,8 +338,9 @@ public class HomeFragment extends Fragment {
                     }
                     if (countStory > 0){
                         modelStories.add(modelStory);
-                    /*}*/
+                    }
                 }
+*/
                 adapterStory = new AdapterStory(getContext(), modelStories);
                 storyView.setAdapter(adapterStory);
                 adapterStory.notifyDataSetChanged();
@@ -352,11 +365,14 @@ public class HomeFragment extends Fragment {
                     if (ds.hasChild("userid")){
                         ModelLive modelLive = ds.getValue(ModelLive.class);
                         modelLiveList.add(modelLive);
-                        /*for (String id : followingList){
+
+/*
+                        for (String id : followingList){
                             if (!Objects.requireNonNull(firebaseUser).getUid().equals(Objects.requireNonNull(modelLive).getUserid()) && Objects.requireNonNull(modelLive).getUserid().equals(id)){
                                 modelLiveList.add(modelLive);
                             }
-                        }*/
+                        }
+*/
                     }
                     podcast = new AdapterPodcast(getActivity(), modelLiveList);
                     podView.setAdapter(podcast);
@@ -382,11 +398,14 @@ public class HomeFragment extends Fragment {
                     if (ds.hasChild("userid")){
                         ModelLive modelLive = ds.getValue(ModelLive.class);
                         modelLives.add(modelLive);
-                       /* for (String id : followingList){
+
+/*
+                        for (String id : followingList){
                             if (!Objects.requireNonNull(firebaseUser).getUid().equals(Objects.requireNonNull(modelLive).getUserid()) && Objects.requireNonNull(modelLive).getUserid().equals(id)){
                                 modelLives.add(modelLive);
                             }
-                        }*/
+                        }
+*/
                     }
                     live = new AdapterLive(getActivity(), modelLives);
                     liveView.setAdapter(live);

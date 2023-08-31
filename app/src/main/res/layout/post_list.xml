@@ -208,7 +208,8 @@
                 android:id="@+id/mediaView"
                 android:layout_centerInParent="true"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="350dp"
+
                tools:ignore="ContentDescription" />
 
             <ImageView
@@ -585,14 +586,6 @@
             app:gnt_template_type="@layout/gnt_medium_template_view" />
 
     </RelativeLayout>
-    <com.facebook.ads.NativeAdLayout
-        android:visibility="gone"
-        android:id="@+id/native_ad_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

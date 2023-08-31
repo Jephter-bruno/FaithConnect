@@ -24,7 +24,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import com.facebook.ads.AudienceNetworkAds;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
@@ -62,6 +61,7 @@ import com.glamour.faithconnect.reel.ViewReelActivity;
 import com.glamour.faithconnect.story.AddStoryActivity;
 import com.glamour.faithconnect.watchParty.StartWatchPartyActivity;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //Bottom
     BottomSheetDialog more;
-    LinearLayout post,tutor,reel,party,camera,meeting,live,podcast,sell,stories;
+    LinearLayout post,reel,party,camera,meeting,live,podcast,sell,stories;
 
     //Permission
     private static final int VIDEO_PICK_CODE = 1002;
@@ -102,7 +102,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onStart() {
         super.onStart();
         startTime = System.currentTimeMillis();
-        AudienceNetworkAds.initialize(MainActivity.this);
     }
 
     @Override
@@ -420,13 +419,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             post = view.findViewById(R.id.post);
             post.setOnClickListener(this);
             reel = view.findViewById(R.id.reel);
-            tutor = view.findViewById(R.id.tutor);
-            tutor.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    startActivity(new Intent(MainActivity.this,Bible_Tutor_Activity.class));
-                }
-            });
             reel.setOnClickListener(this);
             party = view.findViewById(R.id.party);
             party.setOnClickListener(this);

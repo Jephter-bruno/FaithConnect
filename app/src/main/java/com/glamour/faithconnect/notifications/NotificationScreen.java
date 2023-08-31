@@ -68,12 +68,11 @@ public class NotificationScreen extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference("Ads").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                mAdView.setVisibility(View.VISIBLE);
-             /*   if (Objects.requireNonNull(snapshot.child("type").getValue()).toString().equals("on")){
+                if (Objects.requireNonNull(snapshot.child("type").getValue()).toString().equals("on")){
                     mAdView.setVisibility(View.VISIBLE);
                 }else {
                     mAdView.setVisibility(View.GONE);
-                }*/
+                }
             }
 
             @Override

@@ -48,8 +48,8 @@ public class ChatFragment extends Fragment {
         AdView mAdView = view.findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-        mAdView.setVisibility(View.VISIBLE);
-        /*FirebaseDatabase.getInstance().getReference("Ads").addListenerForSingleValueEvent(new ValueEventListener() {
+
+        FirebaseDatabase.getInstance().getReference("Ads").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (Objects.requireNonNull(snapshot.child("type").getValue()).toString().equals("on")){
@@ -64,7 +64,7 @@ public class ChatFragment extends Fragment {
 
             }
         });
-*/
+
         view.findViewById(R.id.edit).setOnClickListener(v -> startActivity(new Intent(getContext(), GroupFragment.class)));
 
         //Create

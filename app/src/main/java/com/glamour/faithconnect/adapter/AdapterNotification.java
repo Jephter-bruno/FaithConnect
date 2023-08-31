@@ -8,16 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.ads.nativetemplates.TemplateView;
-import com.google.android.gms.ads.AdLoader;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -58,9 +53,7 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
-        if (position>1 && (position+1) % 6 == 0) {
-            holder.ad.setVisibility(View.VISIBLE);
-        }
+
         ModelNotification modelNotification = notifications.get(position);
         String notification = modelNotification.getNotification();
         String timestamp = modelNotification.getTimestamp();
@@ -138,7 +131,6 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
         final TextView username;
         final TextView name;
         final ImageView verified;
-        final RelativeLayout ad;
 
         public Holder(@NonNull View itemView) {
             super(itemView);
@@ -146,22 +138,6 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
             username = itemView.findViewById(R.id.username);
             name = itemView.findViewById(R.id.name);
             verified = itemView.findViewById(R.id.verified);
-            ad = itemView.findViewById(R.id.ad);
-
-            MobileAds.initialize(itemView.getContext(), initializationStatus -> {
-
-            });
-            AdLoader.Builder builder = new AdLoader.Builder(itemView.getContext(), itemView.getContext().getString(R.string.native_ad_unit_id));
-            builder.forUnifiedNativeAd(unifiedNativeAd -> {
-                TemplateView templateView = itemView.findViewById(R.id.my_template);
-                templateView.setNativeAd(unifiedNativeAd);
-            });
-
-            AdLoader adLoader = builder.build();
-             AdRequest adRequest = new AdRequest.Builder().build();
-            adLoader.loadAd(adRequest);
-
-        }
         }
     }
-
+}

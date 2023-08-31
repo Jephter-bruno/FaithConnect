@@ -8,13 +8,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -28,21 +26,15 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
-import com.facebook.ads.Ad;
-import com.facebook.ads.AdError;
-import com.facebook.ads.AdOptionsView;
-import com.facebook.ads.AudienceNetworkAds;
-import com.facebook.ads.MediaView;
-import com.facebook.ads.NativeAd;
-import com.facebook.ads.NativeAdLayout;
-import com.facebook.ads.NativeAdListener;
 import com.github.pgreze.reactions.ReactionPopup;
 import com.github.pgreze.reactions.ReactionsConfig;
 import com.github.pgreze.reactions.ReactionsConfigBuilder;
+import com.google.android.ads.nativetemplates.NativeTemplateStyle;
 import com.google.android.ads.nativetemplates.TemplateView;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.nativead.NativeAd;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -90,14 +82,12 @@ import timber.log.Timber;
 
 import static android.os.Environment.DIRECTORY_DOWNLOADS;
 
-/*@SuppressWarnings("ALL")*/
+@SuppressWarnings("ALL")
 public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
 
     final Context context;
-    private NativeAd nativeAd;
     final List<ModelPost> modelPosts;
-    LinearLayout adView;
-    LinearLayout adChoicesContainer;
+
     public AdapterPost(Context context, List<ModelPost> modelPosts) {
         this.context = context;
         this.modelPosts = modelPosts;
@@ -107,13 +97,10 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
     private boolean notify = false;
 
     MediaPlayer mp;
-    View containerView;
-
 
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        containerView = LayoutInflater.from(context).inflate(R.layout.native_ad_container, parent, false);
        View view = LayoutInflater.from(context).inflate(R.layout.post_list, parent, false);
         return new MyHolder(view);
     }
@@ -138,106 +125,13 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
-        if (position>1 && (position+1) % 1 == 0) {
-            holder.ad.setVisibility(View.VISIBLE);
-
-        }
-         if (position>1 && (position+1) % 1 == 0) {
-            holder.nativeAdLayout.setVisibility(View.VISIBLE);
-
-        }
-
-        AudienceNetworkAds.initialize(context);
-        nativeAd = new NativeAd(context, "VID_HD_16_9_15S_APP_INSTALL#102713349600103_102714542933317");
-
-        NativeAdListener nativeAdListener = new NativeAdListener() {
-            @Override
-            public void onMediaDownloaded(Ad ad) {
-                // Native ad finished downloading all assets
-                Log.e("ADSNATIVE", "Native ad finished downloading all assets.");
-            }
-
-
-            @Override
-            public void onError(Ad ad, AdError adError) {
-                // Native ad failed to load
-                Log.e("ADSNATIVE", "Native ad failed to load: " + adError.getErrorMessage());
-            }
-
-            @Override
-            public void onAdLoaded(Ad ad) {
-                // Native ad is loaded and ready to be displayed
-                Log.d("ADSNATIVE", "Native ad is loaded and ready to be displayed!");
-                if (nativeAd == null || nativeAd != ad) {
-                    return;
-                }
-                nativeAd.unregisterView();
-
-                // Add the Ad view into the ad container
-                LayoutInflater inflater = LayoutInflater.from(context);
-                // Inflate the Ad view.  The layout referenced should be the one you created in the last step.
-                adView = (LinearLayout) inflater.inflate(R.layout.native_ad_container, holder.nativeAdLayout, false);
-                holder.nativeAdLayout.addView(adView);
-
-                // Add the AdOptionsView
-                LinearLayout adChoicesContainer = containerView.findViewById(R.id.ad_choices_container);
-                AdOptionsView adOptionsView = new AdOptionsView(context, nativeAd, holder.nativeAdLayout);
-                adChoicesContainer.removeAllViews();
-                adChoicesContainer.addView(adOptionsView, 0);
-
-                // Create native UI using the ad metadata.
-                MediaView nativeAdIcon = adView.findViewById(R.id.native_ad_icon);
-                TextView nativeAdTitle = adView.findViewById(R.id.native_ad_title);
-                MediaView nativeAdMedia = adView.findViewById(R.id.native_ad_media);
-                TextView nativeAdSocialContext = adView.findViewById(R.id.native_ad_social_context);
-                TextView nativeAdBody = adView.findViewById(R.id.native_ad_body);
-                TextView sponsoredLabel = adView.findViewById(R.id.native_ad_sponsored_label);
-                Button nativeAdCallToAction = adView.findViewById(R.id.native_ad_call_to_action);
-
-                // Set the Text.
-                nativeAdTitle.setText(nativeAd.getAdvertiserName());
-                nativeAdBody.setText(nativeAd.getAdBodyText());
-                nativeAdSocialContext.setText(nativeAd.getAdSocialContext());
-                nativeAdCallToAction.setVisibility(nativeAd.hasCallToAction() ? View.VISIBLE : View.INVISIBLE);
-                nativeAdCallToAction.setText(nativeAd.getAdCallToAction());
-                sponsoredLabel.setText(nativeAd.getSponsoredTranslation());
-
-                // Create a list of clickable views
-                List<View> clickableViews = new ArrayList<>();
-                clickableViews.add(nativeAdTitle);
-                clickableViews.add(nativeAdCallToAction);
-
-                // Register the Title and CTA button to listen for clicks.
-                nativeAd.registerViewForInteraction(
-                        adView, nativeAdMedia, nativeAdIcon, clickableViews);
-            }
-
-            @Override
-            public void onAdClicked(Ad ad) {
-                // Native ad clicked
-                Log.d("ADSNATIVE", "Native ad clicked!");
-            }
-
-            @Override
-            public void onLoggingImpression(Ad ad) {
-                // Native ad impression
-                Log.d("ADSNATIVE", "Native ad impression logged!");
-            }
-        };
-
-        // Request an ad
-        nativeAd.loadAd(
-                nativeAd.buildLoadAdConfig()
-                        .withAdListener(nativeAdListener)
-                        .build());
-
-
-
 
         requestQueue = Volley.newRequestQueue(holder.itemView.getContext());
         mp = MediaPlayer.create(context, R.raw.like);
 
-
+        if (position>1 && (position+1) % 4 == 0) {
+            holder.ad.setVisibility(View.VISIBLE);
+        }
 
 
         //UserInfo
@@ -1510,11 +1404,6 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
         final RelativeLayout ad;
         URLEmbeddedView urlEmbeddedView;
 
-
-         NativeAdLayout nativeAdLayout;
-         LinearLayout adView;
-         NativeAd nativeAd;
-
         public MyHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -1525,9 +1414,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
             username = itemView.findViewById(R.id.username);
             comment = itemView.findViewById(R.id.comment);
             ad = itemView.findViewById(R.id.ad);
-            adView = itemView.findViewById(R.id.adView);
             time = itemView.findViewById(R.id.time);
-            nativeAdLayout = itemView.findViewById(R.id.native_ad_container);
             activity = itemView.findViewById(R.id.activity);
             feeling = itemView.findViewById(R.id.feeling);
             location = itemView.findViewById(R.id.location);
@@ -1558,22 +1445,21 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
             more = itemView.findViewById(R.id.more);
 
 
+            MobileAds.initialize(itemView.getContext());
+            AdLoader adLoader = new AdLoader.Builder(itemView.getContext(), itemView.getContext().getString(R.string.native_ad_unit_id))
+                    .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
+                        @Override
+                        public void onNativeAdLoaded(NativeAd nativeAd) {
+                            NativeTemplateStyle styles = new
+                                    NativeTemplateStyle.Builder().build();
+                            TemplateView template = itemView.findViewById(R.id.my_template);
+                            template.setStyles(styles);
+                            template.setNativeAd(nativeAd);
+                        }
+                    })
+                    .build();
 
-
-
-            MobileAds.initialize(itemView.getContext(), initializationStatus -> {
-
-            });
-            AdLoader.Builder builder = new AdLoader.Builder(itemView.getContext(), itemView.getContext().getString(R.string.native_ad_unit_id));
-            builder.forUnifiedNativeAd(unifiedNativeAd -> {
-                TemplateView templateView = itemView.findViewById(R.id.my_template);
-                templateView.setNativeAd(unifiedNativeAd);
-            });
-
-            AdLoader adLoader = builder.build();
-            AdRequest adRequest = new AdRequest.Builder().build();
-            adLoader.loadAd(adRequest);
-
+            adLoader.loadAd(new AdRequest.Builder().build());
         }
 
     }
@@ -1657,7 +1543,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
                             public Map<String, String> getHeaders() {
                                 Map<String, String> headers = new HashMap<>();
                                 headers.put("Content-Type", "application/json");
-                                headers.put("Authorization", "key=AAAAfoG2x4A:APA91bFn9LOCNQXofZENtF0oLioSXaUHY3zkD_umFBnQhccXaEA7yWqUYZzylqd5_LhOYGmGuCrMmxVqKN0jpt9O9GIW19yTue6u-0f78sOXGtGYNpo3Dz7pjOa6cKellOQaOlPMp-nV");
+                                headers.put("Authorization", "key=AAAAoAVZ-Vk:APA91bH7bjTYlktpJ53F9XkNPbmnUMw-csCIbocmKGKPGRPzvBAYXQ0S0XGxP3bVAylQmM6nOW9iOLPz18jUy8GrtA4OlPSe5XffhxnHd9cKlZD6XPbc9IZ7RePBvbAU-CPJ2v7_yybJ");
                                 return headers;
                             }
                         };

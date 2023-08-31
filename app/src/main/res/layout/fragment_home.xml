@@ -153,7 +153,6 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
-                            android:id="@+id/what"
                             android:textColor="?attr/textcolor"
                             android:textSize="16sp"
                             android:layout_width="wrap_content"
@@ -165,43 +164,6 @@
                             app:layout_constraintStart_toEndOf="@+id/circleImageView"
                             app:layout_constraintTop_toTopOf="@+id/circleImageView"
                            tools:ignore="ContentDescription" />
-                        <LinearLayout
-                            android:id="@+id/bible"
-                            android:fontFamily="@font/bold_roboto"
-                            app:layout_constraintBottom_toBottomOf="@+id/what"
-                            app:layout_constraintStart_toEndOf="@+id/what"
-                            app:layout_constraintTop_toTopOf="@+id/what"
-                            tools:ignore="ContentDescription"
-                            android:layout_margin="6dp"
-                            android:layout_weight="1"
-                            android:orientation="horizontal"
-                            android:backgroundTint="#E6F0FF"
-                            android:background="@drawable/btn_round"
-                            android:layout_width="wrap_content"
-                            android:layout_height="35dp">
-
-                            <ImageView
-                                android:layout_width="35dp"
-                                android:layout_height="35dp"
-                                android:background="@drawable/circle"
-                                android:backgroundTint="#85B6FD"
-                                android:padding="1dp"
-                                android:src="@drawable/chatlogo"
-
-                                tools:ignore="ContentDescription" />
-
-                            <TextView
-                                android:layout_margin="6dp"
-                                android:textSize="14sp"
-                                android:textColor="#92D2F4"
-                                android:fontFamily="@font/bold_roboto"
-                                android:text="@string/bible_tutor"
-                                android:layout_weight="1"
-                                android:gravity="center_vertical"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                tools:ignore="InefficientWeight,NestedWeights,RtlCompat" />
-                        </LinearLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 

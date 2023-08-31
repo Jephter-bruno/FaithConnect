@@ -106,6 +106,9 @@ public class AdapterLive extends RecyclerView.Adapter<AdapterLive.MyHolder>{
         public MyHolder(@NonNull View itemView) {
             super(itemView);
             live_photo = itemView.findViewById(R.id.roundedImageView);
+
+
+
         }
     }
 }

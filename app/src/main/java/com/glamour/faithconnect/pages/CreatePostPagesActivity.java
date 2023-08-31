@@ -62,6 +62,7 @@ import com.glamour.faithconnect.watchParty.StartWatchPartyActivity;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Objects;

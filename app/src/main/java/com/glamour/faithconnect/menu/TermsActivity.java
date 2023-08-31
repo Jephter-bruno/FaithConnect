@@ -46,16 +46,16 @@ public class TermsActivity extends AppCompatActivity {
                         "                  to translate the app into other languages, or make derivative\n" +
                         "                  versions. The app itself, and all the trade marks, copyright,\n" +
                         "                  database rights and other intellectual property rights related\n" +
-                        "                  to it, still belong to FaithConnect.\n" +
+                        "                  to it, still belong to Myfriend.\n" +
                         "                </p> <p>\n" +
-                        "                  FaithConnect is committed to ensuring that the app is\n" +
+                        "                  Myfriend is committed to ensuring that the app is\n" +
                         "                  as useful and efficient as possible. For that reason, we\n" +
                         "                  reserve the right to make changes to the app or to charge for\n" +
                         "                  its services, at any time and for any reason. We will never\n" +
                         "                  charge you for the app or its services without making it very\n" +
                         "                  clear to you exactly what you’re paying for.\n" +
                         "                </p> <p>\n" +
-                        "                  The FaithConnect app stores and processes personal data that\n" +
+                        "                  The Myfriend app stores and processes personal data that\n" +
                         "                  you have provided to us, in order to provide our\n" +
                         "                  Service. It’s your responsibility to keep your phone and\n" +
                         "                  access to the app secure. We therefore recommend that you do\n" +
@@ -64,7 +64,7 @@ public class TermsActivity extends AppCompatActivity {
                         "                  official operating system of your device. It could make your\n" +
                         "                  phone vulnerable to malware/viruses/malicious programs,\n" +
                         "                  compromise your phone’s security features and it could mean\n" +
-                        "                  that the FaithConnect app won’t work properly or at all.\n" +
+                        "                  that the Myfriend app won’t work properly or at all.\n" +
                         "                </p> <div><p>\n" +
                         "                    The app does use third party services that declare their own\n" +
                         "                    Terms and Conditions.\n" +
@@ -73,10 +73,10 @@ public class TermsActivity extends AppCompatActivity {
                         "                    providers used by the app\n" +
                         "                  </p> <ul><li><a href=\"https://policies.google.com/terms\" target=\"_blank\" rel=\"noopener noreferrer\">Google Play Services</a></li><li><a href=\"https://developers.google.com/admob/terms\" target=\"_blank\" rel=\"noopener noreferrer\">AdMob</a></li><li><a href=\"https://firebase.google.com/terms/analytics\" target=\"_blank\" rel=\"noopener noreferrer\">Google Analytics for Firebase</a></li><li><a href=\"https://firebase.google.com/terms/crashlytics\" target=\"_blank\" rel=\"noopener noreferrer\">Firebase Crashlytics</a></li><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><li><a href=\"https://www.mapbox.com/legal/tos\" target=\"_blank\" rel=\"noopener noreferrer\">Mapbox</a></li><!----><!----><!----></ul></div> <p>\n" +
                         "                  You should be aware that there are certain things that\n" +
-                        "                  FaithConnect will not take responsibility for. Certain\n" +
+                        "                  Myfriend will not take responsibility for. Certain\n" +
                         "                  functions of the app will require the app to have an active\n" +
                         "                  internet connection. The connection can be Wi-Fi, or provided\n" +
-                        "                  by your mobile network provider, but FaithConnect\n" +
+                        "                  by your mobile network provider, but Myfriend\n" +
                         "                  cannot take responsibility for the app not working at full\n" +
                         "                  functionality if you don’t have access to Wi-Fi, and you don’t\n" +
                         "                  have any of your data allowance left.\n" +
@@ -94,18 +94,18 @@ public class TermsActivity extends AppCompatActivity {
                         "                  using the app, please be aware that we assume that you have\n" +
                         "                  received permission from the bill payer for using the app.\n" +
                         "                </p> <p>\n" +
-                        "                  Along the same lines, FaithConnect cannot always take\n" +
+                        "                  Along the same lines, Myfriend cannot always take\n" +
                         "                  responsibility for the way you use the app i.e. You need to\n" +
                         "                  make sure that your device stays charged – if it runs out of\n" +
                         "                  battery and you can’t turn it on to avail the Service,\n" +
-                        "                  FaithConnect cannot accept responsibility.\n" +
+                        "                  Myfriend cannot accept responsibility.\n" +
                         "                </p> <p>\n" +
-                        "                  With respect to FaithConnect’s responsibility for your\n" +
+                        "                  With respect to Myfriend’s responsibility for your\n" +
                         "                  use of the app, when you’re using the app, it’s important to\n" +
                         "                  bear in mind that although we endeavour to ensure that it is\n" +
                         "                  updated and correct at all times, we do rely on third parties\n" +
                         "                  to provide information to us so that we can make it available\n" +
-                        "                  to you. FaithConnect accepts no liability for any\n" +
+                        "                  to you. Myfriend accepts no liability for any\n" +
                         "                  loss, direct or indirect, you experience as a result of\n" +
                         "                  relying wholly on this functionality of the app.\n" +
                         "                </p> <p>\n" +
@@ -114,7 +114,7 @@ public class TermsActivity extends AppCompatActivity {
                         "                  system(and for any additional systems we\n" +
                         "                  decide to extend the availability of the app to) may change,\n" +
                         "                  and you’ll need to download the updates if you want to keep\n" +
-                        "                  using the app. FaithConnect does not promise that it\n" +
+                        "                  using the app. Myfriend does not promise that it\n" +
                         "                  will always update the app so that it is relevant to you\n" +
                         "                  and/or works with the Android version that you have\n" +
                         "                  installed on your device. However, you promise to always\n" +
@@ -125,7 +125,7 @@ public class TermsActivity extends AppCompatActivity {
                         "                  rights and licenses granted to you in these terms will end;\n" +
                         "                  (b) you must stop using the app, and (if needed) delete it\n" +
                         "                  from your device.\n" +
-                        "<p><strong>Terms &amp; Conditions for Objectionable Content</strong></p>\n" +
+                "<p><strong>Terms &amp; Conditions for Objectionable Content</strong></p>\n" +
                         "<p>4. Objectionable Content Policy. Be Heard maintains a zero tolerance policy regarding objectionable content.</p>\n" +
                         "<p>Objectionable content may not be uploaded or displayed to the extent such content includes, is in conjunction with, or</p>\n" +
                         "<p>alongside any, Objectionable Content Objectionable Content includes, but is not limited to: (i) sexually explicit materials;</p>\n" +
@@ -148,10 +148,8 @@ public class TermsActivity extends AppCompatActivity {
                         "                </p> <p><strong>Contact Us</strong></p> <p>\n" +
                         "                  If you have any questions or suggestions about our\n" +
                         "                  Terms and Conditions, do not hesitate to contact us\n" +
-                        "                  at faithconnectme@gmail.com.\n" +
+                        "                  at dyolandamasiel@gmail.com.\n" +
                         "                </p> </p>\n" +
-
-
                         "    </body>\n" +
                         "    </html>\n" +
                         "      ",

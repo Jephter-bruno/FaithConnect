@@ -39,7 +39,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 @SuppressWarnings("ALL")
 public class YouTubePartyActivity extends YouTubeBaseActivity {
 
-    String ky="AIzaSyDJFf6mY6XIF8vfSHJAwh6dHwYWBPWDGKI";
+    String ky;
     String id;
 
     EditText sendMessage;

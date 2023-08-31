@@ -15,6 +15,8 @@ import com.glamour.faithconnect.R;
 import com.glamour.faithconnect.post.CreatePostActivity;
 import com.glamour.faithconnect.reel.VideoEditActivity;
 
+import java.io.IOException;
+
 public class SendMediaActivity extends AppCompatActivity {
 
     NightMode sharedPref;

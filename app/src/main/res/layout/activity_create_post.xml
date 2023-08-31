@@ -185,11 +185,6 @@
         app:mentionColor="@color/colorPrimary"
         app:socialFlags="hashtag|mention"
        tools:ignore="ContentDescription" />
-    <com.facebook.ads.NativeAdLayout
-        android:id="@+id/native_ad_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" />
 
     <RelativeLayout
         android:visibility="gone"

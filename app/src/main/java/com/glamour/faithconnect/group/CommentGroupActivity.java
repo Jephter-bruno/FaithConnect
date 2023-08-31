@@ -74,6 +74,7 @@ import com.squareup.picasso.Picasso;
 import com.tylersuehr.socialtextview.SocialTextView;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -1369,7 +1370,9 @@ public class CommentGroupActivity extends AppCompatActivity implements View.OnCl
             gif = view.findViewById(R.id.gif);
             gif.setOnClickListener(this);
             camera = view.findViewById(R.id.camera);
-           /* camera.setOnClickListener(this);*/
+/*
+            camera.setOnClickListener(this);
+*/
             comment_more = new BottomSheetDialog(this);
             comment_more.setContentView(view);
         }

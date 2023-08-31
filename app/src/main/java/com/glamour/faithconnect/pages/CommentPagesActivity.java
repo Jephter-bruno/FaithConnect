@@ -72,6 +72,7 @@ import com.squareup.picasso.Picasso;
 import com.tylersuehr.socialtextview.SocialTextView;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.URISyntaxException;
 import java.util.ArrayList;

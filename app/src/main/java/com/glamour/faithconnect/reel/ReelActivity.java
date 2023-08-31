@@ -5,14 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.facebook.ads.AudienceNetworkAds;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -36,7 +34,6 @@ public class ReelActivity extends AppCompatActivity {
     List<ModelReel> modelReels, modelReelList;
     List<String> idList;
 
-
     private static String type = "one";
     public static String getType() {
         return type;
@@ -52,7 +49,6 @@ public class ReelActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         startTime = System.currentTimeMillis();
-
     }
 
     @Override
@@ -159,7 +155,7 @@ public class ReelActivity extends AppCompatActivity {
                                     modelReelList.add(modelUser);
                                 }
                                 Collections.shuffle(modelReels);
-                                viewPager1.setAdapter(new AdapterReel(getApplicationContext(),modelReelList));
+                                viewPager1.setAdapter(new AdapterReel(modelReelList));
                                 if (getIntent().hasExtra("position")){
                                     String position  = getIntent().getStringExtra("position");
                                     String mType  = getIntent().getStringExtra("type");
@@ -169,7 +165,7 @@ public class ReelActivity extends AppCompatActivity {
                                         viewPager1.setCurrentItem(Integer.parseInt(position));
                                     }
                                 }
-                                if (new AdapterReel(getApplicationContext(),modelReelList).getItemCount() == 0){
+                                if (new AdapterReel(modelReelList).getItemCount() == 0){
                                     findViewById(R.id.no).setVisibility(View.VISIBLE);
                                     viewPager1.setVisibility(View.GONE);
                                 }else {
@@ -209,7 +205,7 @@ public class ReelActivity extends AppCompatActivity {
                     ModelReel modelUser = ds.getValue(ModelReel.class);
                     modelReels.add(modelUser);
                     Collections.shuffle(modelReels);
-                    viewPager2.setAdapter(new AdapterReel(getApplicationContext(), modelReels));
+                    viewPager2.setAdapter(new AdapterReel(modelReels));
                     if (getIntent().hasExtra("position")){
                         String position  = getIntent().getStringExtra("position");
                         String mType  = getIntent().getStringExtra("type");
@@ -219,7 +215,7 @@ public class ReelActivity extends AppCompatActivity {
                             viewPager1.setCurrentItem(Integer.parseInt(position));
                         }
                     }
-                    if (new AdapterReel(getApplicationContext(), modelReels).getItemCount() == 0){
+                    if (new AdapterReel(modelReels).getItemCount() == 0){
                        findViewById(R.id.no).setVisibility(View.VISIBLE);
                        viewPager2.setVisibility(View.GONE);
                     }else {

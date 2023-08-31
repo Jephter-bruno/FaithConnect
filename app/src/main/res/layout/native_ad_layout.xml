@@ -3,7 +3,7 @@
     android:id="@+id/ad_unit"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/layoutcolor"
+    android:background="@android:color/white"
     android:orientation="vertical"
     android:paddingLeft="10dp"
     android:paddingRight="10dp">
@@ -17,8 +17,8 @@
 
         <com.facebook.ads.MediaView
             android:id="@+id/native_ad_icon"
-            android:layout_width="50dp"
-            android:layout_height="50dp" />
+            android:layout_width="35dp"
+            android:layout_height="35dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -33,9 +33,8 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:lines="1"
-                android:fontFamily="@font/bold_roboto"
-                android:textColor="?attr/textcolor"
-                android:textSize="16sp" />
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/native_ad_sponsored_label"
@@ -43,9 +42,8 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:lines="1"
-                android:fontFamily="@font/bold_roboto"
-                android:textColor="?attr/texttwocolor"
-                android:textSize="14sp" />
+                android:textColor="@android:color/darker_gray"
+                android:textSize="12sp" />
 
         </LinearLayout>
 
@@ -82,8 +80,8 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:lines="1"
-                android:fontFamily="@font/bold_roboto"
-                android:textColor="?attr/textcolor"                android:textSize="16sp" />
+                android:textColor="@android:color/darker_gray"
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/native_ad_body"
@@ -92,24 +90,23 @@
                 android:ellipsize="end"
                 android:gravity="center_vertical"
                 android:lines="2"
-                android:fontFamily="@font/bold_roboto"
-                android:textColor="?attr/textcolor"
-                android:textSize="16sp" />
-            <Button
-                android:id="@+id/native_ad_call_to_action"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:background="#4286F4"
-                android:paddingLeft="3dp"
-                android:paddingRight="3dp"
-                android:textColor="@android:color/white"
-                android:textSize="12sp"
-                android:visibility="gone" />
+                android:textColor="@android:color/black"
+                android:textSize="12sp" />
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/native_ad_call_to_action"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="#4286F4"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            android:visibility="gone" />
 
     </LinearLayout>
 
