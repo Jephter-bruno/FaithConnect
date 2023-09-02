@@ -499,7 +499,7 @@ public class GroupProfileActivity extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/*");
                 intent.putExtra(Intent.EXTRA_SUBJECT,"Subject Here");
-                intent.putExtra(Intent.EXTRA_TEXT, name.getText().toString() + " Group link " + "www.app.myfriend.com/group/" + groupId + "\nDownload the app "+"https://play.google.com/store/apps/details?id=com.glamour.faithconnect");
+                intent.putExtra(Intent.EXTRA_TEXT, name.getText().toString() + " Church link " + "www.app.FaithConnect.com/church/" + groupId + "\nDownload the app "+"https://play.google.com/store/apps/details?id=com.glamour.faithconnect");
                 startActivity(Intent.createChooser(intent, "Share Via"));
             });
 

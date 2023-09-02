@@ -37,9 +37,9 @@ public class PrivacyActivity extends AppCompatActivity {
                         "    </head>\n" +
                         "    <body>\n" +
                         "    <strong>Privacy Policy</strong> <p>\n" +
-                        "                  Myfriend built the Myfriend app as\n" +
+                        "                  FaithConnect built the FaithConnect app as\n" +
                         "                  a Free app. This SERVICE is provided by\n" +
-                        "                  Myfriend at no cost and is intended for use as\n" +
+                        "                  FaithConnect at no cost and is intended for use as\n" +
                         "                  is.\n" +
                         "                </p> <p>\n" +
                         "                  This page is used to inform visitors regarding our\n" +
@@ -54,7 +54,7 @@ public class PrivacyActivity extends AppCompatActivity {
                         "                </p> <p>\n" +
                         "                  The terms used in this Privacy Policy have the same meanings\n" +
                         "                  as in our Terms and Conditions, which is accessible at\n" +
-                        "                  Myfriend unless otherwise defined in this Privacy Policy.\n" +
+                        "                  FaithConnect unless otherwise defined in this Privacy Policy.\n" +
                         "                </p> <p><strong>Information Collection and Use</strong></p> <p>\n" +
                         "                  For a better experience, while using our Service, we\n" +
                         "                  may require you to provide us with certain personally\n" +
@@ -132,7 +132,7 @@ public class PrivacyActivity extends AppCompatActivity {
                         "                  this page.\n" +
                         "                </p> <p>This policy is effective as of 2021-09-13</p> <p><strong>Contact Us</strong></p> <p>\n" +
                         "                  If you have any questions or suggestions about our\n" +
-                        "                  Privacy Policy, do not hesitate to contact us at +1 (829) 452-0462.\n" +
+                        "                  Privacy Policy, do not hesitate to contact us at +254 (790) 800-423.\n" +
                         "                </p> </p>\n" +
                         "    </body>\n" +
                         "    </html>\n" +

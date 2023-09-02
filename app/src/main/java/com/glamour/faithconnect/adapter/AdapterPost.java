@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,6 +28,14 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.facebook.ads.Ad;
+import com.facebook.ads.AdError;
+import com.facebook.ads.AudienceNetworkAds;
+import com.facebook.ads.MediaView;
+import com.facebook.ads.NativeAdBase;
+import com.facebook.ads.NativeAdLayout;
+import com.facebook.ads.NativeAdListener;
+import com.facebook.ads.NativeAdsManager;
 import com.github.pgreze.reactions.ReactionPopup;
 import com.github.pgreze.reactions.ReactionsConfig;
 import com.github.pgreze.reactions.ReactionsConfigBuilder;
@@ -131,6 +141,9 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
 
         if (position>1 && (position+1) % 4 == 0) {
             holder.ad.setVisibility(View.VISIBLE);
+        }else
+        if (position>1 && (position+1) % 3 == 0) {
+            holder.native_ad_container.setVisibility(View.VISIBLE);
         }
 
 
@@ -1085,31 +1098,31 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
                     Intent intent = new Intent(Intent.ACTION_SEND);
                     intent.setType("text/*");
                     intent.putExtra(Intent.EXTRA_SUBJECT,"Subject Here");
-                    intent.putExtra(Intent.EXTRA_TEXT, modelPosts.get(position).getText() + " \nSee the post "+"www.app.myfriend.com/post/"+modelPosts.get(position).getpId());
+                    intent.putExtra(Intent.EXTRA_TEXT, modelPosts.get(position).getText() + " \nSee the post "+"www.app.FaithConnect.com/post/"+modelPosts.get(position).getpId());
                     context.startActivity(Intent.createChooser(intent, "Share Via"));
                 }else if (type.equals("image")){
                     Intent intent = new Intent(Intent.ACTION_SEND);
                     intent.setType("text/*");
                     intent.putExtra(Intent.EXTRA_SUBJECT,"Subject Here");
-                    intent.putExtra(Intent.EXTRA_TEXT, modelPosts.get(position).getText() + " " + modelPosts.get(position).getMeme()+ " \nSee the post "+"www.app.myfriend.com/post/"+modelPosts.get(position).getpId());
+                    intent.putExtra(Intent.EXTRA_TEXT, modelPosts.get(position).getText() + " " + modelPosts.get(position).getMeme()+ " \nSee the post "+"www.app.FaithConnect.com/post/"+modelPosts.get(position).getpId());
                     context.startActivity(Intent.createChooser(intent, "Share Via"));
                 }else if (type.equals("audio")){
                     Intent intent = new Intent(Intent.ACTION_SEND);
                     intent.setType("text/*");
                     intent.putExtra(Intent.EXTRA_SUBJECT,"Subject Here");
-                    intent.putExtra(Intent.EXTRA_TEXT, modelPosts.get(position).getText() + " " + modelPosts.get(position).getMeme()+ " \nSee the post "+"www.app.myfriend.com/post/"+modelPosts.get(position).getpId());
+                    intent.putExtra(Intent.EXTRA_TEXT, modelPosts.get(position).getText() + " " + modelPosts.get(position).getMeme()+ " \nSee the post "+"www.app.FaithConnect.com/post/"+modelPosts.get(position).getpId());
                     context.startActivity(Intent.createChooser(intent, "Share Via"));
                 }else if (type.equals("gif")){
                     Intent intent = new Intent(Intent.ACTION_SEND);
                     intent.setType("text/*");
                     intent.putExtra(Intent.EXTRA_SUBJECT,"Subject Here");
-                    intent.putExtra(Intent.EXTRA_TEXT, modelPosts.get(position).getText() + " " + modelPosts.get(position).getMeme()+ " \nSee the post "+"www.app.myfriend.com/post/"+modelPosts.get(position).getpId());
+                    intent.putExtra(Intent.EXTRA_TEXT, modelPosts.get(position).getText() + " " + modelPosts.get(position).getMeme()+ " \nSee the post "+"www.app.FaithConnect.com/post/"+modelPosts.get(position).getpId());
                     context.startActivity(Intent.createChooser(intent, "Share Via"));
                 }else if (type.equals("video")){
                     Intent intent = new Intent(Intent.ACTION_SEND);
                     intent.setType("text/*");
                     intent.putExtra(Intent.EXTRA_SUBJECT,"Subject Here");
-                    intent.putExtra(Intent.EXTRA_TEXT, modelPosts.get(position).getText() + " " + modelPosts.get(position).getVine()+ " \nSee the post "+"www.app.myfriend.com/post/"+modelPosts.get(position).getpId());
+                    intent.putExtra(Intent.EXTRA_TEXT, modelPosts.get(position).getText() + " " + modelPosts.get(position).getVine()+ " \nSee the post "+"www.app.FaithConnect.com/post/"+modelPosts.get(position).getpId());
                     context.startActivity(Intent.createChooser(intent, "Share Via"));
                 }else {
                     Snackbar.make(holder.itemView,"This type of post can't be shared", Snackbar.LENGTH_LONG).show();
@@ -1403,13 +1416,16 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
         final RelativeLayout line;
         final RelativeLayout ad;
         URLEmbeddedView urlEmbeddedView;
+        final NativeAdsManager nativeAdsManager;
+        final NativeAdLayout native_ad_container;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
 
             urlEmbeddedView = itemView.findViewById(R.id.uev);
-            dp = itemView.findViewById(R.id.dp);
+
             verified = itemView.findViewById(R.id.verified);
+            native_ad_container=itemView.findViewById(R.id.native_ad_container);
             name = itemView.findViewById(R.id.name);
             username = itemView.findViewById(R.id.username);
             comment = itemView.findViewById(R.id.comment);
@@ -1444,7 +1460,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
             line = itemView.findViewById(R.id.line);
             more = itemView.findViewById(R.id.more);
 
-
+            dp = itemView.findViewById(R.id.dp);
             MobileAds.initialize(itemView.getContext());
             AdLoader adLoader = new AdLoader.Builder(itemView.getContext(), itemView.getContext().getString(R.string.native_ad_unit_id))
                     .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
@@ -1460,6 +1476,68 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
                     .build();
 
             adLoader.loadAd(new AdRequest.Builder().build());
+            MobileAds.initialize(itemView.getContext());
+            AdLoader adLoader1 = new AdLoader.Builder(itemView.getContext(), itemView.getContext().getString(R.string.native_ad_unit_id))
+                    .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
+                        @Override
+                        public void onNativeAdLoaded(NativeAd nativeAd) {
+                            NativeTemplateStyle styles = new
+                                    NativeTemplateStyle.Builder().build();
+                            TemplateView template = itemView.findViewById(R.id.my_template);
+                            template.setStyles(styles);
+                            template.setNativeAd(nativeAd);
+                        }
+                    })
+                    .build();
+
+            adLoader1.loadAd(new AdRequest.Builder().build());
+
+
+            AudienceNetworkAds.initialize(itemView.getContext());
+
+            AudienceNetworkAds.initialize(itemView.getContext());
+            nativeAdsManager = new NativeAdsManager(itemView.getContext(), "VID_HD_16_9_46S_APP_INSTALL#102714542933317",5);
+            nativeAdsManager.setListener(new NativeAdsManager.Listener() {
+                @Override
+                public void onAdError(AdError adError) {
+                    // Handle ad loading error
+                    Log.e("AdLoadingError", "Ad failed to load: " + adError.getErrorMessage());
+                }
+
+                @Override
+                public void onAdsLoaded() {
+                    // Native ads are loaded, you can now inflate and display them
+                    inflateNativeAdLayout();
+                    Toast.makeText(itemView.getContext(), "Ads loaded successfully ", Toast.LENGTH_SHORT).show();
+                }
+            });
+            nativeAdsManager.loadAds();
+
+
+
+
+
+        }
+
+        private void inflateNativeAdLayout() {
+            if (nativeAdsManager.isLoaded()) {
+                NativeAdBase nativeAd = nativeAdsManager.nextNativeAd();
+                if (nativeAd != null) {
+                    // Inflate your native ad layout (e.g., native_ad_layout.xml)
+                    View adView = LayoutInflater.from(itemView.getContext()).inflate(R.layout.native_ad_layout, null);
+
+                    // Populate the ad view components with data from the loaded native ad
+                    // For example, set the ad title, ad icon, ad media, etc.
+
+                    // Add the ad view to the NativeAdsLayout
+                    native_ad_container.addView(adView);
+                    List<View> clickableViews = new ArrayList<>();
+                    // Add clickable views from your ad layout
+                    clickableViews.add(adView);
+                    ((com.facebook.ads.NativeAd) nativeAd).registerViewForInteraction(adView, (MediaView) clickableViews);
+                }
+            }
+
         }
 
     }

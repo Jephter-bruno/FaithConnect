@@ -384,7 +384,7 @@ public class ViewReelActivity extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/*");
                 intent.putExtra(Intent.EXTRA_SUBJECT,"Subject Here");
-                intent.putExtra(Intent.EXTRA_TEXT, " \nWatch the reels "+"www.app.myfriend.com/reel/"+reelId);
+                intent.putExtra(Intent.EXTRA_TEXT, " \nWatch the reels "+"www.app.FaithConnect.com/reel/"+reelId);
                 startActivity(Intent.createChooser(intent, "Share Via"));
             });
 

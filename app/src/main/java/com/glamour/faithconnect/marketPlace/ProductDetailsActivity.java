@@ -124,7 +124,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     Intent intent = new Intent(Intent.ACTION_SEND);
                     intent.setType("text/*");
                     intent.putExtra(Intent.EXTRA_SUBJECT,"Subject Here");
-                    intent.putExtra(Intent.EXTRA_TEXT, title.getText().toString() + ", " + "$"+price.getText().toString() + " \nPlease click on the link to buy "+"www.app.myfriend.com/product/"+pId);
+                    intent.putExtra(Intent.EXTRA_TEXT, title.getText().toString() + ", " + "$"+price.getText().toString() + " \nPlease click on the link to buy "+"www.app.FaithConnect.com/product/"+pId);
                     startActivity(Intent.createChooser(intent, "Share Via"));
                 });
 

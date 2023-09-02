@@ -29,6 +29,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.nativead.NativeAd;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -90,9 +91,27 @@ public class AdapterReel extends RecyclerView.Adapter<AdapterReel.AdapterReelHol
 
     @Override
     public void onBindViewHolder(@NonNull AdapterReelHolder holder, int position) {
-        holder.setVideoData(modelReels.get(position));
         if (position>1 && (position+1) % 4 == 0) {
             holder.ad.setVisibility(View.VISIBLE);
+            holder.videoView.setVisibility(View.GONE);
+            holder.views.setVisibility(View.GONE);
+            holder.more.setVisibility(View.GONE);
+            holder.description.setVisibility(View.GONE);
+            holder.avatar.setVisibility(View.GONE);
+            holder.textComment.setVisibility(View.GONE);
+            holder.share.setVisibility(View.GONE);
+            holder.like_img.setVisibility(View.GONE);
+            holder.name.setVisibility(View.GONE);
+            holder.comment.setVisibility(View.GONE);
+            holder.textLike.setVisibility(View.GONE);
+            holder.description.setVisibility(View.GONE);
+            holder.pb.setVisibility(View.GONE);
+
+
+
+        }else{
+            holder.setVideoData(modelReels.get(position));
+
         }
 
         holder.comment.setOnClickListener(v -> {
@@ -179,7 +198,7 @@ public class AdapterReel extends RecyclerView.Adapter<AdapterReel.AdapterReelHol
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/*");
                 intent.putExtra(Intent.EXTRA_SUBJECT,"Subject Here");
-                intent.putExtra(Intent.EXTRA_TEXT, " \nWatch the reels "+"www.app.myfriend.com/reel/"+modelReels.get(position).getpId());
+                intent.putExtra(Intent.EXTRA_TEXT, " \nWatch the reels "+"www.app.FaithConnect.com/reel/"+modelReels.get(position).getpId());
                 holder.itemView.getContext().startActivity(Intent.createChooser(intent, "Share Via"));
             });
 
@@ -266,11 +285,13 @@ public class AdapterReel extends RecyclerView.Adapter<AdapterReel.AdapterReelHol
         final ImageView more;
         final TextView views;
         final RelativeLayout ad;
+        LinearProgressIndicator pb;
 
         public AdapterReelHolder(@NonNull View itemView) {
             super(itemView);
 
             videoView = itemView.findViewById(R.id.videoView);
+            pb = itemView.findViewById(R.id.pb);
             ad = itemView.findViewById(R.id.ad);
             like = itemView.findViewById(R.id.like);
             comment = itemView.findViewById(R.id.comment);

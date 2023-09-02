@@ -230,7 +230,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="www.app.myfriend.com"
+                    android:host="www.app.FaithConnect.com"
                     android:scheme="https" />
             </intent-filter>
             <intent-filter>
@@ -240,7 +240,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="www.app.myfriend.com"
+                    android:host="www.app.FaithConnect.com"
                     android:scheme="http" />
             </intent-filter>
             <intent-filter>
@@ -250,7 +250,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="www.app.myfriend.com"
+                    android:host="www.app.FaithConnect.com"
                     android:scheme="app" />
             </intent-filter>
         </activity>

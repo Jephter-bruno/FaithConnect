@@ -24,6 +24,12 @@ import com.bumptech.glide.Glide;
 import com.github.pgreze.reactions.ReactionPopup;
 import com.github.pgreze.reactions.ReactionsConfig;
 import com.github.pgreze.reactions.ReactionsConfigBuilder;
+import com.google.android.ads.nativetemplates.NativeTemplateStyle;
+import com.google.android.ads.nativetemplates.TemplateView;
+import com.google.android.gms.ads.AdLoader;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.nativead.NativeAd;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -81,7 +87,9 @@ public class AdapterComment extends RecyclerView.Adapter<AdapterComment.MyHolder
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
-
+        if (position>1 && (position+1) % 5 == 0) {
+            holder.ad.setVisibility(View.VISIBLE);
+        }
         //UserInfo
         FirebaseDatabase.getInstance().getReference().child("Users").child(modelComments.get(position).getId()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -747,7 +755,7 @@ public class AdapterComment extends RecyclerView.Adapter<AdapterComment.MyHolder
         final ImageView angry;
         final ImageView sad;
         TextView reply;
-
+        final RelativeLayout ad;
         public MyHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -771,6 +779,23 @@ public class AdapterComment extends RecyclerView.Adapter<AdapterComment.MyHolder
             verified = itemView.findViewById(R.id.verified);
             likeText  = itemView.findViewById(R.id.likeText);
             noLikes  = itemView.findViewById(R.id.noLikes);
+
+            ad = itemView.findViewById(R.id.ad);
+            MobileAds.initialize(itemView.getContext());
+            AdLoader adLoader = new AdLoader.Builder(itemView.getContext(), itemView.getContext().getString(R.string.native_ad_unit_id))
+                    .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
+                        @Override
+                        public void onNativeAdLoaded(NativeAd nativeAd) {
+                            NativeTemplateStyle styles = new
+                                    NativeTemplateStyle.Builder().build();
+                            TemplateView template = itemView.findViewById(R.id.my_template);
+                            template.setStyles(styles);
+                            template.setNativeAd(nativeAd);
+                        }
+                    })
+                    .build();
+
+            adLoader.loadAd(new AdRequest.Builder().build());
         }
 
     }

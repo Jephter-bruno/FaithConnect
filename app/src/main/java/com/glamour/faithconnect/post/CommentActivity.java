@@ -1242,31 +1242,31 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
                             Intent intent = new Intent(Intent.ACTION_SEND);
                             intent.setType("text/*");
                             intent.putExtra(Intent.EXTRA_SUBJECT,"Subject Here");
-                            intent.putExtra(Intent.EXTRA_TEXT, snapshot.child("text").getValue().toString()+ " \nSee the post "+"www.app.myfriend.com/post/"+postID);
+                            intent.putExtra(Intent.EXTRA_TEXT, snapshot.child("text").getValue().toString()+ " \nSee the post "+"www.app.FaithConnect.com/post/"+postID);
                             startActivity(Intent.createChooser(intent, "Share Via"));
                         }else if (type.equals("image")){
                             Intent intent = new Intent(Intent.ACTION_SEND);
                             intent.setType("text/*");
                             intent.putExtra(Intent.EXTRA_SUBJECT,"Subject Here");
-                            intent.putExtra(Intent.EXTRA_TEXT, snapshot.child("text").getValue().toString() + " \nSee the post "+"www.app.myfriend.com/post/"+postID);
+                            intent.putExtra(Intent.EXTRA_TEXT, snapshot.child("text").getValue().toString() + " \nSee the post "+"www.app.FaithConnect.com/post/"+postID);
                             startActivity(Intent.createChooser(intent, "Share Via"));
                         }else if (type.equals("audio")){
                             Intent intent = new Intent(Intent.ACTION_SEND);
                             intent.setType("text/*");
                             intent.putExtra(Intent.EXTRA_SUBJECT,"Subject Here");
-                            intent.putExtra(Intent.EXTRA_TEXT, snapshot.child("text").getValue().toString() + " \nSee the post "+"www.app.myfriend.com/post/"+postID);
+                            intent.putExtra(Intent.EXTRA_TEXT, snapshot.child("text").getValue().toString() + " \nSee the post "+"www.app.FaithConnect.com/post/"+postID);
                             startActivity(Intent.createChooser(intent, "Share Via"));
                         }else if (type.equals("gif")){
                             Intent intent = new Intent(Intent.ACTION_SEND);
                             intent.setType("text/*");
                             intent.putExtra(Intent.EXTRA_SUBJECT,"Subject Here");
-                            intent.putExtra(Intent.EXTRA_TEXT, snapshot.child("text").getValue().toString() + " \nSee the post "+"www.app.myfriend.com/post/"+postID);
+                            intent.putExtra(Intent.EXTRA_TEXT, snapshot.child("text").getValue().toString() + " \nSee the post "+"www.app.FaithConnect.com/post/"+postID);
                             startActivity(Intent.createChooser(intent, "Share Via"));
                         }else if (type.equals("video")){
                             Intent intent = new Intent(Intent.ACTION_SEND);
                             intent.setType("text/*");
                             intent.putExtra(Intent.EXTRA_SUBJECT,"Subject Here");
-                            intent.putExtra(Intent.EXTRA_TEXT, snapshot.child("text").getValue().toString() + " \nSee the post "+"www.app.myfriend.com/post/"+postID);
+                            intent.putExtra(Intent.EXTRA_TEXT, snapshot.child("text").getValue().toString() + " \nSee the post "+"www.app.FaithConnect.com/post/"+postID);
                             startActivity(Intent.createChooser(intent, "Share Via"));
                         }else {
                             Snackbar.make(main,"This type of post can't be shared", Snackbar.LENGTH_LONG).show();

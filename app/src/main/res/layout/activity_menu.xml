@@ -1231,7 +1231,7 @@
         </LinearLayout>
 
         <TextView
-            android:text="©Spacester"
+            android:text="©FaithConnect"
              android:fontFamily="@font/bold_roboto"
             android:textSize="20sp"
             android:layout_gravity="center_horizontal"

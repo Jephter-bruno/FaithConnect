@@ -16,7 +16,6 @@
         <VideoView
             app:layout_constraintDimensionRatio="16:9"
             android:id="@+id/video"
-            android:layout_centerInParent="true"
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

@@ -53,7 +53,7 @@ public class InviteActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.shareId).setOnClickListener(v -> {
-            String shareBody = "Please sign up with this Referral code :- " + meetingCreate.getText().toString() + "\n " + getResources().getString(R.string.app_name)+ " - Friends Social Network" + " Download now on play store \nhttps://play.google.com/store/apps/details?id="+getApplicationContext().getPackageName();
+            String shareBody = "Please sign up with this Referral code :- " + meetingCreate.getText().toString() + "\n " + getResources().getString(R.string.app_name)+ " - A community of Christ Network" + " Download now on play store \nhttps://play.google.com/store/apps/details?id="+getApplicationContext().getPackageName();
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("text/*");
             intent.putExtra(Intent.EXTRA_SUBJECT,"Referral code");
