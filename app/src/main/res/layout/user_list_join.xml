@@ -103,7 +103,7 @@
             android:layout_margin="10dp"
             android:text="@string/accept"
             android:stateListAnimator="@null"
-            android:background="@drawable/btn_round"
+            android:background="@drawable/gnt_btn_round"
             android:backgroundTint="@color/colorPrimary"
             android:layout_weight="1"
             android:textColor="#fff"

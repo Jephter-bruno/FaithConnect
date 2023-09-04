@@ -384,7 +384,7 @@ public class FaceFilters extends AppCompatActivity implements SurfaceHolder.Call
     }
     private void initializeDeepAR() {
         deepAR = new DeepAR(this);
-        deepAR.setLicenseKey("ad883d6ff5fd7a430b093ca2e6cdfea7be864e334dcf4e97be38ea276887a0edf378507b90c674e5");
+        deepAR.setLicenseKey("7cd14a334cbe61ca8b5d51a3dd0d989fedbd3291986a07f0007c34c0ff9655d79b3cea4ff7012d8d");
         deepAR.initialize(this, this);
         setupCamera();
     }

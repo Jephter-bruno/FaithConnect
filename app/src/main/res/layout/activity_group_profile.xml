@@ -293,7 +293,7 @@
                                 android:textColor="#fff"
                                 android:textSize="16sp"
                                 android:stateListAnimator="@null"
-                                android:background="@drawable/btn_round"
+                                android:background="@drawable/gnt_btn_round"
                                 android:backgroundTint="@color/colorPrimary"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
@@ -309,7 +309,7 @@
                                 android:textSize="16sp"
                                 android:backgroundTint="@color/colorPrimary"
                                 android:stateListAnimator="@null"
-                                android:background="@drawable/btn_round"
+                                android:background="@drawable/gnt_btn_round"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 tools:ignore="UnusedAttribute"
@@ -527,7 +527,7 @@
                             android:layout_weight="1"
                             android:orientation="horizontal"
                             android:backgroundTint="#EBF8E8"
-                            android:background="@drawable/btn_round"
+                            android:background="@drawable/gnt_btn_round"
                             android:layout_width="100dp"
                             android:layout_height="35dp">
                             <ImageView
@@ -558,7 +558,7 @@
                             android:layout_weight="1"
                             android:orientation="horizontal"
                             android:backgroundTint="#E6F0FF"
-                            android:background="@drawable/btn_round"
+                            android:background="@drawable/gnt_btn_round"
                             android:layout_width="100dp"
                             android:layout_height="35dp">
                             <ImageView
@@ -590,7 +590,7 @@
                             android:layout_weight="1"
                             android:orientation="horizontal"
                             android:backgroundTint="#FCEAE6"
-                            android:background="@drawable/btn_round"
+                            android:background="@drawable/gnt_btn_round"
                             android:layout_width="100dp"
                             android:layout_height="35dp">
                             <ImageView

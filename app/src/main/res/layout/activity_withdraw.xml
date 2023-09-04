@@ -74,7 +74,7 @@
             android:layout_marginBottom="24dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_round"
+            android:background="@drawable/gnt_btn_round"
             android:backgroundTint="#F0F2F6"
             tools:ignore="UnusedAttribute">
 
@@ -99,7 +99,7 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_round"
+            android:background="@drawable/gnt_btn_round"
             android:backgroundTint="#F0F2F6"
             tools:ignore="UnusedAttribute">
 
@@ -125,7 +125,7 @@
             android:layout_marginTop="24dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_round"
+            android:background="@drawable/gnt_btn_round"
             android:backgroundTint="#F0F2F6"
             tools:ignore="UnusedAttribute">
 
@@ -155,7 +155,7 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginStart="24dp"
-        android:background="@drawable/btn_round"
+        android:background="@drawable/gnt_btn_round"
         android:backgroundTint="@color/colorPrimary"
         android:text="Withdrawal"
         android:textSize="18sp"

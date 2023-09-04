@@ -477,7 +477,7 @@
 
             <Button
                 android:stateListAnimator="@null"
-                android:background="@drawable/btn_round"
+                android:background="@drawable/gnt_btn_round"
                 android:backgroundTint="@color/colorPrimary"
                 android:text="@string/load_more"
                 android:fontFamily="@font/black"

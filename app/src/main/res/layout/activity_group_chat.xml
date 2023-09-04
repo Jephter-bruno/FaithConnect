@@ -229,7 +229,7 @@
            tools:ignore="ContentDescription" />
 
         <LinearLayout
-            android:background="@drawable/btn_round"
+            android:background="@drawable/gnt_btn_round"
             android:backgroundTint="?attr/backgroundcolor"
             android:orientation="horizontal"
             android:layout_gravity="center"

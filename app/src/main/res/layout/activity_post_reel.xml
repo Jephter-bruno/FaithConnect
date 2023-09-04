@@ -91,7 +91,7 @@
         android:layout_height="45dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:background="@drawable/btn_round"
+        android:background="@drawable/gnt_btn_round"
         android:backgroundTint="@color/colorPrimary"
         android:fontFamily="@font/bold_roboto"
         android:textAllCaps="false"

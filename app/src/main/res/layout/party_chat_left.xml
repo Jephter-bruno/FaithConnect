@@ -19,7 +19,7 @@
         android:paddingEnd="14dp"
         android:paddingTop="12dp"
         android:paddingBottom="12dp"
-        android:background="@drawable/btn_round"
+        android:background="@drawable/gnt_btn_round"
         android:backgroundTint="#F0F2F6"
         android:layout_marginStart="10dp"
         android:orientation="vertical"

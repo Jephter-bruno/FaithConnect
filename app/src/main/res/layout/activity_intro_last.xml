@@ -123,7 +123,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginBottom="25dp"
-            android:background="@drawable/btn_round"
+            android:background="@drawable/gnt_btn_round"
             android:backgroundTint="@color/colorPrimary"
             android:fontFamily="@font/bold_roboto"
             android:textAllCaps="false"

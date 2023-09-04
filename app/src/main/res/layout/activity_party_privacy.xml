@@ -105,7 +105,7 @@
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:layout_marginStart="24dp"
-        android:background="@drawable/btn_round"
+        android:background="@drawable/gnt_btn_round"
         android:backgroundTint="@color/colorPrimary"
         android:text="@string/next"
         android:textSize="18sp"

@@ -147,6 +147,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
         }
 
 
+
         //UserInfo
         FirebaseDatabase.getInstance().getReference().child("Users").child(modelPosts.get(position).getId()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -154,6 +155,9 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
                 if (!snapshot.child("photo").getValue().toString().isEmpty()) Picasso.get().load(snapshot.child("photo").getValue().toString()).into(holder.dp);
                 holder.name.setText(snapshot.child("name").getValue().toString());
                 holder.username.setText(snapshot.child("username").getValue().toString());
+                if(snapshot.child("verified").getValue().toString().equals("yes")){
+                    holder.verified.setVisibility(View.VISIBLE);
+                }
 
                 //SetOnClick
                 holder.dp.setOnClickListener(v -> {
@@ -402,7 +406,8 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
 
         if (type.equals("image")){
             holder.mediaView.setVisibility(View.VISIBLE);
-            Picasso.get().load(modelPosts.get(position).getMeme()).into(holder.mediaView);
+            Glide.with(context).asBitmap().load(modelPosts.get(position).getMeme()).thumbnail(0.1f).into(holder.mediaView);
+
         }
         if (type.equals("gif")){
             holder.mediaView.setVisibility(View.VISIBLE);
@@ -1414,7 +1419,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
         final LinearLayout likeButtonTwo;
         final LinearLayout comment;
         final RelativeLayout line;
-        final RelativeLayout ad;
+        final RelativeLayout ad,ads;
         URLEmbeddedView urlEmbeddedView;
         final NativeAdsManager nativeAdsManager;
         final NativeAdLayout native_ad_container;
@@ -1430,6 +1435,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
             username = itemView.findViewById(R.id.username);
             comment = itemView.findViewById(R.id.comment);
             ad = itemView.findViewById(R.id.ad);
+            ads = itemView.findViewById(R.id.ad1);
             time = itemView.findViewById(R.id.time);
             activity = itemView.findViewById(R.id.activity);
             feeling = itemView.findViewById(R.id.feeling);
@@ -1476,21 +1482,6 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
                     .build();
 
             adLoader.loadAd(new AdRequest.Builder().build());
-            MobileAds.initialize(itemView.getContext());
-            AdLoader adLoader1 = new AdLoader.Builder(itemView.getContext(), itemView.getContext().getString(R.string.native_ad_unit_id))
-                    .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
-                        @Override
-                        public void onNativeAdLoaded(NativeAd nativeAd) {
-                            NativeTemplateStyle styles = new
-                                    NativeTemplateStyle.Builder().build();
-                            TemplateView template = itemView.findViewById(R.id.my_template);
-                            template.setStyles(styles);
-                            template.setNativeAd(nativeAd);
-                        }
-                    })
-                    .build();
-
-            adLoader1.loadAd(new AdRequest.Builder().build());
 
 
             AudienceNetworkAds.initialize(itemView.getContext());
@@ -1501,14 +1492,14 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
                 @Override
                 public void onAdError(AdError adError) {
                     // Handle ad loading error
-                    Log.e("AdLoadingError", "Ad failed to load: " + adError.getErrorMessage());
+                    Log.e("AdLoadingError", "Facebook Ad failed to load: " + adError.getErrorMessage());
                 }
 
                 @Override
                 public void onAdsLoaded() {
                     // Native ads are loaded, you can now inflate and display them
                     inflateNativeAdLayout();
-                    Toast.makeText(itemView.getContext(), "Ads loaded successfully ", Toast.LENGTH_SHORT).show();
+                    Log.e("AdLoadingSucces", "Facebook Ads loaded successfully ");
                 }
             });
             nativeAdsManager.loadAds();
@@ -1621,7 +1612,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
                             public Map<String, String> getHeaders() {
                                 Map<String, String> headers = new HashMap<>();
                                 headers.put("Content-Type", "application/json");
-                                headers.put("Authorization", "key=AAAAoAVZ-Vk:APA91bH7bjTYlktpJ53F9XkNPbmnUMw-csCIbocmKGKPGRPzvBAYXQ0S0XGxP3bVAylQmM6nOW9iOLPz18jUy8GrtA4OlPSe5XffhxnHd9cKlZD6XPbc9IZ7RePBvbAU-CPJ2v7_yybJ");
+                                headers.put("Authorization", "key=AAAAfoG2x4A:APA91bFn9LOCNQXofZENtF0oLioSXaUHY3zkD_umFBnQhccXaEA7yWqUYZzylqd5_LhOYGmGuCrMmxVqKN0jpt9O9GIW19yTue6u-0f78sOXGtGYNpo3Dz7pjOa6cKellOQaOlPMp-nV");
                                 return headers;
                             }
                         };

@@ -63,7 +63,7 @@
             android:layout_width="0dp"
             android:layout_margin="24dp"
             android:layout_height="45dp"
-            android:background="@drawable/btn_round"
+            android:background="@drawable/gnt_btn_round"
             android:backgroundTint="@color/colorPrimary"
             android:text="@string/remove"
             android:stateListAnimator="@null"

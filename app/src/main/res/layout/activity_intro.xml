@@ -28,7 +28,7 @@
         android:layout_height="45dp"
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
-        android:background="@drawable/btn_round"
+        android:background="@drawable/gnt_btn_round"
         android:backgroundTint="@color/colorPrimary"
         android:text="@string/next"
         android:textColor="#fff"

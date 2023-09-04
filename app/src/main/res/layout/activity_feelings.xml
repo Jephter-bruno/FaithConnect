@@ -345,7 +345,7 @@
                     android:fontFamily="@font/bold_roboto"
                     android:textAllCaps="false"
                     android:textColor="#fff"
-                    android:background="@drawable/btn_round"
+                    android:background="@drawable/gnt_btn_round"
                     android:backgroundTint="@color/colorPrimary"
                     android:stateListAnimator="@null"
                     android:layout_marginTop="32dp"

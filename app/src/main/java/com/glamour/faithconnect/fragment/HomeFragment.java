@@ -92,11 +92,11 @@ public class HomeFragment extends Fragment {
         post = v.findViewById(R.id.post);
         post.setLayoutManager(new LinearLayoutManager(getContext()));
         modelPosts = new ArrayList<>();
-       // checkFollowing();
-        readLive();
+        checkFollowing();
+       /* readLive();
         readPod();
         readStory();
-        getAllPost();
+        getAllPost();*/
 
         more = v.findViewById(R.id.more);
         v.findViewById(R.id.more).setOnClickListener(view -> {
@@ -253,8 +253,8 @@ public class HomeFragment extends Fragment {
     }
 
     private void checkFollowing(){
-        followingList = new ArrayList<>();
-         FirebaseDatabase.getInstance().getReference("Follow")
+       /* followingList = new ArrayList<>();*/
+       /*  FirebaseDatabase.getInstance().getReference("Follow")
                 .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
                 .child("Following").addValueEventListener(new ValueEventListener() {
             @Override
@@ -263,7 +263,7 @@ public class HomeFragment extends Fragment {
                 followingList.add(FirebaseAuth.getInstance().getCurrentUser().getUid());
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     followingList.add(snapshot.getKey());
-                }
+                }*/
                 readLive();
                 readPod();
                 readStory();
@@ -275,11 +275,11 @@ public class HomeFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         int i = 0;
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                            for (String s : followingList){
-                                if (Objects.requireNonNull(snapshot.child("id").getValue()).toString().equals(s)){
+                           /* for (String s : followingList){
+                                if (Objects.requireNonNull(snapshot.child("id").getValue()).toString().equals(s)){*/
                                     i++;
-                                }
-                            }
+                               /* }*/
+                            /*}*/
                         }
                         initial = i;
                         getAllPost();
@@ -292,13 +292,13 @@ public class HomeFragment extends Fragment {
                 });
 
 
-            }
+            /*}
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+        });*/
 
     }
 

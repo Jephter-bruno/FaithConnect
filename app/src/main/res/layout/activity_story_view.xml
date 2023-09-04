@@ -158,7 +158,7 @@
         tools:ignore="UseCompoundDrawables">
 
         <TextView
-            android:background="@drawable/btn_round"
+            android:background="@drawable/gnt_btn_round"
             android:backgroundTint="#fff"
             android:fontFamily="@font/bold_roboto"
             android:textColor="?attr/textcolor"

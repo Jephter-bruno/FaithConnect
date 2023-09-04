@@ -327,7 +327,7 @@
                                 android:textColor="#fff"
                                 android:textSize="16sp"
                                 android:stateListAnimator="@null"
-                                android:background="@drawable/btn_round"
+                                android:background="@drawable/gnt_btn_round"
                                 android:backgroundTint="@color/colorPrimary"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
@@ -537,7 +537,7 @@
 
                 <Button
                     android:stateListAnimator="@null"
-                    android:background="@drawable/btn_round"
+                    android:background="@drawable/gnt_btn_round"
                     android:backgroundTint="@color/colorPrimary"
                     android:text="@string/load_more"
                     android:fontFamily="@font/black"
