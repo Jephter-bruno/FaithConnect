@@ -584,29 +584,15 @@
             app:gnt_template_type="@layout/gnt_medium_template_view" />
 
     </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/ad1"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main">
-
-        <com.google.android.ads.nativetemplates.TemplateView
-            android:id="@+id/my_template1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:gnt_template_type="@layout/gnt_medium_template_view" />
-
-    </RelativeLayout>
 
     <com.facebook.ads.NativeAdLayout
         android:visibility="gone"
         android:id="@+id/native_ad_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" />
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -155,20 +155,20 @@ public class HomeFragment extends Fragment {
         liveView.setLayoutManager(linearLayoutManager2);
         modelLives = new ArrayList<>();
 
-         FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-             @Override
-             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                 CircleImageView circleImageView = v.findViewById(R.id.circleImageView);
-                 if (!Objects.requireNonNull(snapshot.child("photo").getValue()).toString().isEmpty()){
-                     Picasso.get().load(Objects.requireNonNull(snapshot.child("photo").getValue()).toString()).into(circleImageView);
-                 }
-             }
+        FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                CircleImageView circleImageView = v.findViewById(R.id.circleImageView);
+                if (!Objects.requireNonNull(snapshot.child("photo").getValue()).toString().isEmpty()){
+                    Picasso.get().load(Objects.requireNonNull(snapshot.child("photo").getValue()).toString()).into(circleImageView);
+                }
+            }
 
-             @Override
-             public void onCancelled(@NonNull DatabaseError error) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-             }
-         });
+            }
+        });
 
 
         //Pod
@@ -253,7 +253,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void checkFollowing(){
-       /* followingList = new ArrayList<>();*/
+        /* followingList = new ArrayList<>();*/
        /*  FirebaseDatabase.getInstance().getReference("Follow")
                 .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
                 .child("Following").addValueEventListener(new ValueEventListener() {
@@ -264,32 +264,32 @@ public class HomeFragment extends Fragment {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     followingList.add(snapshot.getKey());
                 }*/
-                readLive();
-                readPod();
-                readStory();
+        readLive();
+        readPod();
+        readStory();
 
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
-                reference.addValueEventListener(new ValueEventListener() {
-                    @SuppressLint("SetTextI18n")
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        int i = 0;
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
+        reference.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int i = 0;
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                            /* for (String s : followingList){
                                 if (Objects.requireNonNull(snapshot.child("id").getValue()).toString().equals(s)){*/
-                                    i++;
-                               /* }*/
-                            /*}*/
-                        }
-                        initial = i;
-                        getAllPost();
-                    }
+                    i++;
+                    /* }*/
+                    /*}*/
+                }
+                initial = i;
+                getAllPost();
+            }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                    }
-                });
+            }
+        });
 
 
             /*}

@@ -104,12 +104,11 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-    buildFeatures {
-        dataBinding true
-    }
+
     buildTypes {
         release {
             minifyEnabled false
+           /* shrinkResources true*/
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
@@ -257,8 +256,8 @@ dependencies {
     implementation 'com.facebook.android:audience-network-sdk:6.13.7'
 
     //exoplayer
-   /* implementation 'com.google.android.exoplayer:exoplayer:2.19.0'*/
-   /* implementation 'com.google.android.exoplayer:exoplayer-core:2.19.0'
-    implementation 'com.google.android.exoplayer:exoplayer-dash:2.19.0'
-    implementation 'com.google.android.exoplayer:exoplayer-ui:2.19.0'*/
+    /* implementation 'com.google.android.exoplayer:exoplayer:2.19.0'*/
+    /* implementation 'com.google.android.exoplayer:exoplayer-core:2.19.0'
+     implementation 'com.google.android.exoplayer:exoplayer-dash:2.19.0'
+     implementation 'com.google.android.exoplayer:exoplayer-ui:2.19.0'*/
 }

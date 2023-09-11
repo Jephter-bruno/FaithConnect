@@ -38,12 +38,12 @@
                 android:layout_marginEnd="8dp"
                 android:id="@+id/add"
                 android:layout_width="35dp"
-                android:src="@drawable/ic_group"
+                android:src="@drawable/church"
                 android:layout_height="35dp"
                 android:background="@drawable/circle"
                 android:backgroundTint="?attr/backgroundcolor"
                 android:padding="8dp"
-                android:tint="#596C84"
+
                 tools:ignore="ContentDescription,UnusedAttribute,UseAppTint" />
 
             <ImageView

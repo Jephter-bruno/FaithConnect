@@ -67,7 +67,8 @@
         <item>Home</item>
         <item>Others</item>
     </string-array>
-
+    <string name="native_ad_unit_id_groups" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
+    <string name="native_ad_unit_id_reels" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
     <string name="native_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/2247696110</string>  <!-- Paste Native Ad unit id here for admob -->
     <string name="banner_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>  <!-- Paste Banner Ad unit id here for admob -->
 

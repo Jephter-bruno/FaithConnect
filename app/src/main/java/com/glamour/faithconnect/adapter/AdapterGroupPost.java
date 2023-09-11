@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -25,11 +26,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
+import com.facebook.ads.AdOptionsView;
 import com.facebook.ads.AudienceNetworkAds;
 import com.facebook.ads.MediaView;
 import com.facebook.ads.NativeAdBase;
 import com.facebook.ads.NativeAdLayout;
+import com.facebook.ads.NativeAdListener;
 import com.facebook.ads.NativeAdsManager;
 import com.github.pgreze.reactions.ReactionPopup;
 import com.github.pgreze.reactions.ReactionsConfig;
@@ -81,6 +85,9 @@ public class AdapterGroupPost extends RecyclerView.Adapter<AdapterGroupPost.MyHo
     final Context context;
     final List<ModelPostGroup> modelPosts;
     String username_poster;
+    View containerView;
+    private static final String TAG = "NativeAdActivity".getClass().getSimpleName();
+
 
     public AdapterGroupPost(Context context, List<ModelPostGroup> modelPosts) {
         this.context = context;
@@ -108,8 +115,10 @@ public class AdapterGroupPost extends RecyclerView.Adapter<AdapterGroupPost.MyHo
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-       View view = LayoutInflater.from(context).inflate(R.layout.post_list, parent, false);
+        containerView = LayoutInflater.from(context).inflate(R.layout.native_ad_container, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.post_list, parent, false);
         return new MyHolder(view);
+
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -122,6 +131,92 @@ public class AdapterGroupPost extends RecyclerView.Adapter<AdapterGroupPost.MyHo
         }else
         if (position>1 && (position+1) % 3 == 0) {
             holder.native_ad_container.setVisibility(View.VISIBLE);
+            AudienceNetworkAds.initialize(context);
+            com.facebook.ads.NativeAd nativeAd;
+            nativeAd = new com.facebook.ads.NativeAd(context, "VID_HD_16_9_15S_APP_INSTALL#102713349600103_102714542933317");
+
+            NativeAdListener nativeAdListener = new NativeAdListener() {
+                @Override
+                public void onMediaDownloaded(Ad ad) {
+                    // Native ad finished downloading all assets
+                    Log.e("ADSNATIVE", "Native ad finished downloading all assets.");
+                }
+
+
+                @Override
+                public void onError(Ad ad, AdError adError) {
+                    // Native ad failed to load
+                    Log.e("ADSNATIVE", "Native ad failed to load: " + adError.getErrorMessage());
+                }
+
+                @Override
+                public void onAdLoaded(Ad ad) {
+                    // Native ad is loaded and ready to be displayed
+                    Log.d("ADSNATIVE", "Native ad is loaded and ready to be displayed!");
+                    if (nativeAd == null || nativeAd != ad) {
+                        return;
+                    }
+                    nativeAd.unregisterView();
+
+                    // Add the Ad view into the ad container
+                    LayoutInflater inflater = LayoutInflater.from(context);
+                    // Inflate the Ad view.  The layout referenced should be the one you created in the last step.
+                    LinearLayout adView = (LinearLayout) inflater.inflate(R.layout.native_ad_container, holder.native_ad_container, false);
+                    holder.native_ad_container.addView(adView);
+
+                    // Add the AdOptionsView
+                    LinearLayout adChoicesContainer = containerView.findViewById(R.id.ad_choices_container);
+                    AdOptionsView adOptionsView = new AdOptionsView(context, nativeAd, holder.native_ad_container);
+                    adChoicesContainer.removeAllViews();
+                    adChoicesContainer.addView(adOptionsView, 0);
+
+                    // Create native UI using the ad metadata.
+                    MediaView nativeAdIcon = adView.findViewById(R.id.native_ad_icon);
+                    TextView nativeAdTitle = adView.findViewById(R.id.native_ad_title);
+                    MediaView nativeAdMedia = adView.findViewById(R.id.native_ad_media);
+                    TextView nativeAdSocialContext = adView.findViewById(R.id.native_ad_social_context);
+                    TextView nativeAdBody = adView.findViewById(R.id.native_ad_body);
+                    TextView sponsoredLabel = adView.findViewById(R.id.native_ad_sponsored_label);
+                    Button nativeAdCallToAction = adView.findViewById(R.id.native_ad_call_to_action);
+
+                    // Set the Text.
+                    nativeAdTitle.setText(nativeAd.getAdvertiserName());
+                    nativeAdBody.setText(nativeAd.getAdBodyText());
+                    nativeAdSocialContext.setText(nativeAd.getAdSocialContext());
+                    nativeAdCallToAction.setVisibility(nativeAd.hasCallToAction() ? View.VISIBLE : View.INVISIBLE);
+                    nativeAdCallToAction.setText(nativeAd.getAdCallToAction());
+                    sponsoredLabel.setText(nativeAd.getSponsoredTranslation());
+
+                    // Create a list of clickable views
+                    List<View> clickableViews = new ArrayList<>();
+                    clickableViews.add(nativeAdTitle);
+                    clickableViews.add(nativeAdCallToAction);
+
+                    // Register the Title and CTA button to listen for clicks.
+                    nativeAd.registerViewForInteraction(
+                            adView, nativeAdMedia, nativeAdIcon, clickableViews);
+                }
+
+                @Override
+                public void onAdClicked(Ad ad) {
+                    // Native ad clicked
+                    Log.d("ADSNATIVE", "Native ad clicked!");
+                }
+
+                @Override
+                public void onLoggingImpression(Ad ad) {
+                    // Native ad impression
+                    Log.d("ADSNATIVE", "Native ad impression logged!");
+                }
+            };
+
+            // Request an ad
+            nativeAd.loadAd(
+                    nativeAd.buildLoadAdConfig()
+                            .withAdListener(nativeAdListener)
+                            .build());
+
+
         }
 
         //UserInfo
@@ -1239,8 +1334,8 @@ public class AdapterGroupPost extends RecyclerView.Adapter<AdapterGroupPost.MyHo
         final RelativeLayout line;
         final RelativeLayout ad;
         URLEmbeddedView urlEmbeddedView;
-        final NativeAdsManager nativeAdsManager;
-        final NativeAdLayout native_ad_container;
+
+         NativeAdLayout native_ad_container;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
@@ -1282,7 +1377,7 @@ public class AdapterGroupPost extends RecyclerView.Adapter<AdapterGroupPost.MyHo
             line = itemView.findViewById(R.id.line);
             more = itemView.findViewById(R.id.more);
             native_ad_container = itemView.findViewById(R.id.native_ad_container);
-
+            AudienceNetworkAds.initialize(itemView.getContext());
             MobileAds.initialize(itemView.getContext());
             AdLoader adLoader = new AdLoader.Builder(itemView.getContext(), itemView.getContext().getString(R.string.native_ad_unit_id))
                     .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
@@ -1299,52 +1394,12 @@ public class AdapterGroupPost extends RecyclerView.Adapter<AdapterGroupPost.MyHo
 
             adLoader.loadAd(new AdRequest.Builder().build());
 
-            AudienceNetworkAds.initialize(itemView.getContext());
-
-            AudienceNetworkAds.initialize(itemView.getContext());
-            nativeAdsManager = new NativeAdsManager(itemView.getContext(), "VID_HD_16_9_46S_APP_INSTALL#102714542933317",5);
-            nativeAdsManager.setListener(new NativeAdsManager.Listener() {
-                @Override
-                public void onAdError(AdError adError) {
-                    // Handle ad loading error
-                    Log.e("AdLoadingError", "Ad failed to load: " + adError.getErrorMessage());
-                }
-
-                @Override
-                public void onAdsLoaded() {
-                    // Native ads are loaded, you can now inflate and display them
-                    inflateNativeAdLayout();
-                    Toast.makeText(itemView.getContext(), "Ads loaded successfully ", Toast.LENGTH_SHORT).show();
-                }
-            });
-            nativeAdsManager.loadAds();
-
 
 
 
 
         }
 
-        private void inflateNativeAdLayout() {
-            if (nativeAdsManager.isLoaded()) {
-                NativeAdBase nativeAd = nativeAdsManager.nextNativeAd();
-                if (nativeAd != null) {
-                    // Inflate your native ad layout (e.g., native_ad_layout.xml)
-                    View adView = LayoutInflater.from(itemView.getContext()).inflate(R.layout.native_ad_layout, null);
-
-                    // Populate the ad view components with data from the loaded native ad
-                    // For example, set the ad title, ad icon, ad media, etc.
-
-                    // Add the ad view to the NativeAdsLayout
-                    native_ad_container.addView(adView);
-                    List<View> clickableViews = new ArrayList<>();
-                    // Add clickable views from your ad layout
-                    clickableViews.add(adView);
-                    ((com.facebook.ads.NativeAd) nativeAd).registerViewForInteraction(adView, (MediaView) clickableViews);
-                }
-            }
-
-        }
 
     }
         }
