@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.google.android.ads.nativetemplates;
+package com.glamour.faithconnect.nativetemplates;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -26,8 +26,11 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+
+import com.glamour.faithconnect.R;
 import com.google.android.gms.ads.nativead.MediaView;
 import com.google.android.gms.ads.nativead.NativeAd;
 import com.google.android.gms.ads.nativead.NativeAdView;
@@ -267,8 +270,7 @@ public class TemplateView extends FrameLayout {
 
     try {
       templateType =
-          attributes.getResourceId(
-              R.styleable.TemplateView_gnt_template_type, R.layout.gnt_medium_template_view);
+          attributes.getResourceId(R.styleable.TemplateView_gnt_template_type, R.layout.gnt_medium_template_view);
     } finally {
       attributes.recycle();
     }

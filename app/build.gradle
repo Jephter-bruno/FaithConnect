@@ -108,7 +108,6 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-           /* shrinkResources true*/
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
@@ -167,7 +166,7 @@ dependencies {
     //noinspection GradleDependency
     implementation 'com.google.firebase:firebase-messaging:23.0.0'
     implementation project(path: ':Stipop')
-    implementation project(path: ':nativetemplates')
+   /* implementation project(path: ':nativetemplates')*/
     implementation project(path: ':SimplePlacePicker-master')
     testImplementation 'junit:junit:4.13.2'
     //noinspection GradleDependency
@@ -235,7 +234,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
     //noinspection RiskyLibrary,GradleDependency
-    implementation 'com.google.android.gms:play-services-ads:19.8.0'
+
     implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.2")
     testImplementation("com.squareup.okhttp3:mockwebserver:4.9.1")
     //noinspection GradleDependency,GradleDependency
@@ -254,10 +253,15 @@ dependencies {
 
     //Facebook Audience
     implementation 'com.facebook.android:audience-network-sdk:6.13.7'
-
+   //admob Implementation
+    implementation 'com.google.android.gms:play-services-ads:20.1.0'
+    implementation 'com.google.errorprone:error_prone_annotations:2.16'
     //exoplayer
     /* implementation 'com.google.android.exoplayer:exoplayer:2.19.0'*/
     /* implementation 'com.google.android.exoplayer:exoplayer-core:2.19.0'
      implementation 'com.google.android.exoplayer:exoplayer-dash:2.19.0'
      implementation 'com.google.android.exoplayer:exoplayer-ui:2.19.0'*/
+
+
+
 }

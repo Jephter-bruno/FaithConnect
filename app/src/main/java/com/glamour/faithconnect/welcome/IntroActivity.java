@@ -35,11 +35,11 @@ public class IntroActivity extends AppCompatActivity {
         mList.add(new ScreenItem("Post video, image & text\n" +
                 "With hashtag and mention\n" +
                 "your friends",R.drawable.ic_one));
-        mList.add(new ScreenItem("Watch or create reels with\n" +
+        mList.add(new ScreenItem("Watch or create bites(Short videos) with\n" +
                 "face filters camera",R.drawable.ic_two));
         mList.add(new ScreenItem("Private chat with video &\n" +
                 "voice calls",R.drawable.ic_three));
-        mList.add(new ScreenItem("Create or join groups & \n" +
+        mList.add(new ScreenItem("Create or join Church groups & \n" +
                 "group chat with group\n" +
                 "Video & voice call",R.drawable.ic_four));
         mList.add(new ScreenItem("Create or join Live stream\n" +

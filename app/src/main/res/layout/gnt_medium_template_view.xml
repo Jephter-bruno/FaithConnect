@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
   <com.google.android.gms.ads.nativead.NativeAdView
-      android:layout_height="350dp"
+      android:layout_height="360dp"
       android:layout_width="match_parent"
       android:id="@+id/native_ad_view"
       android:background="@drawable/gnt_outline_shape"
@@ -22,22 +22,20 @@
 
       <com.google.android.gms.ads.nativead.MediaView
           android:id="@+id/media_view"
-          android:layout_margin="@dimen/gnt_no_size"
           android:layout_width="match_parent"
           android:layout_height="200dp"
-          android:layout_marginTop="@dimen/gnt_no_margin"
+          android:layout_marginTop="10dp"
           app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="1.0"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@id/body"
-
-
-
-          />
+          app:layout_constraintTop_toBottomOf="@id/middle"
+          tools:ignore="NotSibling" />
 
       <androidx.constraintlayout.widget.ConstraintLayout
           android:layout_height="60dp"
           android:layout_marginTop="@dimen/gnt_small_margin"
           android:layout_width="match_parent"
+          android:layout_marginBottom="@dimen/gnt_small_margin"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
@@ -96,10 +94,10 @@
                 >
 
               <TextView
+                  android:textSize="16sp"
                   android:id="@+id/primary"
                   android:background="@color/gnt_white"
                   android:textStyle="bold"
-                  android:textSize="@dimen/gnt_text_size_large"
                   android:textColor="@color/gnt_gray"
                   android:lines="1"
                   android:layout_height="match_parent"
@@ -192,35 +190,38 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
       </androidx.constraintlayout.widget.ConstraintLayout>
       <TextView
-          android:layout_width="match_parent"
-          android:layout_margin="@dimen/gnt_no_size"
-          android:layout_height="wrap_content"
-          android:paddingBottom="@dimen/gnt_default_margin"
-          android:paddingLeft="@dimen/gnt_default_margin"
+
           android:id="@+id/body"
-          app:layout_constraintBottom_toTopOf="@+id/media_view"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@id/middle"
-          android:paddingStart="@dimen/gnt_default_margin"
-          android:layout_marginBottom="@dimen/gnt_small_margin"
-          />
-      <androidx.appcompat.widget.AppCompatButton
-          android:id="@+id/cta"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:background="#596C84"
-          android:textColor="@color/gnt_white"
-          android:layout_marginLeft="5dp"
-          android:layout_margin="5dp"
-          android:lines="1"
-          android:gravity="center"
-          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintBottom_toTopOf="@+id/cta"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/media_view"
-          app:layout_constraintHeight_min="35dp"
+          android:layout_marginBottom="@dimen/gnt_small_margin"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:ellipsize="end"
+          android:gravity="center_vertical"
+          android:lines="2"
+          android:textSize="16sp"
           />
+
+      <androidx.appcompat.widget.AppCompatButton
+          android:id="@+id/cta"
+          android:layout_width="100dp"
+          android:layout_height="30dp"
+          android:layout_gravity="center_vertical"
+          android:layout_weight="1"
+          android:background="#4286F4"
+          android:paddingLeft="3dp"
+          android:paddingRight="3dp"
+          android:textColor="@android:color/white"
+          android:textSize="12sp"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHeight_min="35dp"
+          app:layout_constraintHorizontal_bias="0.016"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/body" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
   </com.google.android.gms.ads.nativead.NativeAdView>

@@ -34,8 +34,8 @@ import com.facebook.ads.NativeAdBase;
 import com.facebook.ads.NativeAdLayout;
 import com.facebook.ads.NativeAdListener;
 import com.facebook.ads.NativeAdsManager;
-import com.google.android.ads.nativetemplates.NativeTemplateStyle;
-import com.google.android.ads.nativetemplates.TemplateView;
+import com.glamour.faithconnect.nativetemplates.NativeTemplateStyle;
+import com.glamour.faithconnect.nativetemplates.TemplateView;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
@@ -216,10 +216,10 @@ public class AdapterReel extends RecyclerView.Adapter<AdapterReel.AdapterReelHol
 */
 
 
-        else{
+
             holder.setVideoData(modelReels.get(position));
 
-        }
+
 
         holder.comment.setOnClickListener(v -> {
             Intent intent = new Intent(holder.itemView.getContext(), ReelCommentActivity.class);

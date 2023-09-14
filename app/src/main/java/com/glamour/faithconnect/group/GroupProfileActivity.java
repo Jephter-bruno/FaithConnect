@@ -411,6 +411,7 @@ public class GroupProfileActivity extends AppCompatActivity {
                 findViewById(R.id.cancel).setVisibility(View.GONE);
                 break;
             case "visitor":
+                findViewById(R.id.create_post).setVisibility(View.GONE);
                 checkRequest();
                 break;
         }

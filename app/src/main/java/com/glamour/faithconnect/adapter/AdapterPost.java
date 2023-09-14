@@ -41,8 +41,8 @@ import com.facebook.ads.NativeAdsManager;
 import com.github.pgreze.reactions.ReactionPopup;
 import com.github.pgreze.reactions.ReactionsConfig;
 import com.github.pgreze.reactions.ReactionsConfigBuilder;
-import com.google.android.ads.nativetemplates.NativeTemplateStyle;
-import com.google.android.ads.nativetemplates.TemplateView;
+import com.glamour.faithconnect.nativetemplates.NativeTemplateStyle;
+import com.glamour.faithconnect.nativetemplates.TemplateView;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
@@ -77,9 +77,7 @@ import com.glamour.faithconnect.watchParty.StartYouTubeActivity;
 import com.glamour.faithconnect.who.LikedActivity;
 import com.squareup.picasso.Picasso;
 import com.tylersuehr.socialtextview.SocialTextView;
-
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -87,7 +85,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 import me.jagar.chatvoiceplayerlibrary.VoicePlayerView;
 import timber.log.Timber;
@@ -143,10 +140,10 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
         requestQueue = Volley.newRequestQueue(holder.itemView.getContext());
         mp = MediaPlayer.create(context, R.raw.like);
 
-        if (position>1 && (position+1) % 4 == 0) {
+        if (position>1 && (position+1) % 3 == 0) {
             holder.ad.setVisibility(View.VISIBLE);
         }else
-        if (position>1 && (position+1) % 3 == 0) {
+        if (position>1 && (position+1) % 4 == 0) {
             holder.native_ad_container.setVisibility(View.VISIBLE);
             AudienceNetworkAds.initialize(context);
             com.facebook.ads.NativeAd nativeAd;
