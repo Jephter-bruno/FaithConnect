@@ -6,6 +6,7 @@
       android:layout_height="wrap_content"
       android:layout_width="match_parent"
       android:layout_centerInParent="true"
+      android:background="?attr/layoutcolor"
       android:id="@+id/native_ad_view"
       >
 
@@ -13,7 +14,7 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:layout_centerInParent="true"
-        android:background="@drawable/gnt_outline_shape"
+        android:background="?attr/layoutcolor"
         >
       <androidx.constraintlayout.widget.ConstraintLayout
           android:layout_width="@dimen/gnt_no_size"
@@ -76,7 +77,8 @@
                 android:id="@+id/primary"
                 android:textStyle="bold"
                 android:textSize="@dimen/gnt_text_size_large"
-                android:textColor="@color/gnt_gray"
+                android:fontFamily="@font/bold_roboto"
+                android:textColor="?attr/textcolor"
                 android:lines="1"
                 android:layout_height="match_parent"
                 android:layout_width="wrap_content"
@@ -111,7 +113,8 @@
                 android:layout_marginStart="@dimen/gnt_no_margin"
                 android:layout_marginEnd="@dimen/gnt_default_margin"
                 android:text="Ad"
-                android:textColor="@color/gnt_ad_green"
+                android:fontFamily="@font/bold_roboto"
+                android:textColor="?attr/textcolor"
                 android:textStyle="bold"
                 android:textSize="@dimen/gnt_ad_indicator_text_size"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -147,7 +150,8 @@
                 android:layout_height="match_parent"
                 android:gravity="top"
                 android:textSize="@dimen/gnt_text_size_small"
-                android:textColor="@color/gnt_gray"
+                android:fontFamily="@font/bold_roboto"
+                android:textColor="?attr/textcolor"
                 android:lines="1"
                 android:layout_marginTop="@dimen/gnt_no_margin"
                 android:layout_marginBottom="@dimen/gnt_no_margin"

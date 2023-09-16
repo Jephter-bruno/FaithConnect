@@ -28,8 +28,8 @@
             <com.google.android.material.progressindicator.LinearProgressIndicator
                 app:layout_constraintTop_toTopOf="parent"
                 android:id="@+id/progressBar"
-                app:trackColor="#FF7CB6FF"
-                app:indicatorColor="#1877F2"
+                app:trackColor="#FF9800"
+                app:indicatorColor="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_width="match_parent"

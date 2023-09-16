@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#5FA5DD</color>
-    <color name="colorAccent">#094a9f</color>
+    <color name="colorPrimary">#f20a84</color>
+    <color name="colorAccent">#5FA5DD</color>
     <!-- Intro -->
     <color name="indicator">#5FA5DD</color>
-    <color name="indicator_def">#62a3f6</color>
+    <color name="indicator_def">#f20a84</color>
     <!-- Call -->
     <color name="localBackground">#020001</color>
     <color name="remoteBackground">#0f0f0f</color>
@@ -15,7 +15,7 @@
     <color name="gnt_white">#FFFFFF</color>
     <color name="gnt_red">#FF0000</color>
     <color name="gnt_green">#00FF00</color>
-    <color name="gnt_blue">#4285f4</color>
+    <color name="gnt_blue">#f20a84</color>
     <color name="gnt_ad_green">#3A6728</color>
     <color name="gnt_gray">#808080</color>
     <color name="gnt_outline">#E0E0E0</color>

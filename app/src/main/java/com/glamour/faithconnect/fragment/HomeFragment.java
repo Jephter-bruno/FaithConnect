@@ -93,6 +93,7 @@ public class HomeFragment extends Fragment {
         post.setLayoutManager(new LinearLayoutManager(getContext()));
         modelPosts = new ArrayList<>();
         checkFollowing();
+        posts();
 
         more = v.findViewById(R.id.more);
         v.findViewById(R.id.more).setOnClickListener(view -> {
@@ -189,6 +190,38 @@ public class HomeFragment extends Fragment {
         return v;
     }
 
+    private void posts() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
+        reference.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int i = 0;
+                i++;
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    i++;
+
+                    for (String s : followingList){
+                        if (Objects.requireNonNull(snapshot.child("id").getValue()).toString().equals(s)){
+                            i++;
+                        }
+                    }
+
+
+                }
+
+                initial = i;
+                getAllPost();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     private void loadMoreData() {
         currentPage++;
         getAllPost();
@@ -205,11 +238,14 @@ public class HomeFragment extends Fragment {
                             modelPosts.clear();
                             for (DataSnapshot ds: snapshot.getChildren()){
                                 ModelPost modelPost = ds.getValue(ModelPost.class);
+                                modelPosts.add(modelPost);
+/*
                                 for (String id : followingList){
                                     if (Objects.requireNonNull(modelPost).getId().equals(id)){
                                         modelPosts.add(modelPost);
                                     }
                                 }
+*/
                             }
                             Collections.reverse(modelPosts);
                             adapterPost = new AdapterPost(getActivity(), modelPosts);
@@ -260,29 +296,6 @@ public class HomeFragment extends Fragment {
                         readLive();
                         readPod();
                         readStory();
-
-                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
-                        reference.addValueEventListener(new ValueEventListener() {
-                            @SuppressLint("SetTextI18n")
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                int i = 0;
-                                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                                    for (String s : followingList){
-                                        if (Objects.requireNonNull(snapshot.child("id").getValue()).toString().equals(s)){
-                                            i++;
-                                        }
-                                    }
-                                }
-                                initial = i;
-                                getAllPost();
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
 
 
                     }

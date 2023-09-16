@@ -137,7 +137,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
 
-        requestQueue = Volley.newRequestQueue(holder.itemView.getContext());
+       requestQueue = Volley.newRequestQueue(holder.itemView.getContext());
         mp = MediaPlayer.create(context, R.raw.like);
 
         if (position>1 && (position+1) % 3 == 0) {
