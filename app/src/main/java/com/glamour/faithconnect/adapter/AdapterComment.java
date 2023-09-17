@@ -87,9 +87,11 @@ public class AdapterComment extends RecyclerView.Adapter<AdapterComment.MyHolder
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
+/*
         if (position>1 && (position+1) % 5 == 0) {
             holder.ad.setVisibility(View.VISIBLE);
         }
+*/
         //UserInfo
         FirebaseDatabase.getInstance().getReference().child("Users").child(modelComments.get(position).getId()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -755,7 +757,7 @@ public class AdapterComment extends RecyclerView.Adapter<AdapterComment.MyHolder
         final ImageView angry;
         final ImageView sad;
         TextView reply;
-        final RelativeLayout ad;
+       /* final RelativeLayout ad;*/
         public MyHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -780,8 +782,10 @@ public class AdapterComment extends RecyclerView.Adapter<AdapterComment.MyHolder
             likeText  = itemView.findViewById(R.id.likeText);
             noLikes  = itemView.findViewById(R.id.noLikes);
 
+/*
             ad = itemView.findViewById(R.id.ad);
-            MobileAds.initialize(itemView.getContext());
+*/
+           /* MobileAds.initialize(itemView.getContext());
             AdLoader adLoader = new AdLoader.Builder(itemView.getContext(), itemView.getContext().getString(R.string.native_ad_unit_id))
                     .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
                         @Override
@@ -795,7 +799,7 @@ public class AdapterComment extends RecyclerView.Adapter<AdapterComment.MyHolder
                     })
                     .build();
 
-            adLoader.loadAd(new AdRequest.Builder().build());
+            adLoader.loadAd(new AdRequest.Builder().build());*/
         }
 
     }
