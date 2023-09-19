@@ -14,11 +14,12 @@
         android:layout_height="match_parent">
 
         <VideoView
-            app:layout_constraintDimensionRatio="16:9"
+
             android:id="@+id/video"
+            android:layout_centerInParent="true"
             android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent"/>
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
             android:layout_width="wrap_content"
@@ -94,7 +95,7 @@
             android:id="@+id/dot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-           tools:ignore="ContentDescription,HardcodedText" />
+            tools:ignore="ContentDescription,HardcodedText" />
 
         <TextView
             android:fontFamily="@font/black"
@@ -133,7 +134,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
 
-           tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:fontFamily="@font/black"
@@ -158,7 +159,7 @@
         tools:ignore="UseCompoundDrawables">
 
         <TextView
-            android:background="@drawable/gnt_btn_round"
+            android:background="@drawable/btn_round"
             android:backgroundTint="#fff"
             android:fontFamily="@font/bold_roboto"
             android:textColor="?attr/textcolor"
@@ -173,7 +174,7 @@
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-           tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:layout_marginStart="12dp"
@@ -184,7 +185,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
 
-           tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription" />
 
     </LinearLayout>
 

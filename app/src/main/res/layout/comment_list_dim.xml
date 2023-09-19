@@ -292,7 +292,7 @@
         </LinearLayout>
 
     </LinearLayout>
-<!--
+
     <RelativeLayout
         android:id="@+id/ad"
         android:visibility="gone"
@@ -309,6 +309,6 @@
             app:gnt_template_type="@layout/gnt_small_template_view" />
 
     </RelativeLayout>
--->
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

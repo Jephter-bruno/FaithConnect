@@ -200,9 +200,10 @@
 
         <TextView
             android:id="@+id/body"
-            android:layout_width="240dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/gnt_white"
+            android:layout_marginEnd="125dp"
             android:layout_margin="@dimen/gnt_no_size"
             android:paddingLeft="@dimen/gnt_default_margin"
             android:paddingBottom="@dimen/gnt_default_margin"
@@ -210,7 +211,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/cta"
-            android:layout_width="150dp"
+            android:layout_width="120dp"
             android:layout_height="35dp"
             android:layout_gravity="end|center"
             android:layout_marginLeft="5dp"

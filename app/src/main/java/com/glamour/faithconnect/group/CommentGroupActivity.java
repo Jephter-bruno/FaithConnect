@@ -42,6 +42,7 @@ import com.bumptech.glide.Glide;
 import com.github.pgreze.reactions.ReactionPopup;
 import com.github.pgreze.reactions.ReactionsConfig;
 import com.github.pgreze.reactions.ReactionsConfigBuilder;
+import com.glamour.faithconnect.adapter.AdapterCommentPosts;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
@@ -138,7 +139,7 @@ public class CommentGroupActivity extends AppCompatActivity implements View.OnCl
 
     //Comments
     List<ModelComment> commentsList;
-    AdapterComment adapterComments;
+    AdapterCommentPosts adapterComments;
     RecyclerView recyclerView;
 
     URLEmbeddedView urlEmbeddedView;
@@ -1606,7 +1607,7 @@ public class CommentGroupActivity extends AppCompatActivity implements View.OnCl
                 for(DataSnapshot ds: dataSnapshot.getChildren()){
                     ModelComment modelComments = ds.getValue(ModelComment.class);
                     commentsList.add(modelComments);
-                    adapterComments = new AdapterComment(getApplicationContext(), commentsList);
+                    adapterComments = new AdapterCommentPosts(getApplicationContext(), commentsList);
                     recyclerView.setAdapter(adapterComments);
                     adapterComments.notifyDataSetChanged();
                 }

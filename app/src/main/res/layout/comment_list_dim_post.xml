@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginTop="8dp"
-    android:background="#fff"
+    android:background="#141d26"
     android:layout_height="wrap_content"
     tools:ignore="Overdraw">
 
@@ -37,7 +37,7 @@
             android:paddingEnd="18dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:backgroundTint="#F0F2F6"
+            android:backgroundTint="#243447"
             android:background="@drawable/comment_bg"
             android:orientation="vertical"
             android:layout_width="wrap_content"
@@ -50,7 +50,7 @@
                 <TextView
                     android:id="@+id/name"
                     android:fontFamily="@font/bold_roboto"
-                    android:textColor="#040404"
+                    android:textColor="#fff"
                     android:textSize="16sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
@@ -78,7 +78,7 @@
                 app:urlColor="@color/colorPrimary"
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/bold_roboto"
-                android:textColor="#5B5B5E"
+                android:textColor="#fff"
                 android:textSize="14sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -132,7 +132,7 @@
         android:src="@drawable/ic_more"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="#5B5B5E"
+        app:tint="#fff"
 
        tools:ignore="ContentDescription" />
 
@@ -156,7 +156,7 @@
             android:gravity="start"
             android:textSize="14sp"
             android:fontFamily="@font/bold_roboto"
-            android:textColor="#5B5B5E"
+            android:textColor="#fff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -166,7 +166,7 @@
             android:text="Reply"
             android:textSize="14sp"
             android:fontFamily="@font/bold_roboto"
-            android:textColor="#858585"
+            android:textColor="#fff"
             android:layout_marginStart="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -182,7 +182,7 @@
                 android:id="@+id/like"
                 android:text="@string/like"
                 android:fontFamily="@font/bold_roboto"
-                android:textColor="#5B5B5E"
+                android:textColor="#fff"
                 android:textAlignment="viewStart"
                 android:gravity="start"
                 android:textSize="14sp"
@@ -262,6 +262,7 @@
                     android:src="@drawable/ic_angry"
                     android:layout_width="16dp"
                     android:layout_height="wrap_content"
+
                    tools:ignore="ContentDescription" />
 
             </LinearLayout>
@@ -272,7 +273,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/bold_roboto"
-                android:textColor="#5B5B5E"
+                android:textColor="#fff"
                 tools:ignore="SmallSp" />
 
             <TextView
@@ -285,29 +286,13 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/bold_roboto"
                 android:text="@string/likes"
-                android:textColor="#5B5B5E"
+                android:textColor="#fff"
                 tools:ignore="SmallSp" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-    <RelativeLayout
-        android:id="@+id/ad"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints">
-        <com.glamour.faithconnect.nativetemplates.TemplateView
-            android:id="@+id/my_template"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:gnt_template_type="@layout/gnt_small_template_view" />
-
-    </RelativeLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

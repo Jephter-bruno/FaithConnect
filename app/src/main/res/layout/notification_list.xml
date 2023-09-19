@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/bold_roboto"
                 android:textColor="?attr/textcolor"
-                android:textSize="18sp" />
+                android:textSize="15sp" />
 
             <ImageView
                 android:id="@+id/verified"
@@ -69,7 +69,7 @@
             android:layout_marginBottom="5dp"
             android:fontFamily="@font/bold_roboto"
             android:textColor="?attr/texttwocolor"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
 
     </LinearLayout>
     <RelativeLayout

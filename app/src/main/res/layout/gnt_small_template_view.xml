@@ -104,7 +104,6 @@
               app:layout_constraintTop_toBottomOf="@id/headline"
               >
             <TextView
-                android:background="@drawable/gnt_rounded_corners_shape"
                 android:layout_width="@dimen/gnt_ad_indicator_width"
                 android:gravity="center"
                 android:id="@+id/ad_notification_view"
@@ -164,20 +163,38 @@
                 ></TextView>
 
           </LinearLayout>
-          <androidx.appcompat.widget.AppCompatButton
-              android:id="@+id/cta"
+          <TextView
+
+              android:id="@+id/body"
               android:layout_width="match_parent"
-              android:layout_height="@dimen/gnt_no_size"
-              android:background="#596C84"
-              android:textColor="@color/gnt_white"
-              android:lines="1"
+              android:layout_height="wrap_content"
+              android:layout_marginEnd="105dp"
+              android:ellipsize="end"
+              android:fontFamily="@font/bold_roboto"
+              android:gravity="center_vertical"
+              android:lines="2"
+              android:textColor="?attr/textcolor"
+              android:textSize="12sp"
               app:layout_constraintBottom_toBottomOf="parent"
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintTop_toBottomOf="@id/row_two"
+              app:layout_constraintTop_toBottomOf="@id/media_view"
+              app:layout_constraintVertical_bias="0.2" />
+
+          <androidx.appcompat.widget.AppCompatButton
+              android:id="@+id/cta"
+              android:layout_width="100dp"
+              android:layout_height="@dimen/gnt_no_size"
+              android:background="#596C84"
               android:gravity="center"
+              android:lines="1"
+              android:textColor="@color/gnt_white"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintHeight_percent="0.35"
-              />
+              app:layout_constraintHorizontal_bias="1.0"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@id/row_two" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

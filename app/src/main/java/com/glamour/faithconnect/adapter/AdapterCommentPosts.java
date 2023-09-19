@@ -1,5 +1,7 @@
 package com.glamour.faithconnect.adapter;
 
+import static android.os.Environment.DIRECTORY_DOWNLOADS;
+
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
 import android.content.ClipData;
@@ -24,12 +26,14 @@ import com.bumptech.glide.Glide;
 import com.github.pgreze.reactions.ReactionPopup;
 import com.github.pgreze.reactions.ReactionsConfig;
 import com.github.pgreze.reactions.ReactionsConfigBuilder;
-import com.glamour.faithconnect.nativetemplates.NativeTemplateStyle;
-import com.glamour.faithconnect.nativetemplates.TemplateView;
-import com.google.android.gms.ads.AdLoader;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.nativead.NativeAd;
+import com.glamour.faithconnect.GetTimeAgo;
+import com.glamour.faithconnect.MediaViewActivity;
+import com.glamour.faithconnect.NightMode;
+import com.glamour.faithconnect.R;
+import com.glamour.faithconnect.model.ModelComment;
+import com.glamour.faithconnect.post.ReplyActivity;
+import com.glamour.faithconnect.profile.UserProfileActivity;
+import com.glamour.faithconnect.search.SearchActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -39,14 +43,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.glamour.faithconnect.GetTimeAgo;
-import com.glamour.faithconnect.MediaViewActivity;
-import com.glamour.faithconnect.NightMode;
-import com.glamour.faithconnect.R;
-import com.glamour.faithconnect.model.ModelComment;
-import com.glamour.faithconnect.post.ReplyActivity;
-import com.glamour.faithconnect.profile.UserProfileActivity;
-import com.glamour.faithconnect.search.SearchActivity;
 import com.squareup.picasso.Picasso;
 import com.tylersuehr.socialtextview.SocialTextView;
 
@@ -56,16 +52,14 @@ import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static android.os.Environment.DIRECTORY_DOWNLOADS;
-
 @SuppressWarnings("ALL")
-public class AdapterComment extends RecyclerView.Adapter<AdapterComment.MyHolder>{
+public class AdapterCommentPosts extends RecyclerView.Adapter<AdapterCommentPosts.MyHolder>{
 
     final Context context;
     final List<ModelComment> modelComments;
     NightMode nightMode;
 
-    public AdapterComment(Context context, List<ModelComment> modelComments) {
+    public AdapterCommentPosts(Context context, List<ModelComment> modelComments) {
         this.context = context;
         this.modelComments = modelComments;
     }
@@ -75,23 +69,23 @@ public class AdapterComment extends RecyclerView.Adapter<AdapterComment.MyHolder
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         nightMode = new NightMode(context);
         if (nightMode.loadNightModeState().equals("night")){
-            View view = LayoutInflater.from(context).inflate(R.layout.comment_list_night, parent, false);   return new MyHolder(view);
+            View view = LayoutInflater.from(context).inflate(R.layout.comment_list_night_post, parent, false);   return new MyHolder(view);
         }else if (nightMode.loadNightModeState().equals("dim")){
-            View view = LayoutInflater.from(context).inflate(R.layout.comment_list_dim, parent, false);   return new MyHolder(view);
+            View view = LayoutInflater.from(context).inflate(R.layout.comment_list_dim_post, parent, false);   return new MyHolder(view);
         }
         else {
-            View view = LayoutInflater.from(context).inflate(R.layout.comment_list, parent, false);   return new MyHolder(view);
+            View view = LayoutInflater.from(context).inflate(R.layout.comment_list_post, parent, false);   return new MyHolder(view);
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
-
+/*
         if (position>1 && (position+1) % 5 == 0) {
             holder.ad.setVisibility(View.VISIBLE);
         }
-
+*/
         //UserInfo
         FirebaseDatabase.getInstance().getReference().child("Users").child(modelComments.get(position).getId()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -757,7 +751,7 @@ public class AdapterComment extends RecyclerView.Adapter<AdapterComment.MyHolder
         final ImageView angry;
         final ImageView sad;
         TextView reply;
-       final RelativeLayout ad;
+       /* final RelativeLayout ad;*/
         public MyHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -782,10 +776,10 @@ public class AdapterComment extends RecyclerView.Adapter<AdapterComment.MyHolder
             likeText  = itemView.findViewById(R.id.likeText);
             noLikes  = itemView.findViewById(R.id.noLikes);
 
-
+/*
             ad = itemView.findViewById(R.id.ad);
-
-            MobileAds.initialize(itemView.getContext());
+*/
+           /* MobileAds.initialize(itemView.getContext());
             AdLoader adLoader = new AdLoader.Builder(itemView.getContext(), itemView.getContext().getString(R.string.native_ad_unit_id))
                     .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
                         @Override
@@ -799,7 +793,7 @@ public class AdapterComment extends RecyclerView.Adapter<AdapterComment.MyHolder
                     })
                     .build();
 
-            adLoader.loadAd(new AdRequest.Builder().build());
+            adLoader.loadAd(new AdRequest.Builder().build());*/
         }
 
     }

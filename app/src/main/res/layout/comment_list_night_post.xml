@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginTop="8dp"
-    android:background="#fff"
+    android:background="#212121"
     android:layout_height="wrap_content"
     tools:ignore="Overdraw">
 
@@ -37,7 +37,7 @@
             android:paddingEnd="18dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:backgroundTint="#F0F2F6"
+            android:backgroundTint="#000"
             android:background="@drawable/comment_bg"
             android:orientation="vertical"
             android:layout_width="wrap_content"
@@ -50,7 +50,7 @@
                 <TextView
                     android:id="@+id/name"
                     android:fontFamily="@font/bold_roboto"
-                    android:textColor="#040404"
+                    android:textColor="#fff"
                     android:textSize="16sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
@@ -78,7 +78,7 @@
                 app:urlColor="@color/colorPrimary"
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/bold_roboto"
-                android:textColor="#5B5B5E"
+                android:textColor="#858585"
                 android:textSize="14sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -98,15 +98,15 @@
                 app:cardBackgroundColor="@android:color/transparent"
                 app:cardElevation="0dp"
                 app:cardCornerRadius="15dp">
-            <ImageView
-                android:src="@drawable/cover"
-                android:scaleType="centerCrop"
-                android:id="@+id/media"
-                android:layout_centerInParent="true"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                <ImageView
+                    android:src="@drawable/cover"
+                    android:scaleType="centerCrop"
+                    android:id="@+id/media"
+                    android:layout_centerInParent="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
 
-               tools:ignore="ContentDescription" />
+                   tools:ignore="ContentDescription" />
             </androidx.cardview.widget.CardView>
             <ImageView
                 android:id="@+id/play"
@@ -132,7 +132,7 @@
         android:src="@drawable/ic_more"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="#5B5B5E"
+        app:tint="#858585"
 
        tools:ignore="ContentDescription" />
 
@@ -156,7 +156,7 @@
             android:gravity="start"
             android:textSize="14sp"
             android:fontFamily="@font/bold_roboto"
-            android:textColor="#5B5B5E"
+            android:textColor="#858585"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -182,7 +182,7 @@
                 android:id="@+id/like"
                 android:text="@string/like"
                 android:fontFamily="@font/bold_roboto"
-                android:textColor="#5B5B5E"
+                android:textColor="#858585"
                 android:textAlignment="viewStart"
                 android:gravity="start"
                 android:textSize="14sp"
@@ -206,9 +206,8 @@
 
         <LinearLayout
             android:layout_weight="1"
-            android:layout_gravity="center"
             android:layout_width="0dp"
-            android:layout_height="17dp">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_gravity="center"
@@ -239,7 +238,7 @@
                     android:layout_width="16dp"
                     android:layout_height="wrap_content"
 
-                    tools:ignore="ContentDescription" />
+                   tools:ignore="ContentDescription" />
                 <ImageView
                     android:visibility="gone"
                     android:id="@+id/wow"
@@ -262,7 +261,8 @@
                     android:src="@drawable/ic_angry"
                     android:layout_width="16dp"
                     android:layout_height="wrap_content"
-                   tools:ignore="ContentDescription" />
+
+                    tools:ignore="ContentDescription" />
 
             </LinearLayout>
 
@@ -272,12 +272,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/bold_roboto"
-                android:textColor="#5B5B5E"
+                android:textColor="#858585"
                 tools:ignore="SmallSp" />
 
             <TextView
                 android:id="@+id/likeText"
-                android:ellipsize="end"
                 android:visibility="gone"
                 android:layout_marginStart="4dp"
                 android:textSize="14sp"
@@ -285,29 +284,13 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/bold_roboto"
                 android:text="@string/likes"
-                android:textColor="#5B5B5E"
+                android:textColor="#858585"
                 tools:ignore="SmallSp" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-    <RelativeLayout
-        android:id="@+id/ad"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints">
-        <com.glamour.faithconnect.nativetemplates.TemplateView
-            android:id="@+id/my_template"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:gnt_template_type="@layout/gnt_small_template_view" />
-
-    </RelativeLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
