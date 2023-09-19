@@ -133,7 +133,7 @@ public class AdapterGroupPost extends RecyclerView.Adapter<AdapterGroupPost.MyHo
             holder.native_ad_container.setVisibility(View.VISIBLE);
             AudienceNetworkAds.initialize(context);
             com.facebook.ads.NativeAd nativeAd;
-            nativeAd = new com.facebook.ads.NativeAd(context, "VID_HD_16_9_15S_APP_INSTALL#102713349600103_102714542933317");
+            nativeAd = new com.facebook.ads.NativeAd(context, "VID_HD_16_9_15S_APP_INSTALL#102713349600103_116050314933073");
 
             NativeAdListener nativeAdListener = new NativeAdListener() {
                 @Override
@@ -1379,7 +1379,7 @@ public class AdapterGroupPost extends RecyclerView.Adapter<AdapterGroupPost.MyHo
             native_ad_container = itemView.findViewById(R.id.native_ad_container);
             AudienceNetworkAds.initialize(itemView.getContext());
             MobileAds.initialize(itemView.getContext());
-            AdLoader adLoader = new AdLoader.Builder(itemView.getContext(), itemView.getContext().getString(R.string.native_ad_unit_id))
+            AdLoader adLoader = new AdLoader.Builder(itemView.getContext(), itemView.getContext().getString(R.string.native_ad_unit_id_groups))
                     .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
                         @Override
                         public void onNativeAdLoaded(NativeAd nativeAd) {

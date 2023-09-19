@@ -149,7 +149,7 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
 
             ad = itemView.findViewById(R.id.ad);
             MobileAds.initialize(itemView.getContext());
-            AdLoader adLoader = new AdLoader.Builder(itemView.getContext(), itemView.getContext().getString(R.string.native_ad_unit_id))
+            AdLoader adLoader = new AdLoader.Builder(itemView.getContext(), itemView.getContext().getString(R.string.native_ad_unit_id_comments))
                     .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
                         @Override
                         public void onNativeAdLoaded(NativeAd nativeAd) {

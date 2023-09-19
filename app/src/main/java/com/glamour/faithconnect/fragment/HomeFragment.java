@@ -76,7 +76,7 @@ public class HomeFragment extends Fragment {
     TextView nothing;
 
 
-    private static final int TOTAL_ITEM_EACH_LOAD = 18;
+    private static final int TOTAL_ITEM_EACH_LOAD = 12;
     private int currentPage = 1;
     Button more;
     long initial;

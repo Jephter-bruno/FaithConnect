@@ -136,9 +136,11 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
-
+        if (requestQueue == null) {
        requestQueue = Volley.newRequestQueue(holder.itemView.getContext());
-        mp = MediaPlayer.create(context, R.raw.like);
+        }
+
+            mp = MediaPlayer.create(context, R.raw.like);
 
         if (position>1 && (position+1) % 3 == 0) {
             holder.ad.setVisibility(View.VISIBLE);

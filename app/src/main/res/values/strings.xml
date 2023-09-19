@@ -67,10 +67,13 @@
         <item>Home</item>
         <item>Others</item>
     </string-array>
-    <string name="native_ad_unit_id_groups" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
-    <string name="native_ad_unit_id_reels" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
-    <string name="native_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/2247696110</string>  <!-- Paste Native Ad unit id here for admob -->
-    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>  <!-- Paste Banner Ad unit id here for admob -->
+    <string name="native_ad_unit_id_comments" translatable="false">ca-app-pub-8221169478042876/6573828463</string>
+    <string name="native_ad_unit_id_groups" translatable="false">ca-app-pub-8221169478042876/2491113228</string>
+    <string name="native_ad_unit_id_reels" translatable="false">ca-app-pub-8221169478042876/6138231694</string>
+    <string name="native_ad_unit_id" translatable="false">ca-app-pub-8221169478042876/3649953128</string>  <!-- Paste Native Ad unit id here for admob -->
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-8221169478042876/1933347081</string>  <!-- Paste Banner Ad unit id here for admob -->
+    <string name="facebook_native_ad_unit_id_groups" translatable="false">102713349600103_116050314933073</string>
+    <string name="facebook_native_ad_unit_id_post" translatable="false">102713349600103_102714542933317</string>
 
     <string name="msg_connection_error">Connection error, please check the network settings or make sure channel name/access token are valid</string>
     <string name="verification_about">A verified badge is a check that appears on a account to indicate that the account is the authentic presence of a notable public figure, celebrity, global brand or entity it represents. Submitting a request not guarantee that your account will be verified.</string>
