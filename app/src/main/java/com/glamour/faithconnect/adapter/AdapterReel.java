@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
 import com.facebook.ads.AdOptionsView;
@@ -221,6 +222,7 @@ public class AdapterReel extends RecyclerView.Adapter<AdapterReel.AdapterReelHol
 
 
 
+
         holder.comment.setOnClickListener(v -> {
             Intent intent = new Intent(holder.itemView.getContext(), ReelCommentActivity.class);
             intent.putExtra("item", String.valueOf(position));
@@ -389,7 +391,7 @@ public class AdapterReel extends RecyclerView.Adapter<AdapterReel.AdapterReelHol
         final TextView textComment;
         final SocialTextView description;
         final ImageView like_img;
-        final ImageView more;
+        final ImageView more, imageView;
         final TextView views;
         final RelativeLayout ad;
         LinearProgressIndicator pb;
@@ -400,6 +402,7 @@ public class AdapterReel extends RecyclerView.Adapter<AdapterReel.AdapterReelHol
             super(itemView);
 
             videoView = itemView.findViewById(R.id.videoView);
+            imageView = itemView.findViewById(R.id.imageView);
             pb = itemView.findViewById(R.id.pb);
             ad = itemView.findViewById(R.id.ad);
             like = itemView.findViewById(R.id.like);
@@ -439,6 +442,8 @@ public class AdapterReel extends RecyclerView.Adapter<AdapterReel.AdapterReelHol
         void setVideoData(ModelReel modelReel){
             //TextView
             description.setLinkText(modelReel.getText());
+            Glide.with(itemView.getContext()).asBitmap().load(modelReel.getVideo()).thumbnail(0.1f).into(imageView);
+
             FirebaseDatabase.getInstance().getReference().child("Users").child(modelReel.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
                 @SuppressLint("SetTextI18n")
                 @Override
@@ -629,6 +634,7 @@ public class AdapterReel extends RecyclerView.Adapter<AdapterReel.AdapterReelHol
             videoView.setOnPreparedListener(mp -> {
                 itemView.findViewById(R.id.pb).setVisibility(View.GONE);
                 mp.start();
+                imageView.setVisibility(View.GONE);
                 mp.setLooping(true);
                 FirebaseDatabase.getInstance().getReference("ReelViews").child(modelReel.getpId()).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(true);
             });

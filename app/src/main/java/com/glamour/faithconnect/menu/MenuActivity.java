@@ -28,7 +28,6 @@ import com.glamour.faithconnect.marketPlace.MarketPlaceActivity;
 import com.glamour.faithconnect.NightMode;
 import com.glamour.faithconnect.R;
 import com.glamour.faithconnect.admin.AdminActivity;
-import com.glamour.faithconnect.meeting.MeetingActivity;
 import com.glamour.faithconnect.podcast.GoPodcastBroadcastActivity;
 import com.glamour.faithconnect.profile.EditProfileActivity;
 import com.glamour.faithconnect.reel.ReelActivity;
@@ -114,7 +113,7 @@ public class MenuActivity extends AppCompatActivity {
 
         });
 
-        findViewById(R.id.meeting).setOnClickListener(v -> startActivity(new Intent(MenuActivity.this, MeetingActivity.class)));
+       /* findViewById(R.id.meeting).setOnClickListener(v -> startActivity(new Intent(MenuActivity.this, MeetingActivity.class)));*/
 
         findViewById(R.id.podcast).setOnClickListener(v -> {
 

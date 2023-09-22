@@ -55,7 +55,6 @@ import com.glamour.faithconnect.StickersPost;
 import com.glamour.faithconnect.calling.RingingActivity;
 import com.glamour.faithconnect.faceFilters.FaceFilters;
 import com.glamour.faithconnect.groupVoiceCall.RingingGroupVoiceActivity;
-import com.glamour.faithconnect.meeting.MeetingActivity;
 import com.glamour.faithconnect.podcast.GoPodcastBroadcastActivity;
 import com.glamour.faithconnect.post.FeelingActivity;
 import com.glamour.faithconnect.post.PrivacyPick;
@@ -1150,10 +1149,10 @@ public class CreateGroupPostActivity extends AppCompatActivity implements Privac
                 });
                 dialogFragment.show(getSupportFragmentManager(), "tag");
                 break;
-            case R.id.meeting:
+           /* case R.id.meeting:
                 post_more.cancel();
                 startActivity(new Intent(CreateGroupPostActivity.this, MeetingActivity.class));
-                break;
+                break;*/
             case R.id.reels:
                 post_more.cancel();
                 selectReel();

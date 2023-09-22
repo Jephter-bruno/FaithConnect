@@ -69,7 +69,6 @@ import com.glamour.faithconnect.adapter.AdapterChat;
 import com.glamour.faithconnect.calling.RingingActivity;
 import com.glamour.faithconnect.faceFilters.FaceFilters;
 import com.glamour.faithconnect.groupVoiceCall.RingingGroupVoiceActivity;
-import com.glamour.faithconnect.meeting.MeetingActivity;
 import com.glamour.faithconnect.model.ModelChat;
 import com.glamour.faithconnect.model.ModelUser;
 import com.glamour.faithconnect.notifications.Data;
@@ -895,10 +894,10 @@ public class ChatActivity extends AppCompatActivity implements GiphyDialogFragme
                 }
 
                 break;
-            case R.id.meeting:
+            /*case R.id.meeting:
                 post_more.cancel();
                 startActivity(new Intent(ChatActivity.this, MeetingActivity.class));
-                break;
+                break;*/
 
             case R.id.watch_party:
                 post_more.cancel();

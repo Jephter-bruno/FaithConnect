@@ -46,7 +46,6 @@ import com.glamour.faithconnect.groupVoiceCall.RingingGroupVoiceActivity;
 import com.glamour.faithconnect.live.activities.GoBroadcastActivity;
 import com.glamour.faithconnect.marketPlace.PostProductActivity;
 import com.glamour.faithconnect.marketPlace.ProductDetailsActivity;
-import com.glamour.faithconnect.meeting.MeetingActivity;
 import com.glamour.faithconnect.menu.InviteActivity;
 import com.glamour.faithconnect.menu.TranslationActivity;
 import com.glamour.faithconnect.notifications.Token;
@@ -488,10 +487,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 more.cancel();
                 startActivity(new Intent(MainActivity.this, StartWatchPartyActivity.class));
                 break;
-            case R.id.meeting:
+            /*case R.id.meeting:
                 more.cancel();
                 startActivity(new Intent(MainActivity.this, MeetingActivity.class));
-                break;
+                break;*/
             case R.id.live:
                 more.cancel();
                 String room = String.valueOf(System.currentTimeMillis());

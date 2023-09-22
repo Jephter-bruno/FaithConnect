@@ -37,7 +37,6 @@ import com.mapbox.geojson.Point;
 import com.glamour.faithconnect.MediaViewActivity;
 import com.glamour.faithconnect.R;
 import com.glamour.faithconnect.group.GroupChatActivity;
-import com.glamour.faithconnect.meeting.MeetingActivity;
 import com.glamour.faithconnect.model.ModelGroupChat;
 import com.glamour.faithconnect.post.CommentActivity;
 import com.glamour.faithconnect.profile.UserProfileActivity;
@@ -547,14 +546,14 @@ public class AdapterGroupChat extends RecyclerView.Adapter<AdapterGroupChat.MyHo
 
                     break;
 
-                case "meet":
+               /* case "meet":
 
                     Intent intent21 = new Intent(context, MeetingActivity.class);
                     intent21.putExtra("meet", modelChats.get(position).getTimestamp());
                     context.startActivity(intent21);
 
                     break;
-
+*/
             }
 
         });
@@ -682,13 +681,13 @@ public class AdapterGroupChat extends RecyclerView.Adapter<AdapterGroupChat.MyHo
                     });
 
                     break;
-                case "meet":
+              /*  case "meet":
 
                     Intent intent21 = new Intent(context, MeetingActivity.class);
                     intent21.putExtra("meet", modelChats.get(position).getTimestamp());
                     context.startActivity(intent21);
 
-                    break;
+                    break;*/
 
             }
 
@@ -816,13 +815,13 @@ public class AdapterGroupChat extends RecyclerView.Adapter<AdapterGroupChat.MyHo
                     });
 
                     break;
-                case "meet":
+                /*case "meet":
 
                     Intent intent21 = new Intent(context, MeetingActivity.class);
                     intent21.putExtra("meet", modelChats.get(position).getTimestamp());
                     context.startActivity(intent21);
 
-                    break;
+                    break;*/
 
             }
         });

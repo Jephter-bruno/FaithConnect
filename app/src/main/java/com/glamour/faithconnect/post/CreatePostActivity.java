@@ -56,7 +56,6 @@ import com.glamour.faithconnect.calling.RingingActivity;
 import com.glamour.faithconnect.faceFilters.FaceFilters;
 import com.glamour.faithconnect.groupVoiceCall.RingingGroupVoiceActivity;
 
-import com.glamour.faithconnect.meeting.MeetingActivity;
 import com.glamour.faithconnect.podcast.GoPodcastBroadcastActivity;
 import com.glamour.faithconnect.reel.VideoEditActivity;
 import com.glamour.faithconnect.story.AddStoryActivity;
@@ -1175,10 +1174,10 @@ public class CreatePostActivity extends AppCompatActivity implements PrivacyPick
                 });
                 dialogFragment.show(getSupportFragmentManager(), "tag");
                 break;
-            case R.id.meeting:
+        /*    case R.id.meeting:
                 post_more.cancel();
                 startActivity(new Intent(CreatePostActivity.this, MeetingActivity.class));
-                break;
+                break;*/
             case R.id.reels:
                 post_more.cancel();
                 selectReel();

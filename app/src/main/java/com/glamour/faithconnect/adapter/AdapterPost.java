@@ -826,7 +826,10 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
 
         ReactionPopup popup = new ReactionPopup(context, config, (position1) -> {
 
-            mp.start();
+
+            if (mp != null) {
+                mp.start();
+            }
 
             if (position1 == 0) {
                 FirebaseDatabase.getInstance().getReference().child("Likes").addListenerForSingleValueEvent(new ValueEventListener() {
