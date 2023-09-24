@@ -123,6 +123,7 @@ public class AdapterReel extends RecyclerView.Adapter<AdapterReel.AdapterReelHol
             holder.textLike.setVisibility(View.GONE);
             holder.description.setVisibility(View.GONE);
             holder.pb.setVisibility(View.GONE);
+            holder.imageView.setVisibility(View.GONE);
 
 
 
