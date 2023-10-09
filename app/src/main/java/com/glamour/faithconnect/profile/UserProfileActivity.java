@@ -92,7 +92,7 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
 
     //Post
     AdapterPost adapterPost;
-    List<ModelPost> modelPosts;
+    ArrayList<ModelPost> modelPosts;
     RecyclerView post;
 
     private static final int TOTAL_ITEM_EACH_LOAD = 6;

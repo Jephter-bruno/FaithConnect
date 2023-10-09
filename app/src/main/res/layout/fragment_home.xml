@@ -43,7 +43,7 @@
                 android:background="@drawable/circle"
                 android:backgroundTint="?attr/backgroundcolor"
                 android:padding="8dp"
-
+                android:tint="#596C84"
                 tools:ignore="ContentDescription,UnusedAttribute,UseAppTint" />
 
             <ImageView
@@ -295,7 +295,6 @@
 
 
                 </LinearLayout>
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/post"
                     android:layout_width="match_parent"

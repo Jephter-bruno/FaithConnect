@@ -32,12 +32,12 @@ public class TrendingActivity extends AppCompatActivity {
 
     //Post
     AdapterPost adapterPost;
-    List<ModelPost> modelPosts;
+    ArrayList<ModelPost> modelPosts;
     RecyclerView post;
 
     //Post
     AdapterPost getAdapterPost;
-    List<ModelPost> modelPostList;
+    ArrayList<ModelPost> modelPostList;
     RecyclerView postView;
 
     private static final int TOTAL_ITEM_EACH_LOAD = 6;

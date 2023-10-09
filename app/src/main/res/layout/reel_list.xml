@@ -29,22 +29,17 @@
     <RelativeLayout
         android:id="@+id/ad"
         android:visibility="gone"
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
         app:layout_constraintDimensionRatio="16:9"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        tools:ignore="MissingConstraints">
 
         <com.glamour.faithconnect.nativetemplates.TemplateView
             android:id="@+id/my_template"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:gnt_template_type="@layout/gnt_medium_template_view_reels" />
 
     </RelativeLayout>

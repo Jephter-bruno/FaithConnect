@@ -39,9 +39,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 @SuppressWarnings("ALL")
 public class YouTubePartyActivity extends YouTubeBaseActivity {
 
-    String ky="AIzaSyDJFf6mY6XIF8vfSHJAwh6dHwYWBPWDGKI";
+    String ky;
     String id;
-
+    //AIzaSyDJFf6mY6XIF8vfSHJAwh6dHwYWBPWDGKI
     EditText sendMessage;
     ImageView send;
     RecyclerView chat_rv;
@@ -67,7 +67,7 @@ public class YouTubePartyActivity extends YouTubeBaseActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
-                    ky = "AIzaSyDJFf6mY6XIF8vfSHJAwh6dHwYWBPWDGKI";
+                    ky = snapshot.child("key").getValue().toString();
                 }else {
                     Toast.makeText(YouTubePartyActivity.this, "Please paste key in firebase", Toast.LENGTH_SHORT).show();
                     onBackPressed();

@@ -20,7 +20,6 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,10 +33,8 @@ import com.facebook.ads.AdError;
 import com.facebook.ads.AdOptionsView;
 import com.facebook.ads.AudienceNetworkAds;
 import com.facebook.ads.MediaView;
-import com.facebook.ads.NativeAdBase;
 import com.facebook.ads.NativeAdLayout;
 import com.facebook.ads.NativeAdListener;
-import com.facebook.ads.NativeAdsManager;
 import com.github.pgreze.reactions.ReactionPopup;
 import com.github.pgreze.reactions.ReactionsConfig;
 import com.github.pgreze.reactions.ReactionsConfigBuilder;
@@ -95,14 +92,23 @@ import static android.os.Environment.DIRECTORY_DOWNLOADS;
 public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
 
     final Context context;
-    final List<ModelPost> modelPosts;
+    ArrayList<ModelPost> modelPosts = new ArrayList<>();
     View containerView;
     private static final String TAG = "NativeAdActivity".getClass().getSimpleName();
 
-    public AdapterPost(Context context, List<ModelPost> modelPosts) {
+    public AdapterPost(Context context, ArrayList<ModelPost> modelPosts) {
         this.context = context;
         this.modelPosts = modelPosts;
     }
+
+    public void setitems(ArrayList<ModelPost> emb){
+        int initSize = modelPosts.size();
+        modelPosts.addAll(emb);
+        notifyItemRangeChanged(initSize,emb.size());
+    }
+    public String getLastItemId(){
+        return modelPosts.get(modelPosts.size()-1).getId();   }
+
     private RequestQueue requestQueue;
     private boolean notify = false;
 
@@ -142,10 +148,10 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
 
             mp = MediaPlayer.create(context, R.raw.like);
 
-        if (position>1 && (position+1) % 3 == 0) {
+        if (position>1 && (position+1) % 4 == 0) {
             holder.ad.setVisibility(View.VISIBLE);
         }else
-        if (position>1 && (position+1) % 4 == 0) {
+        if (position>1 && (position+1) % 5 == 0) {
             holder.native_ad_container.setVisibility(View.VISIBLE);
             AudienceNetworkAds.initialize(context);
             com.facebook.ads.NativeAd nativeAd;
@@ -242,8 +248,12 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
         FirebaseDatabase.getInstance().getReference().child("Users").child(modelPosts.get(position).getId()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (!snapshot.child("photo").getValue().toString().isEmpty()) Picasso.get().load(snapshot.child("photo").getValue().toString()).into(holder.dp);
-                holder.name.setText(snapshot.child("name").getValue().toString());
+           if (!snapshot.child("photo").getValue().toString().isEmpty()) Picasso.get().load(snapshot.child("photo").getValue().toString()).into(holder.dp);
+
+                Object nameValue = snapshot.child("name").getValue();
+                if (nameValue != null && !nameValue.toString().isEmpty()) {
+                    holder.name.setText(snapshot.child("name").getValue().toString());
+                }
                 holder.username.setText(snapshot.child("username").getValue().toString());
                 if(snapshot.child("verified").getValue().toString().equals("yes")){
                     holder.verified.setVisibility(View.VISIBLE);
@@ -257,6 +267,9 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
                         context.startActivity(intent);
                     }else {
                         Snackbar.make(v,"It's you",Snackbar.LENGTH_LONG).show();
+                        Intent intent = new Intent(context, UserProfileActivity.class);
+                        intent.putExtra("hisUID", modelPosts.get(position).getId());
+                        context.startActivity(intent);
                     }
                 });
                 holder.name.setOnClickListener(v -> {
@@ -507,6 +520,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
             holder.mediaView.setVisibility(View.VISIBLE);
             holder.play.setVisibility(View.VISIBLE);
             Glide.with(context).asBitmap().load(modelPosts.get(position).getVine()).thumbnail(0.1f).into(holder.mediaView);
+
         }
         if (type.equals("party")){
             Picasso.get().load(modelPosts.get(position).getMeme()).into(holder.mediaView);

@@ -126,10 +126,10 @@ public class AdapterGroupPost extends RecyclerView.Adapter<AdapterGroupPost.MyHo
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
 
         mp = MediaPlayer.create(context, R.raw.like);
-        if (position>1 && (position+1) % 3 == 0) {
+        if (position>1 && (position+1) % 4 == 0) {
             holder.ad.setVisibility(View.VISIBLE);
         }else
-        if (position>1 && (position+1) % 4 == 0) {
+        if (position>1 && (position+1) % 5 == 0) {
             holder.native_ad_container.setVisibility(View.VISIBLE);
             AudienceNetworkAds.initialize(context);
             com.facebook.ads.NativeAd nativeAd;

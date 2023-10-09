@@ -9,12 +9,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.glamour.faithconnect.menu.MenuActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,6 +25,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.glamour.faithconnect.adapter.AdapterLive;
 import com.glamour.faithconnect.adapter.AdapterPodcast;
@@ -50,7 +53,7 @@ public class HomeFragment extends Fragment {
 
     //Post
     AdapterPost adapterPost;
-    List<ModelPost> modelPosts;
+    ArrayList<ModelPost> modelPosts;
     RecyclerView post;
 
     //Live
@@ -76,25 +79,54 @@ public class HomeFragment extends Fragment {
     TextView nothing;
 
 
-    private static final int TOTAL_ITEM_EACH_LOAD = 12;
+    private static final int TOTAL_ITEM_EACH_LOAD = 22;
     private int currentPage = 1;
+    private static final int PAGE_SIZE = 20;
+    private boolean isLoading = false;
+    private boolean isLastPage = false;
+    private String lastPostKey = "";
     Button more;
     long initial;
-
+    Query initialQuery;
+    DatabaseReference databaseReference;
     @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
+         databaseReference = FirebaseDatabase.getInstance().getReference("Posts");
+
+         initialQuery = databaseReference.orderByKey().limitToFirst(PAGE_SIZE);
+
 
         //Post
         post = v.findViewById(R.id.post);
+
         post.setLayoutManager(new LinearLayoutManager(getContext()));
         modelPosts = new ArrayList<>();
+
         checkFollowing();
         posts();
+   /*  post.addOnScrollListener(new RecyclerView.OnScrollListener() {
+         @Override
+         public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+             super.onScrolled(recyclerView, dx, dy);
 
+             LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+             int visibleItemCount = layoutManager.getChildCount();
+             int totalItemCount = layoutManager.getItemCount();
+             int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
+
+             if (!isLoading && !isLastPage && (lastVisibleItemPosition + 1) == totalItemCount) {
+                 // User is nearing the end of the list, load more data
+                 isLoading = true;
+                 progressBar.setVisibility(View.VISIBLE); // Show the progress bar
+                 getAllPost(); // Load the next page of posts
+             }
+         }
+     });
+*/
         more = v.findViewById(R.id.more);
         v.findViewById(R.id.more).setOnClickListener(view -> {
             more.setText("Loading...");
@@ -190,6 +222,9 @@ public class HomeFragment extends Fragment {
         return v;
     }
 
+
+
+
     private void posts() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
         reference.addValueEventListener(new ValueEventListener() {
@@ -226,6 +261,51 @@ public class HomeFragment extends Fragment {
         currentPage++;
         getAllPost();
     }
+/*
+    private void getAllPost() {
+        DatabaseReference postsRef = FirebaseDatabase.getInstance().getReference("Posts");
+        Query query = postsRef.orderByKey().limitToLast(currentPage * TOTAL_ITEM_EACH_LOAD);
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<ModelPost> loadedPosts = new ArrayList<>();
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    ModelPost modelPost = ds.getValue(ModelPost.class);
+                    if (modelPost != null) {
+                        modelPost.setId(ds.getKey());
+                        loadedPosts.add(modelPost);
+                    }
+                }
+                Collections.reverse(loadedPosts);
+                adapterPost = new AdapterPost(getActivity(), modelPosts);
+                post.setAdapter(adapterPost);
+                // Add the loaded posts to your existing list
+                modelPosts.addAll(loadedPosts);
+
+                // Update the UI with the new data
+                adapterPost.notifyDataSetChanged();
+
+                // Check if there are more posts to load
+                if (loadedPosts.size() >= TOTAL_ITEM_EACH_LOAD) {
+                    currentPage++; // Move to the next page for the next load
+                } else {
+                    isLastPage = true; // No more posts to load
+                }
+
+                isLoading = false; // Reset the loading flag
+                progressBar.setVisibility(View.GONE); // Hide the progress bar
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                isLoading = false; // Reset the loading flag in case of an error
+                progressBar.setVisibility(View.GONE); // Hide the progress bar
+            }
+        });
+    }
+*/
+
 
     private void getAllPost() {
 
@@ -239,6 +319,7 @@ public class HomeFragment extends Fragment {
                             for (DataSnapshot ds: snapshot.getChildren()){
                                 ModelPost modelPost = ds.getValue(ModelPost.class);
                                 modelPosts.add(modelPost);
+
 /*
                                 for (String id : followingList){
                                     if (Objects.requireNonNull(modelPost).getId().equals(id)){
@@ -246,6 +327,7 @@ public class HomeFragment extends Fragment {
                                     }
                                 }
 */
+
                             }
                             Collections.reverse(modelPosts);
                             adapterPost = new AdapterPost(getActivity(), modelPosts);
@@ -280,6 +362,7 @@ public class HomeFragment extends Fragment {
         }
 
     }
+
 
     private void checkFollowing(){
         followingList = new ArrayList<>();

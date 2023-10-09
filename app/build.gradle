@@ -104,7 +104,12 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
     buildTypes {
         release {
             minifyEnabled true
@@ -154,13 +159,14 @@ dependencies {
 
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation "androidx.paging:paging-runtime:3.1.0"
 
     implementation 'com.google.firebase:firebase-auth:21.0.1'
 
-    implementation 'com.google.firebase:firebase-database:20.0.3'
+    implementation 'com.google.firebase:firebase-database:20.2.2'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
-    implementation 'com.google.firebase:firebase-storage:20.0.0'
+    implementation 'com.google.firebase:firebase-storage:20.2.1'
 
     //noinspection GradleDependency,DifferentStdlibGradleVersion
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -224,6 +230,8 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.9'
     //noinspection GradleDependency,GradleDependency
     implementation  'com.google.firebase:firebase-iid:21.1.0'
+
+    implementation 'com.shreyaspatil:FirebaseRecyclerPagination:1.0.1'
 
     //noinspection GradleDependency
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

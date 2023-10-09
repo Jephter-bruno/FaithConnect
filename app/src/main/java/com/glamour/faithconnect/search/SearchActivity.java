@@ -66,7 +66,7 @@ public class SearchActivity extends AppCompatActivity {
 
     //Post
     AdapterPost adapterPost;
-    List<ModelPost> modelPosts;
+    ArrayList<ModelPost> modelPosts;
     RecyclerView post;
 
     //Other

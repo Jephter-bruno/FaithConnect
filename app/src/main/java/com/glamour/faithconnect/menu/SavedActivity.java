@@ -37,7 +37,7 @@ public class SavedActivity extends AppCompatActivity {
 
     //Post
     AdapterPost adapterPost;
-    List<ModelPost> modelPosts;
+    ArrayList<ModelPost> modelPosts;
     RecyclerView post;
     List<String> mySaves;
 

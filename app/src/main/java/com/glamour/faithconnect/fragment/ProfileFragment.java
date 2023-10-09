@@ -69,7 +69,7 @@ public class ProfileFragment extends Fragment {
 
     //Post
     AdapterPost adapterPost;
-    List<ModelPost> modelPosts;
+    ArrayList<ModelPost> modelPosts;
     RecyclerView post;
 
     //Story

@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.glamour.faithconnect.NightMode;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -54,10 +55,16 @@ public class ReelCommentActivity extends AppCompatActivity {
 
     private RequestQueue requestQueue;
     private boolean notify = false;
-
+    NightMode sharedPref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPref = new NightMode(this);
+        if (sharedPref.loadNightModeState().equals("night")){
+            setTheme(R.style.DarkTheme);
+        }else if (sharedPref.loadNightModeState().equals("dim")){
+            setTheme(R.style.DimTheme);
+        }else setTheme(R.style.AppTheme);
         setContentView(R.layout.fragment_party_chat);
 
         requestQueue = Volley.newRequestQueue(ReelCommentActivity.this);

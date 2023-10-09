@@ -63,12 +63,12 @@ public class AdapterCommentReel extends RecyclerView.Adapter<AdapterCommentReel.
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         nightMode = new NightMode(context);
         if (nightMode.loadNightModeState().equals("night")){
-            View view = LayoutInflater.from(context).inflate(R.layout.comment_list_night, parent, false);   return new MyHolder(view);
+            View view = LayoutInflater.from(context).inflate(R.layout.comment_list_night_post, parent, false);   return new MyHolder(view);
         }else if (nightMode.loadNightModeState().equals("dim")){
-            View view = LayoutInflater.from(context).inflate(R.layout.comment_list_dim, parent, false);   return new MyHolder(view);
+            View view = LayoutInflater.from(context).inflate(R.layout.comment_list_dim_post, parent, false);   return new MyHolder(view);
         }
         else {
-            View view = LayoutInflater.from(context).inflate(R.layout.comment_list, parent, false);   return new MyHolder(view);
+            View view = LayoutInflater.from(context).inflate(R.layout.comment_list_post, parent, false);   return new MyHolder(view);
         }
     }
 

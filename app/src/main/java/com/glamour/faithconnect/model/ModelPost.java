@@ -1,5 +1,7 @@
 package com.glamour.faithconnect.model;
 
+import com.google.firebase.database.Query;
+
 public class ModelPost {
 
     String id, pId, text, type, meme, vine, pTime;
@@ -72,5 +74,6 @@ public class ModelPost {
     public void setpTime(String pTime) {
         this.pTime = pTime;
     }
+
 }
 
