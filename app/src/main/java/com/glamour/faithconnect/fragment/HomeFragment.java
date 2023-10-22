@@ -5,15 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,7 +31,6 @@ import com.glamour.faithconnect.adapter.AdapterLive;
 import com.glamour.faithconnect.adapter.AdapterPodcast;
 import com.glamour.faithconnect.adapter.AdapterPost;
 import com.glamour.faithconnect.adapter.AdapterStory;
-import com.glamour.faithconnect.faceFilters.FaceFilters;
 import com.glamour.faithconnect.group.GroupFragment;
 import com.glamour.faithconnect.model.ModelLive;
 import com.glamour.faithconnect.model.ModelPost;
@@ -52,9 +51,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class HomeFragment extends Fragment {
 
     //Post
-    AdapterPost adapterPost;
+    AdapterPost postsAdapter;
     ArrayList<ModelPost> modelPosts;
-    RecyclerView post;
+    RecyclerView postsRecyclerView;
 
     //Live
     private AdapterLive live;
@@ -77,61 +76,40 @@ public class HomeFragment extends Fragment {
     //OtherId;
     ProgressBar progressBar;
     TextView nothing;
-
+    NestedScrollView homeScrollview;
+    ImageView bell;
+    TextView count;
+    CircleImageView circleImageView;
+    TextView postInfo;
 
     private static final int TOTAL_ITEM_EACH_LOAD = 22;
     private int currentPage = 1;
-    private static final int PAGE_SIZE = 20;
     private boolean isLoading = false;
     private boolean isLastPage = false;
     private String lastPostKey = "";
-    Button more;
-    long initial;
-    Query initialQuery;
-    DatabaseReference databaseReference;
+
     @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
-         databaseReference = FirebaseDatabase.getInstance().getReference("Posts");
 
-         initialQuery = databaseReference.orderByKey().limitToFirst(PAGE_SIZE);
+        //User
+        circleImageView = v.findViewById(R.id.circleImageView);
+        getCurrentUser();
 
+        //Posts
+        postsRecyclerView = v.findViewById(R.id.post);
+        progressBar = v.findViewById(R.id.progressBar);
+        nothing = v.findViewById(R.id.nothing);
+        postInfo = v.findViewById(R.id.post_list_info);
 
-        //Post
-        post = v.findViewById(R.id.post);
-
-        post.setLayoutManager(new LinearLayoutManager(getContext()));
         modelPosts = new ArrayList<>();
 
+        getAllPosts(TOTAL_ITEM_EACH_LOAD, lastPostKey);
+
         checkFollowing();
-        posts();
-   /*  post.addOnScrollListener(new RecyclerView.OnScrollListener() {
-         @Override
-         public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-             super.onScrolled(recyclerView, dx, dy);
-
-             LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-             int visibleItemCount = layoutManager.getChildCount();
-             int totalItemCount = layoutManager.getItemCount();
-             int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
-
-             if (!isLoading && !isLastPage && (lastVisibleItemPosition + 1) == totalItemCount) {
-                 // User is nearing the end of the list, load more data
-                 isLoading = true;
-                 progressBar.setVisibility(View.VISIBLE); // Show the progress bar
-                 getAllPost(); // Load the next page of posts
-             }
-         }
-     });
-*/
-        more = v.findViewById(R.id.more);
-        v.findViewById(R.id.more).setOnClickListener(view -> {
-            more.setText("Loading...");
-            loadMoreData();
-        });
 
         //PostIntent
         v.findViewById(R.id.create_post).setOnClickListener(v1 -> startActivity(new Intent(getActivity(), CreatePostActivity.class)));
@@ -146,35 +124,20 @@ public class HomeFragment extends Fragment {
         v.findViewById(R.id.camera).setOnClickListener(v1 -> startActivity(new Intent(getActivity(), MenuActivity.class)));
 
         //Notification
-        FirebaseDatabase.getInstance().getReference("Users").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid()).child("Count").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    v.findViewById(R.id.bell).setVisibility(View.GONE);
-                    v.findViewById(R.id.count).setVisibility(View.VISIBLE);
-                    TextView count =  v.findViewById(R.id.count);
-                    count.setText(String.valueOf(snapshot.getChildrenCount()));
-                }else {
-                    v.findViewById(R.id.bell).setVisibility(View.VISIBLE);
-                    v.findViewById(R.id.count).setVisibility(View.GONE);
-                }
-            }
+        bell = v.findViewById(R.id.bell);
+        count = v.findViewById(R.id.count);
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+        handleNotifications();
 
-            }
-        });
-
-        v.findViewById(R.id.bell).setOnClickListener(v1 -> {
+        bell.setOnClickListener(v1 -> {
             startActivity(new Intent(getActivity(), NotificationScreen.class));
-            v.findViewById(R.id.bell).setVisibility(View.VISIBLE);
-            v.findViewById(R.id.count).setVisibility(View.GONE);
+            bell.setVisibility(View.VISIBLE);
+            count.setVisibility(View.GONE);
         });
-        v.findViewById(R.id.count).setOnClickListener(v1 -> {
+        count.setOnClickListener(v1 -> {
             startActivity(new Intent(getActivity(), NotificationScreen.class));
-            v.findViewById(R.id.bell).setVisibility(View.VISIBLE);
-            v.findViewById(R.id.count).setVisibility(View.GONE);
+            bell.setVisibility(View.VISIBLE);
+            count.setVisibility(View.GONE);
         });
 
         //Live
@@ -183,22 +146,6 @@ public class HomeFragment extends Fragment {
                 LinearLayoutManager.HORIZONTAL, false);
         liveView.setLayoutManager(linearLayoutManager2);
         modelLives = new ArrayList<>();
-
-        FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                CircleImageView circleImageView = v.findViewById(R.id.circleImageView);
-                if (!Objects.requireNonNull(snapshot.child("photo").getValue()).toString().isEmpty()){
-                    Picasso.get().load(Objects.requireNonNull(snapshot.child("photo").getValue()).toString()).into(circleImageView);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
 
         //Pod
         podView = v.findViewById(R.id.pod_list);
@@ -214,200 +161,165 @@ public class HomeFragment extends Fragment {
         storyView.setLayoutManager(linearLayoutManager5);
         modelStories = new ArrayList<>();
 
+        //Home ScrollView
+        homeScrollview = v.findViewById(R.id.home_scrollview);
+        homeScrollview.setOnTouchListener((v12, event) -> false);
 
-        //OtherId
-        progressBar = v.findViewById(R.id.progressBar);
-        nothing = v.findViewById(R.id.nothing);
+        homeScrollview.getViewTreeObserver().addOnScrollChangedListener(() -> {
+            View view = homeScrollview.getChildAt(homeScrollview.getChildCount() - 1);
+            int bottomDetector = view.getBottom() - (homeScrollview.getHeight() + homeScrollview.getScrollY());
+            if (bottomDetector == 0) {
+                if (!isLastPage){
+                    getAllPosts(TOTAL_ITEM_EACH_LOAD, lastPostKey);
+                }
+
+            }
+        });
 
         return v;
     }
 
+    private void handleNotifications() {
+        FirebaseDatabase.getInstance()
+                .getReference("Users")
+                .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
+                .child("Count")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            bell.setVisibility(View.GONE);
+                            count.setVisibility(View.VISIBLE);
+                            count.setText(String.valueOf(snapshot.getChildrenCount()));
+                        } else {
+                            bell.setVisibility(View.VISIBLE);
+                            count.setVisibility(View.GONE);
+                        }
+                    }
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
+    }
 
+    private void getCurrentUser() {
+        FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!Objects.requireNonNull(snapshot.child("photo").getValue()).toString().isEmpty()) {
+                    Picasso.get().load(Objects.requireNonNull(snapshot.child("photo").getValue()).toString()).into(circleImageView);
+                }
+            }
 
-    private void posts() {
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void getAllPosts(int pageSize, String lastPostId) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
+
+        if (lastPostId != null) {
+            reference.startAt(lastPostId).limitToFirst(pageSize + 1);
+        } else {
+            reference.limitToFirst(pageSize);
+        }
+
         reference.addValueEventListener(new ValueEventListener() {
             @SuppressLint("SetTextI18n")
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                int i = 0;
-                i++;
-
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    i++;
-
-                    for (String s : followingList){
-                        if (Objects.requireNonNull(snapshot.child("id").getValue()).toString().equals(s)){
-                            i++;
-                        }
-                    }
-
-
-                }
-
-                initial = i;
-                getAllPost();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    private void loadMoreData() {
-        currentPage++;
-        getAllPost();
-    }
-/*
-    private void getAllPost() {
-        DatabaseReference postsRef = FirebaseDatabase.getInstance().getReference("Posts");
-        Query query = postsRef.orderByKey().limitToLast(currentPage * TOTAL_ITEM_EACH_LOAD);
-
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ArrayList<ModelPost> loadedPosts = new ArrayList<>();
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                modelPosts.clear();
+                for (DataSnapshot ds : snapshot.getChildren()) {
                     ModelPost modelPost = ds.getValue(ModelPost.class);
-                    if (modelPost != null) {
-                        modelPost.setId(ds.getKey());
-                        loadedPosts.add(modelPost);
+                    modelPosts.add(modelPost);
+                    lastPostKey = modelPost.getId();
+                }
+                if (modelPosts.size() == snapshot.getChildrenCount()) {
+                    isLastPage = true;
+                    postInfo.setVisibility(View.VISIBLE);
+                    postInfo.setText("Come back later for more posts, or create a new post!");
+                }
+
+                // Remove the last item if it was included for reference
+                if (lastPostId != null) {
+                    if (!modelPosts.isEmpty()) {
+                        modelPosts.remove(modelPosts.size() - 1);
                     }
                 }
-                Collections.reverse(loadedPosts);
-                adapterPost = new AdapterPost(getActivity(), modelPosts);
-                post.setAdapter(adapterPost);
-                // Add the loaded posts to your existing list
-                modelPosts.addAll(loadedPosts);
-
-                // Update the UI with the new data
-                adapterPost.notifyDataSetChanged();
-
-                // Check if there are more posts to load
-                if (loadedPosts.size() >= TOTAL_ITEM_EACH_LOAD) {
-                    currentPage++; // Move to the next page for the next load
-                } else {
-                    isLastPage = true; // No more posts to load
-                }
-
-                isLoading = false; // Reset the loading flag
-                progressBar.setVisibility(View.GONE); // Hide the progress bar
+                Collections.reverse(modelPosts);
+                initializePostsAdapter(modelPosts);
+                toggleProgressbarVisibility();
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                isLoading = false; // Reset the loading flag in case of an error
-                progressBar.setVisibility(View.GONE); // Hide the progress bar
+            public void onCancelled(@NonNull DatabaseError error) {
+                System.out.println(error.getMessage());
             }
         });
     }
-*/
 
-
-    private void getAllPost() {
-
-        if (currentPage*TOTAL_ITEM_EACH_LOAD>0){
-            FirebaseDatabase.getInstance().getReference("Posts").limitToLast(currentPage*TOTAL_ITEM_EACH_LOAD)
-                    .addValueEventListener(new ValueEventListener() {
-                        @SuppressLint("SetTextI18n")
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            modelPosts.clear();
-                            for (DataSnapshot ds: snapshot.getChildren()){
-                                ModelPost modelPost = ds.getValue(ModelPost.class);
-                                modelPosts.add(modelPost);
-
-/*
-                                for (String id : followingList){
-                                    if (Objects.requireNonNull(modelPost).getId().equals(id)){
-                                        modelPosts.add(modelPost);
-                                    }
-                                }
-*/
-
-                            }
-                            Collections.reverse(modelPosts);
-                            adapterPost = new AdapterPost(getActivity(), modelPosts);
-                            post.setAdapter(adapterPost);
-                            progressBar.setVisibility(View.GONE);
-                            if (adapterPost.getItemCount() == 0){
-                                progressBar.setVisibility(View.GONE);
-                                post.setVisibility(View.GONE);
-                                nothing.setVisibility(View.VISIBLE);
-                                more.setVisibility(View.GONE);
-                            }else {
-                                progressBar.setVisibility(View.GONE);
-                                post.setVisibility(View.VISIBLE);
-                                nothing.setVisibility(View.GONE);
-                                if(adapterPost.getItemCount() >= initial){
-                                    more.setVisibility(View.GONE);
-                                    currentPage--;
-                                    more.setText("Load more");
-                                }else {
-                                    more.setVisibility(View.VISIBLE);
-                                    more.setText("Load more");
-                                }
-                            }
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-        }
-
+    private void initializePostsAdapter(ArrayList<ModelPost> posts) {
+        postsAdapter = new AdapterPost(getActivity(), posts);
+        postsRecyclerView.setAdapter(postsAdapter);
+        postsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
+    private void toggleProgressbarVisibility() {
+        if (postsAdapter.getItemCount() == 0) {
+            progressBar.setVisibility(View.GONE);
+            postsRecyclerView.setVisibility(View.GONE);
+            nothing.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+            postsRecyclerView.setVisibility(View.VISIBLE);
+            nothing.setVisibility(View.GONE);
+        }
+    }
 
-    private void checkFollowing(){
+    private void checkFollowing() {
         followingList = new ArrayList<>();
         FirebaseDatabase.getInstance().getReference("Follow")
                 .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
-                .child("Following").addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        followingList.clear();
-                        followingList.add(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                            followingList.add(snapshot.getKey());
-                        }
-                        readLive();
-                        readPod();
-                        readStory();
+                .child("1Following").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                followingList.clear();
+                followingList.add(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    followingList.add(snapshot.getKey());
+                }
+                readLive();
+                readPod();
+                readStory();
+            }
 
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
     }
 
-    private void readStory(){
+    private void readStory() {
         FirebaseDatabase.getInstance().getReference("Story").addListenerForSingleValueEvent(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 long timecurrent = System.currentTimeMillis();
                 modelStories.clear();
-                for (String id : followingList){
+                for (String id : followingList) {
                     int countStory = 0;
                     ModelStory modelStory = null;
-                    for (DataSnapshot snapshot1 : snapshot.child(id).getChildren()){
+                    for (DataSnapshot snapshot1 : snapshot.child(id).getChildren()) {
                         modelStory = snapshot1.getValue(ModelStory.class);
-                        if (timecurrent > Objects.requireNonNull(modelStory).getTimestart() && timecurrent < modelStory.getTimeend()){
+                        if (timecurrent > Objects.requireNonNull(modelStory).getTimestart() && timecurrent < modelStory.getTimeend()) {
                             countStory++;
                         }
                     }
-                    if (countStory > 0){
+                    if (countStory > 0) {
                         modelStories.add(modelStory);
                     }
                 }
@@ -431,11 +343,11 @@ public class HomeFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 modelLiveList.clear();
-                for (DataSnapshot ds: dataSnapshot.getChildren()){
-                    if (ds.hasChild("userid")){
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    if (ds.hasChild("userid")) {
                         ModelLive modelLive = ds.getValue(ModelLive.class);
-                        for (String id : followingList){
-                            if (!Objects.requireNonNull(firebaseUser).getUid().equals(Objects.requireNonNull(modelLive).getUserid()) && Objects.requireNonNull(modelLive).getUserid().equals(id)){
+                        for (String id : followingList) {
+                            if (!Objects.requireNonNull(firebaseUser).getUid().equals(Objects.requireNonNull(modelLive).getUserid()) && Objects.requireNonNull(modelLive).getUserid().equals(id)) {
                                 modelLiveList.add(modelLive);
                             }
                         }
@@ -452,7 +364,7 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    private void readLive(){
+    private void readLive() {
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Live");
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -460,11 +372,11 @@ public class HomeFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 modelLives.clear();
-                for (DataSnapshot ds: dataSnapshot.getChildren()){
-                    if (ds.hasChild("userid")){
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    if (ds.hasChild("userid")) {
                         ModelLive modelLive = ds.getValue(ModelLive.class);
-                        for (String id : followingList){
-                            if (!Objects.requireNonNull(firebaseUser).getUid().equals(Objects.requireNonNull(modelLive).getUserid()) && Objects.requireNonNull(modelLive).getUserid().equals(id)){
+                        for (String id : followingList) {
+                            if (!Objects.requireNonNull(firebaseUser).getUid().equals(Objects.requireNonNull(modelLive).getUserid()) && Objects.requireNonNull(modelLive).getUserid().equals(id)) {
                                 modelLives.add(modelLive);
                             }
                         }
@@ -480,5 +392,4 @@ public class HomeFragment extends Fragment {
             }
         });
     }
-
 }

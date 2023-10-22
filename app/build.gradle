@@ -116,13 +116,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
-        debug {
-            ndk {
-                //noinspection ChromeOsAbiSupport
-                abiFilters "armeabi-v7a", "armeabi"
-            }
-        }
-
         release {
             ndk {
                 //noinspection ChromeOsAbiSupport
