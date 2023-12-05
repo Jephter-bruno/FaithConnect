@@ -4,12 +4,16 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -29,6 +33,7 @@ import com.glamour.faithconnect.model.ModelGroups;
 import com.glamour.faithconnect.model.ModelPostGroup;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -38,7 +43,7 @@ public class GroupFragment extends AppCompatActivity {
     AdapterGroups adapterGroups;
     List<ModelGroups> modelGroups;
     RecyclerView groups;
-
+    TextView postInfo;
     RecyclerView post;
     AdapterGroupPost adapterPost;
     List<ModelPostGroup> modelPosts;
@@ -48,7 +53,13 @@ public class GroupFragment extends AppCompatActivity {
     RecyclerView groups_chat;
 
     NightMode sharedPref;
+    NestedScrollView homeScrollview;
 
+    private static final int TOTAL_ITEM_EACH_LOAD = 6;
+    private int currentPage = 1;
+    private boolean isLoading = false;
+    private boolean isLastPage = false;
+    private String lastPostKey = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sharedPref = new NightMode(this);
@@ -60,6 +71,21 @@ public class GroupFragment extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_fragment);
 
+//Home ScrollView
+        postInfo = findViewById(R.id.post_list_info);
+        homeScrollview = findViewById(R.id.home_scrollview);
+        homeScrollview.setOnTouchListener((v12, event) -> false);
+
+        homeScrollview.getViewTreeObserver().addOnScrollChangedListener(() -> {
+            View view = homeScrollview.getChildAt(homeScrollview.getChildCount() - 1);
+            int bottomDetector = view.getBottom() - (homeScrollview.getHeight() + homeScrollview.getScrollY());
+            if (bottomDetector == 0) {
+                if (!isLastPage){
+                    getAllPost(TOTAL_ITEM_EACH_LOAD, lastPostKey);
+                }
+
+            }
+        });
         //Groups
         groups = findViewById(R.id.groups);
         groups.setLayoutManager(new LinearLayoutManager(GroupFragment.this));
@@ -149,7 +175,7 @@ public class GroupFragment extends AppCompatActivity {
                     groups.setVisibility(View.GONE);
                     post.setVisibility(View.VISIBLE);
                     findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
-                    getAllPost();
+                    getAllPost( 3, lastPostKey);
                 } else if (tabLayout.getSelectedTabPosition() == 2) {
                     groups_chat.setVisibility(View.GONE);
                     groups.setVisibility(View.VISIBLE);
@@ -219,8 +245,15 @@ public class GroupFragment extends AppCompatActivity {
         });
     }
 
-    private void getAllPost() {
-        FirebaseDatabase.getInstance().getReference("Groups").addValueEventListener(new ValueEventListener() {
+    private void getAllPost(int pageSize, String lastPostId) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Groups");
+
+        if (lastPostId != null) {
+            reference.startAt(lastPostId).limitToFirst(pageSize + 1);
+        } else {
+            reference.limitToFirst(pageSize);
+        }
+        reference.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -230,10 +263,18 @@ public class GroupFragment extends AppCompatActivity {
                         for (DataSnapshot dataSnapshot1 : ds.child("Posts").getChildren()){
                             ModelPostGroup modelPost = dataSnapshot1.getValue(ModelPostGroup.class);
                             modelPosts.add(modelPost);
+                            lastPostKey = modelPost.getId();
+                            Collections.reverse(modelPosts);
                             adapterPost = new AdapterGroupPost(GroupFragment.this, modelPosts);
                             post.setAdapter(adapterPost);
                             adapterPost.notifyDataSetChanged();
                             findViewById(R.id.progressBar).setVisibility(View.GONE);
+                            if (modelPosts.size() == dataSnapshot1.getChildrenCount()) {
+                                isLastPage = true;
+                                postInfo.setVisibility(View.VISIBLE);
+                                postInfo.setText("Come back later for more posts, or create a new post!");
+                            }
+
                             if (adapterPost.getItemCount() == 0){
                                 findViewById(R.id.progressBar).setVisibility(View.GONE);
                                 post.setVisibility(View.GONE);

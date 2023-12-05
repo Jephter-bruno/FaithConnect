@@ -835,8 +835,8 @@ public class CreatePostActivity extends AppCompatActivity implements PrivacyPick
             long timeInMilli = Long.parseLong(time);
            retriever.release();
 
-            if (timeInMilli > 60000){
-                Snackbar.make(findViewById(R.id.main), "Video must be of 1 minutes or less", Snackbar.LENGTH_LONG).show();
+            if (timeInMilli > 90000){
+                Snackbar.make(findViewById(R.id.main), "Video must be of 1 minute and 30 seconds or less", Snackbar.LENGTH_LONG).show();
             }else {
                 Intent intent = new Intent(CreatePostActivity.this, VideoEditActivity.class);
                 intent.putExtra("uri", video_uri.toString());

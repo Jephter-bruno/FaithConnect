@@ -3,6 +3,7 @@ package com.glamour.faithconnect.adapter;
 import static android.os.Environment.DIRECTORY_DOWNLOADS;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -23,6 +24,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.facebook.ads.NativeAdLayout;
+import com.facebook.ads.NativeBannerAdView;
 import com.github.pgreze.reactions.ReactionPopup;
 import com.github.pgreze.reactions.ReactionsConfig;
 import com.github.pgreze.reactions.ReactionsConfigBuilder;
@@ -30,6 +33,9 @@ import com.glamour.faithconnect.GetTimeAgo;
 import com.glamour.faithconnect.MediaViewActivity;
 import com.glamour.faithconnect.NightMode;
 import com.glamour.faithconnect.R;
+import com.glamour.faithconnect.facebookmetaads.MyNativeBannerAd;
+import com.glamour.faithconnect.facebookmetaads.MyNativeBannerAds;
+import com.glamour.faithconnect.facebookmetaads.NativeBannerAds;
 import com.glamour.faithconnect.model.ModelComment;
 import com.glamour.faithconnect.post.ReplyActivity;
 import com.glamour.faithconnect.profile.UserProfileActivity;
@@ -81,11 +87,15 @@ public class AdapterCommentPosts extends RecyclerView.Adapter<AdapterCommentPost
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
-/*
-        if (position>1 && (position+1) % 5 == 0) {
-            holder.ad.setVisibility(View.VISIBLE);
+
+
+        if (position>1 && (position+1) % 3 == 0) {
+
+            MyNativeBannerAd myNativeBannerAds = new MyNativeBannerAd((Activity) context);
+            myNativeBannerAds.loadNativeBannerAd(holder.nativeAdLayout, NativeBannerAdView.Type.HEIGHT_120,false, "YOUR_PLACEMENT_ID");
+
         }
-*/
+
         //UserInfo
         FirebaseDatabase.getInstance().getReference().child("Users").child(modelComments.get(position).getId()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -751,10 +761,11 @@ public class AdapterCommentPosts extends RecyclerView.Adapter<AdapterCommentPost
         final ImageView angry;
         final ImageView sad;
         TextView reply;
-       /* final RelativeLayout ad;*/
+        final NativeAdLayout nativeAdLayout;
+
         public MyHolder(@NonNull View itemView) {
             super(itemView);
-
+            nativeAdLayout= itemView.findViewById(R.id.nativeBannerAd);
             reply = itemView.findViewById(R.id.reply);
             thumb  =  itemView.findViewById(R.id.thumb);
             love  =  itemView.findViewById(R.id.love);

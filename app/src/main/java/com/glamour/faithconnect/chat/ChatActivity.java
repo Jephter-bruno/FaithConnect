@@ -1112,7 +1112,6 @@ public class ChatActivity extends AppCompatActivity implements GiphyDialogFragme
             }
         });
     }
-
     private void sendAudio(Uri audio_uri) {
         StorageReference storageReference = FirebaseStorage.getInstance().getReference("chat_audio/" + ""+System.currentTimeMillis());
         storageReference.putFile(audio_uri).addOnSuccessListener(taskSnapshot -> {

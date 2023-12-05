@@ -1,6 +1,7 @@
 package com.glamour.faithconnect.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -21,9 +22,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.facebook.ads.NativeAdLayout;
+import com.facebook.ads.NativeBannerAdView;
 import com.github.pgreze.reactions.ReactionPopup;
 import com.github.pgreze.reactions.ReactionsConfig;
 import com.github.pgreze.reactions.ReactionsConfigBuilder;
+import com.glamour.faithconnect.facebookmetaads.MyNativeBannerAd;
+import com.glamour.faithconnect.facebookmetaads.MyNativeBannerAds;
 import com.glamour.faithconnect.nativetemplates.NativeTemplateStyle;
 import com.glamour.faithconnect.nativetemplates.TemplateView;
 import com.google.android.gms.ads.AdLoader;
@@ -91,6 +96,16 @@ public class AdapterComment extends RecyclerView.Adapter<AdapterComment.MyHolder
         if (position>1 && (position+1) % 5 == 0) {
             holder.ad.setVisibility(View.VISIBLE);
         }
+        else if (position>1 && (position+1) % 6 == 0) {
+            MyNativeBannerAd nativeBannerAd = new MyNativeBannerAd((Activity) context);
+            nativeBannerAd.loadNativeBannerAd(
+                    holder.nativeAdLayout,
+                    NativeBannerAdView.Type.HEIGHT_120,
+                    true,
+                    "YOUR_PLACEMENT_ID"
+            );
+        }
+
 
         //UserInfo
         FirebaseDatabase.getInstance().getReference().child("Users").child(modelComments.get(position).getId()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -758,9 +773,10 @@ public class AdapterComment extends RecyclerView.Adapter<AdapterComment.MyHolder
         final ImageView sad;
         TextView reply;
        final RelativeLayout ad;
+        final NativeAdLayout nativeAdLayout;
         public MyHolder(@NonNull View itemView) {
             super(itemView);
-
+            nativeAdLayout= itemView.findViewById(R.id.nativeBannerAd);
             reply = itemView.findViewById(R.id.reply);
             thumb  =  itemView.findViewById(R.id.thumb);
             love  =  itemView.findViewById(R.id.love);
@@ -785,7 +801,6 @@ public class AdapterComment extends RecyclerView.Adapter<AdapterComment.MyHolder
 
             ad = itemView.findViewById(R.id.ad);
 
-            MobileAds.initialize(itemView.getContext());
             AdLoader adLoader = new AdLoader.Builder(itemView.getContext(), itemView.getContext().getString(R.string.native_ad_unit_id_comments))
                     .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
                         @Override

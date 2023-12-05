@@ -9,6 +9,7 @@
     android:layout_height="wrap_content"
     tools:ignore="Overdraw">
 
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/dp"
         android:src="@drawable/avatar"
@@ -290,16 +291,17 @@
         </LinearLayout>
 
     </LinearLayout>
-
     <RelativeLayout
         android:id="@+id/ad"
         android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
         <com.glamour.faithconnect.nativetemplates.TemplateView
             android:id="@+id/my_template"
             android:layout_width="match_parent"
@@ -307,6 +309,15 @@
             app:gnt_template_type="@layout/gnt_small_template_view" />
 
     </RelativeLayout>
-
-
+    <com.facebook.ads.NativeAdLayout
+        android:id="@+id/nativeBannerAd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

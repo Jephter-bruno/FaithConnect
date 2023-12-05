@@ -296,6 +296,13 @@
 
 
                 </LinearLayout>
+                <com.facebook.ads.NativeAdLayout
+                    android:id="@+id/nativeBannerAd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/post"
                     android:layout_width="match_parent"
@@ -304,13 +311,12 @@
 
                 <TextView
                     android:stateListAnimator="@null"
-                    android:backgroundTint="@color/colorPrimary"
                     tools:text="@string/load_more"
                     android:fontFamily="@font/black"
-                    android:textColor="#fff"
+                    android:textColor="?attr/texttwocolor"
                     android:visibility="gone"
                     android:id="@+id/post_list_info"
-                    android:layout_marginTop="8dp"
+                    android:layout_margin="18dp"
                     android:gravity="center"
                     android:layout_marginBottom="8dp"
                     android:textAllCaps="false"

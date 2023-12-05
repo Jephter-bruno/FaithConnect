@@ -6,7 +6,6 @@
     android:background="?attr/layoutcolor"
     android:layout_marginTop="8dp"
     android:layout_height="wrap_content">
-
     <LinearLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
@@ -15,12 +14,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/head"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/dp"
                 android:layout_width="50dp"
@@ -32,7 +29,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -58,7 +54,7 @@
                             android:id="@+id/name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/bold_roboto"
+                            android:fontFamily="sans-serif-black"
                             android:text="Loading..."
                             android:textColor="?attr/textcolor"
                             android:textSize="16sp"
@@ -68,7 +64,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             >
-
                             <TextView
                                 android:id="@+id/feeling"
                                 android:layout_marginStart="5dp"
@@ -78,7 +73,6 @@
                                 android:fontFamily="@font/bold_roboto"
                                 android:textColor="?attr/textcolor"
                                 android:textSize="14sp" />
-
                             <ImageView
                                 android:id="@+id/activity"
                                 android:layout_width="16dp"
@@ -112,8 +106,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:fontFamily="@font/bold_roboto"
-                        android:text="Loading.."
+                        android:fontFamily="sans-serif-black"                        android:text="Loading.."
                         android:textColor="?attr/texttwocolor"
                         android:textSize="14sp"
                        tools:ignore="ContentDescription" />
@@ -172,7 +165,6 @@
 
         <com.tylersuehr.socialtextview.SocialTextView
             android:layout_marginTop="8dp"
-            android:fontFamily="@font/bold_roboto"
             app:mentionColor="@color/colorAccent"
             app:emailColor="@color/colorAccent"
             app:phoneColor="@color/colorAccent"
@@ -182,8 +174,8 @@
             android:textColor="?attr/textcolor"
             android:id="@+id/text"
             android:textSize="16sp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginStart="24dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginStart="4dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -195,19 +187,18 @@
             android:layout_height="wrap_content" />
 
         <RelativeLayout
+            android:backgroundTint="#2835383B"
             android:id="@+id/media"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:visibility="gone"
-                android:scaleType="centerCrop"
-                android:id="@+id/mediaView"
-                android:layout_centerInParent="true"
-                android:layout_width="match_parent"
-                android:layout_height="500dp"
+            <com.joooonho.SelectableRoundedImageView
 
+                app:sriv_oval="false"
+                android:id="@+id/mediaView"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
                tools:ignore="ContentDescription" />
 
             <ImageView
@@ -245,7 +236,6 @@
 
             <com.tylersuehr.socialtextview.SocialTextView
                 android:visibility="gone"
-                android:fontFamily="@font/bold_roboto"
                 app:mentionColor="@color/colorAccent"
                 app:emailColor="@color/colorAccent"
                 app:phoneColor="@color/colorAccent"
@@ -500,7 +490,7 @@
                         android:layout_marginStart="6dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/bold_roboto"
+                        android:fontFamily="sans-serif-black"
                         android:text="@string/like"
                         android:textColor="?attr/texttwocolor"
                         android:textSize="16sp"
@@ -530,8 +520,7 @@
                     android:layout_marginStart="6dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/bold_roboto"
-                    android:text="@string/comments"
+                    android:fontFamily="sans-serif-black"                    android:text="@string/comments"
                     android:textColor="?attr/texttwocolor"
                     android:textSize="16sp"
                    tools:ignore="ContentDescription" />
@@ -556,8 +545,7 @@
                     android:layout_marginStart="6dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/bold_roboto"
-                    android:text="@string/share"
+                    android:fontFamily="sans-serif-black"                    android:text="@string/share"
                     android:textColor="?attr/texttwocolor"
                     android:textSize="16sp"
                    tools:ignore="ContentDescription" />
@@ -584,15 +572,14 @@
             app:gnt_template_type="@layout/gnt_medium_template_view" />
 
     </RelativeLayout>
-
     <com.facebook.ads.NativeAdLayout
-        android:visibility="gone"
-        android:id="@+id/native_ad_container"
+        android:id="@+id/nativeBannerAd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

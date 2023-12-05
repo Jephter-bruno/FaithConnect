@@ -21,6 +21,11 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.glamour.faithconnect.nativetemplates.NativeTemplateStyle;
+import com.glamour.faithconnect.nativetemplates.TemplateView;
+import com.google.android.gms.ads.AdLoader;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.nativead.NativeAd;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -100,6 +105,9 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder>{
         //Seen
 
         ModelChat mChat = modelChats.get(position);
+        if (position>1 && (position+1) % 3 == 0) {
+            holder.ad.setVisibility(View.VISIBLE);
+        }
 
         if (position == modelChats.size()-1){
             if (mChat.isSeen()) {
@@ -173,7 +181,9 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder>{
             });
 
 
-        }else if (modelChats.get(position).getType().equals("image")){
+        }
+
+        else if (modelChats.get(position).getType().equals("image")){
             holder.media.setVisibility(View.VISIBLE);
             holder.media_layout.setVisibility(View.VISIBLE);
             Picasso.get().load(modelChats.get(position).getMsg()).into(holder.media);
@@ -1291,7 +1301,7 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder>{
         final CardView reelView;
         final ImageView reelSource;
         final ImageView icon;
-
+        final RelativeLayout ad;
         public MyHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -1318,9 +1328,28 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder>{
             reelView=  itemView.findViewById(R.id.reel);
             reelSource=  itemView.findViewById(R.id.reelSource);
             icon = itemView.findViewById(R.id.icon);
+            ad = itemView.findViewById(R.id.ad);
+
+
+            AdLoader adLoader = new AdLoader.Builder(itemView.getContext(), itemView.getContext().getString(R.string.native_ad_unit_id))
+                    .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
+                        @Override
+                        public void onNativeAdLoaded(NativeAd nativeAd) {
+                            NativeTemplateStyle styles = new
+                                    NativeTemplateStyle.Builder().build();
+                            TemplateView template = itemView.findViewById(R.id.my_template);
+                            template.setStyles(styles);
+                            template.setNativeAd(nativeAd);
+                        }
+                    })
+                    .build();
+
+            adLoader.loadAd(new AdRequest.Builder().build());
         }
 
     }
+
+
 
     @Override
     public int getItemViewType(int position) {

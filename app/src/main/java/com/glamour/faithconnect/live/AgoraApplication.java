@@ -3,6 +3,8 @@ package com.glamour.faithconnect.live;
 import android.content.SharedPreferences;
 
 
+import com.facebook.ads.AdSettings;
+import com.facebook.ads.AudienceNetworkAds;
 import com.glamour.faithconnect.R;
 import com.glamour.faithconnect.groupVideoCall.openvcall.AGApplicationVideo;
 import com.glamour.faithconnect.live.rtc.AgoraEventHandler;
@@ -11,6 +13,7 @@ import com.glamour.faithconnect.live.rtc.EventHandler;
 import com.glamour.faithconnect.live.stats.StatsManager;
 import com.glamour.faithconnect.live.utils.FileUtil;
 import com.glamour.faithconnect.live.utils.PrefManager;
+import com.google.android.gms.ads.MobileAds;
 
 import io.agora.rtc.RtcEngine;
 
@@ -24,6 +27,11 @@ public class AgoraApplication extends AGApplicationVideo {
     @Override
     public void onCreate() {
         super.onCreate();
+       AudienceNetworkAds.initialize(this);
+        MobileAds.initialize(this);
+        // if app release change to false
+       AdSettings.setTestMode(true);
+        // Example for setting the SDK to crash when in debug mode*/
         try {
             mRtcEngine = RtcEngine.create(getApplicationContext(), getString(R.string.private_app_id), mHandler);
             mRtcEngine.setLogFile(FileUtil.initializeLogFile(this));

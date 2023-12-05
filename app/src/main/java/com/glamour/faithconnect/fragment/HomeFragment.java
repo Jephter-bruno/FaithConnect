@@ -1,7 +1,9 @@
 package com.glamour.faithconnect.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,15 +12,22 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.ads.NativeAdLayout;
+import com.glamour.faithconnect.MainActivity;
+import com.glamour.faithconnect.facebookmetaads.NativeBannerAds;
 import com.glamour.faithconnect.menu.MenuActivity;
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -39,6 +48,7 @@ import com.glamour.faithconnect.notifications.NotificationScreen;
 import com.glamour.faithconnect.post.CreatePostActivity;
 import com.glamour.faithconnect.R;
 import com.glamour.faithconnect.search.TrendingActivity;
+
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -64,7 +74,7 @@ public class HomeFragment extends Fragment {
     private AdapterPodcast podcast;
     private List<ModelLive> modelLiveList;
     RecyclerView podView;
-
+    private LinearLayout adView;
     //Story
     private AdapterStory adapterStory;
     private List<ModelStory> modelStories;
@@ -82,11 +92,15 @@ public class HomeFragment extends Fragment {
     CircleImageView circleImageView;
     TextView postInfo;
 
-    private static final int TOTAL_ITEM_EACH_LOAD = 22;
+    private static final int TOTAL_ITEM_EACH_LOAD = 6;
     private int currentPage = 1;
     private boolean isLoading = false;
     private boolean isLastPage = false;
     private String lastPostKey = "";
+
+    NativeAdLayout nativeBannerAd;
+
+
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -94,22 +108,32 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
+        //nativeAdLayout = v.findViewById(R.id.native_ad_container);
+      //  AudienceNetworkAds.initialize(getContext());
 
+        // Inflate the Ad view. The layout referenced should be the one you created in the last step.
+       // adView = (LinearLayout) inflater.inflate(R.layout.native_ad_layout, nativeAdLayout, false);
+       // nativeAdLayout.addView(adView);
         //User
         circleImageView = v.findViewById(R.id.circleImageView);
+
         getCurrentUser();
 
         //Posts
         postsRecyclerView = v.findViewById(R.id.post);
+        nativeBannerAd = v.findViewById(R.id.nativeBannerAd);
         progressBar = v.findViewById(R.id.progressBar);
         nothing = v.findViewById(R.id.nothing);
         postInfo = v.findViewById(R.id.post_list_info);
 
-        modelPosts = new ArrayList<>();
 
-        getAllPosts(TOTAL_ITEM_EACH_LOAD, lastPostKey);
+        modelPosts = new ArrayList<>();
+        NativeBannerAds myNativeAds = new NativeBannerAds((Activity) getContext());
+        myNativeAds.loadNativeAd(nativeBannerAd, false, "VID_HD_16_9_15S_APP_INSTALL#102713349600103_116050314933073");
+       getAllPosts(TOTAL_ITEM_EACH_LOAD, lastPostKey);
 
         checkFollowing();
+
 
         //PostIntent
         v.findViewById(R.id.create_post).setOnClickListener(v1 -> startActivity(new Intent(getActivity(), CreatePostActivity.class)));
@@ -161,7 +185,7 @@ public class HomeFragment extends Fragment {
         storyView.setLayoutManager(linearLayoutManager5);
         modelStories = new ArrayList<>();
 
-        //Home ScrollView
+      //Home ScrollView
         homeScrollview = v.findViewById(R.id.home_scrollview);
         homeScrollview.setOnTouchListener((v12, event) -> false);
 
@@ -178,6 +202,7 @@ public class HomeFragment extends Fragment {
 
         return v;
     }
+
 
     private void handleNotifications() {
         FirebaseDatabase.getInstance()
@@ -245,11 +270,13 @@ public class HomeFragment extends Fragment {
                 }
 
                 // Remove the last item if it was included for reference
+/*
                 if (lastPostId != null) {
                     if (!modelPosts.isEmpty()) {
                         modelPosts.remove(modelPosts.size() - 1);
                     }
                 }
+*/
                 Collections.reverse(modelPosts);
                 initializePostsAdapter(modelPosts);
                 toggleProgressbarVisibility();

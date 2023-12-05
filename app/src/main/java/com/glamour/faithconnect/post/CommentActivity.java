@@ -39,9 +39,12 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.facebook.ads.NativeBannerAd;
+import com.facebook.ads.NativeBannerAdView;
 import com.github.pgreze.reactions.ReactionPopup;
 import com.github.pgreze.reactions.ReactionsConfig;
 import com.github.pgreze.reactions.ReactionsConfigBuilder;
+import com.glamour.faithconnect.facebookmetaads.MyNativeBannerAd;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
 import com.google.android.exoplayer2.SimpleExoPlayer;
@@ -186,6 +189,14 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
         main = findViewById(R.id.main);
         urlEmbeddedView = findViewById(R.id.uev);
         requestQueue = Volley.newRequestQueue(CommentActivity.this);
+
+        MyNativeBannerAd nativeBannerAd = new MyNativeBannerAd(this);
+        nativeBannerAd.loadNativeBannerAd(
+                findViewById(R.id.nativeBannerAd),
+                NativeBannerAdView.Type.HEIGHT_120,
+                true,
+                "102713349600103_116057628265675"
+        );
 
         //GetPostId
         //GIF
@@ -598,7 +609,8 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
                 if (type.equals("image")){
                     mediaView.setVisibility(View.VISIBLE);
                     findViewById(R.id.media).setVisibility(View.VISIBLE);
-                    Picasso.get().load(snapshot.child("meme").getValue().toString()).into(mediaView);
+                    Glide.with(getApplicationContext()).asBitmap().load(snapshot.child("meme").getValue().toString()).fitCenter().into(mediaView);
+
                 }
                 if (type.equals("gif")){
                     mediaView.setVisibility(View.VISIBLE);

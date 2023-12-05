@@ -22,7 +22,7 @@
       <com.google.android.gms.ads.nativead.MediaView
           android:id="@+id/media_view"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
+          android:layout_height="250dp"
           android:layout_marginTop="10dp"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintHorizontal_bias="1.0"
@@ -209,21 +209,23 @@
 
       <androidx.appcompat.widget.AppCompatButton
           android:id="@+id/cta"
-          android:layout_width="100dp"
+          android:layout_width="match_parent"
           android:layout_height="28dp"
           android:layout_gravity="center_vertical"
           android:layout_weight="1"
-          android:background="#4286F4"
+          android:background="@drawable/gnt_btn_round"
+          android:backgroundTint="@color/colorPrimary"
           android:fontFamily="@font/bold_roboto"
           android:paddingLeft="3dp"
           android:paddingRight="3dp"
+          android:layout_margin="10dp"
           android:textColor="@color/white"
           android:textSize="12sp"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintHeight_min="35dp"
-          app:layout_constraintHorizontal_bias="0.987"
-          app:layout_constraintStart_toStartOf="parent" />
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/body"
+          app:layout_constraintVertical_bias="0.2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
   </com.google.android.gms.ads.nativead.NativeAdView>

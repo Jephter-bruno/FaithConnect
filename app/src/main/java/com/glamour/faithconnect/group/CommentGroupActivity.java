@@ -39,10 +39,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.facebook.ads.NativeBannerAdView;
 import com.github.pgreze.reactions.ReactionPopup;
 import com.github.pgreze.reactions.ReactionsConfig;
 import com.github.pgreze.reactions.ReactionsConfigBuilder;
 import com.glamour.faithconnect.adapter.AdapterCommentPosts;
+import com.glamour.faithconnect.facebookmetaads.MyNativeBannerAd;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
@@ -163,7 +165,13 @@ public class CommentGroupActivity extends AppCompatActivity implements View.OnCl
         setContentView(R.layout.activity_comment);
 
         mp = MediaPlayer.create(getApplicationContext(), R.raw.like);
-
+        MyNativeBannerAd nativeBannerAd = new MyNativeBannerAd(this);
+        nativeBannerAd.loadNativeBannerAd(
+                findViewById(R.id.nativeBannerAd),
+                NativeBannerAdView.Type.HEIGHT_120,
+                true,
+                "102713349600103_116057628265675"
+        );
         //GetPostId
         urlEmbeddedView = findViewById(R.id.uev);
         //GIF
@@ -535,8 +543,7 @@ public class CommentGroupActivity extends AppCompatActivity implements View.OnCl
                 if (type.equals("image")){
                     mediaView.setVisibility(View.VISIBLE);
                     findViewById(R.id.media).setVisibility(View.VISIBLE);
-                    Picasso.get().load(snapshot.child("meme").getValue().toString()).into(mediaView);
-                }
+                    Glide.with(getApplicationContext()).asBitmap().load(snapshot.child("meme").getValue().toString()).fitCenter().into(mediaView);                }
                 if (type.equals("gif")){
                     mediaView.setVisibility(View.VISIBLE);
                     findViewById(R.id.media).setVisibility(View.VISIBLE);

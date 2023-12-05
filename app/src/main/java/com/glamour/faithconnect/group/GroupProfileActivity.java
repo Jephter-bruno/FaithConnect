@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -65,7 +66,7 @@ public class GroupProfileActivity extends AppCompatActivity {
     RecyclerView post;
     AdapterGroupPost adapterPost;
     List<ModelPostGroup> modelPosts;
-    TextView name;
+    TextView name,nothing;
     //Bottom
     BottomSheetDialog more_options;
     LinearLayout members,add,announcement,mEdit,mLeave,delete,addPost,report,requestJoin;
@@ -75,7 +76,13 @@ public class GroupProfileActivity extends AppCompatActivity {
 
     boolean sendRequest = false;
     NightMode sharedPref;
-
+    private static final int TOTAL_ITEM_EACH_LOAD = 6;
+    private int currentPage = 1;
+    private boolean isLoading = false;
+    private boolean isLastPage = false;
+    private String lastPostKey = "";
+    NestedScrollView homeScrollview;
+    TextView postInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sharedPref = new NightMode(this);
@@ -89,6 +96,23 @@ public class GroupProfileActivity extends AppCompatActivity {
 
         requestQueue = Volley.newRequestQueue(GroupProfileActivity.this);
 
+        nothing=findViewById(R.id.nothing);
+        postInfo =findViewById(R.id.post_list_info);
+        //Home ScrollView
+        homeScrollview = findViewById(R.id.home_scrollview);
+        homeScrollview.setOnTouchListener((v12, event) -> false);
+
+        homeScrollview.getViewTreeObserver().addOnScrollChangedListener(() -> {
+            View view = homeScrollview.getChildAt(homeScrollview.getChildCount() - 1);
+            int bottomDetector = view.getBottom() - (homeScrollview.getHeight() + homeScrollview.getScrollY());
+            if (bottomDetector == 0) {
+                if (!isLastPage){
+                    getAllPost(TOTAL_ITEM_EACH_LOAD, lastPostKey);
+                }
+
+            }
+        });
+
         groupId = getIntent().getStringExtra("group");
         String type = getIntent().getStringExtra("type");
 
@@ -96,7 +120,7 @@ public class GroupProfileActivity extends AppCompatActivity {
         post = findViewById(R.id.post);
         post.setLayoutManager(new LinearLayoutManager(GroupProfileActivity.this));
         modelPosts = new ArrayList<>();
-        getAllPost();
+        getAllPost(TOTAL_ITEM_EACH_LOAD, lastPostKey);
 
         //Back
         findViewById(R.id.back).setOnClickListener(v -> {
@@ -412,6 +436,7 @@ public class GroupProfileActivity extends AppCompatActivity {
                 break;
             case "visitor":
                 findViewById(R.id.create_post).setVisibility(View.GONE);
+                post.setVisibility(View.GONE);
                 checkRequest();
                 break;
         }
@@ -452,17 +477,28 @@ public class GroupProfileActivity extends AppCompatActivity {
 
     }
 
-    private void getAllPost() {
-        FirebaseDatabase.getInstance().getReference("Groups").child(groupId).child("Posts").addValueEventListener(new ValueEventListener() {
+    private void getAllPost(int pageSize, String lastPostId) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Groups").child(groupId).child("Posts");
+
+        if (lastPostId != null) {
+            reference.startAt(lastPostId).limitToFirst(pageSize + 1);
+        } else {
+            reference.limitToFirst(pageSize);
+        }
+reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 modelPosts.clear();
                 for (DataSnapshot ds: dataSnapshot.getChildren()){
                     ModelPostGroup modelPost = ds.getValue(ModelPostGroup.class);
                     modelPosts.add(modelPost);
+                    lastPostKey = modelPost.getId();
                     adapterPost = new AdapterGroupPost(GroupProfileActivity.this, modelPosts);
                     post.setAdapter(adapterPost);
                     findViewById(R.id.progressBar).setVisibility(View.GONE);
+                    if (modelPosts.size() == dataSnapshot.getChildrenCount()) {
+                        Toast.makeText(GroupProfileActivity.this, "Come back later for more posts, or create a new post!", Toast.LENGTH_SHORT).show();
+                    }
                     if (adapterPost.getItemCount() == 0){
                         findViewById(R.id.progressBar).setVisibility(View.GONE);
                         post.setVisibility(View.GONE);
@@ -525,6 +561,8 @@ public class GroupProfileActivity extends AppCompatActivity {
                     add.setVisibility(View.GONE);
                     addPost.setVisibility(View.GONE);
                     requestJoin.setVisibility(View.GONE);
+                    post.setVisibility(View.GONE);
+                    nothing.setText("Please Join the Church Group for you to see the Posts");
                     break;
             }
 

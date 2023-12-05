@@ -88,7 +88,7 @@
     <string name="reported_users">Reported Users</string>
     <string name="reported_groups">Reported Churches</string>
     <string name="reported_posts">Reported Posts</string>
-    <string name="reported_reels">Reported Bites</string>
+    <string name="reported_reels">Reported Realms</string>
     <string name="verification_requests">Verification requests</string>
     <string name="remove_verified_users">Remove Verified users</string>
     <string name="warned_users">Warned users</string>
@@ -216,7 +216,7 @@
     <string name="background_colour">Background colour</string>
     <string name="add_gif">Add GIF</string>
     <string name="feeling_activity">Feeling / Activity</string>
-    <string name="add_reels">Add Bites</string>
+    <string name="add_reels">Add Realms</string>
     <string name="go_live">Go Live</string>
 
     <string name="create_podcast">Create Podcast</string>
@@ -237,12 +237,11 @@
     <string name="document">Document</string>
     <string name="for_you">For You</string>
     <string name="following">Following</string>
-    <string name="no_reels">No Bites</string>
+    <string name="no_reels">No Realms</string>
     <string name="followers">Followers</string>
     <string name="send_a_comment" tools:ignore="TypographyEllipsis">Send a comment...</string>
     <string name="video">Video</string>
     <string name="live">Live</string>
-    <string name="bible_tutor">Bible Tutor</string>
     <string name="chat">Chat</string>
     <string name="delete_photo">Delete Photo</string>
     <string name="create_a_new_meeting">Create a new meeting</string>
@@ -264,7 +263,7 @@
     <string name="post_background">Post Background</string>
     <string name="announcement">Announcement</string>
     <string name="send">Send</string>
-    <string name="create_reel">Create Bite</string>
+    <string name="create_reel">Create Realms</string>
     <string name="sell_something">Sell something</string>
     <string name="video_paused">Video Paused</string>
     <string name="muted">Muted</string>
@@ -306,7 +305,7 @@
     <string name="email">Email</string>
     <string name="already_have_an_account_login">Already have an account ? Login</string>
     <string name="send_to">Send to</string>
-    <string name="add_to_reels">Add to Bites</string>
+    <string name="add_to_reels">Add to Realms</string>
     <string name="add_to_story">Add to story</string>
     <string name="add_to_post">Add to post</string>
     <string name="send_to_user">Send to user</string>
@@ -321,7 +320,7 @@
     <string name="nearby">Nearby</string>
     <string name="load_more">Load More</string>
     <string name="saved">Saved</string>
-    <string name="reels">Bites</string>
+    <string name="reels">Realms</string>
     <string name="nothing_found">Nothing Found</string>
     <string name="calling" tools:ignore="TypographyEllipsis">Calling...</string>
     <string name="new_account">New account</string>

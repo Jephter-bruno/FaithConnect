@@ -40,7 +40,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:theme"
-        android:largeHeap="true">
+       >
         <meta-data
             android:name="com.google.android.gms.ads.flag.OPTIMIZE_INITIALIZATION"
             android:value="true"/>
@@ -147,7 +147,7 @@
         <activity android:name=".watchParty.PartyPrivacyActivity" />
         <activity android:name=".watchParty.InviteActivity" />
         <activity android:name=".watchParty.StartWatchPartyActivity" />
-        <activity android:name=".meeting.MeetingActivity" />
+      <!--  <activity android:name=".meeting.MeetingActivity" />-->
         <activity
             android:name=".groupVideoCall.openvcall.ui.VideoGroupCallActivity"
             android:theme="@style/FullScreenVideoTheme" />

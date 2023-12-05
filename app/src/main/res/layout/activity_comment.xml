@@ -294,11 +294,10 @@
 
                            <ImageView
                                android:visibility="gone"
-                               android:scaleType="centerCrop"
                                android:id="@+id/mediaView"
                                android:layout_centerInParent="true"
                                android:layout_width="match_parent"
-                               android:layout_height="450dp"
+                               android:layout_height="wrap_content"
                               tools:ignore="ContentDescription" />
 
 
@@ -665,9 +664,15 @@
                    android:layout_height="0.5dp"/>
 
                <LinearLayout
+                   android:orientation="vertical"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content">
-
+                   <com.facebook.ads.NativeAdLayout
+                       android:id="@+id/nativeBannerAd"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="vertical"
+                       />
                    <androidx.recyclerview.widget.RecyclerView
                        android:id="@+id/recycler_view"
                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -745,6 +750,7 @@
        </LinearLayout>
 
    </LinearLayout>
+
 
 
 </LinearLayout>

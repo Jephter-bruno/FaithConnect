@@ -131,10 +131,10 @@ public class ProfileFragment extends Fragment {
         view.findViewById(R.id.following).setVisibility(View.GONE);
         view.findViewById(R.id.posts).setVisibility(View.GONE);
 
-         view.findViewById(R.id.edit).setOnClickListener(v -> {
+        view.findViewById(R.id.edit).setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), EditProfileActivity.class);
             startActivity(intent);
-         });
+        });
 
         view.findViewById(R.id.menu).setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), MenuActivity.class);
@@ -553,7 +553,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void getAllPost() {
-        FirebaseDatabase.getInstance().getReference("Posts").limitToLast(currentPage*TOTAL_ITEM_EACH_LOAD)
+        FirebaseDatabase.getInstance().getReference("Posts")
                 .orderByChild("id").equalTo(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
                 .addValueEventListener(new ValueEventListener() {
                     @Override
