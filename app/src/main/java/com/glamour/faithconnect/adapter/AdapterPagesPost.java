@@ -132,6 +132,7 @@ public class AdapterPagesPost extends RecyclerView.Adapter<AdapterPagesPost.MyHo
 
 
         else if (position>1 && (position+1) % 4 == 0) {
+            holder.nativeAdLayout.removeAllViews();
             MyNativeBannerAd nativeBannerAd = new MyNativeBannerAd((Activity) context);
             nativeBannerAd.loadNativeBannerAd(
                     holder.nativeAdLayout,
@@ -141,11 +142,13 @@ public class AdapterPagesPost extends RecyclerView.Adapter<AdapterPagesPost.MyHo
             );
         }
         else if (position>1 && (position+1) % 10 == 0) {
+            holder.nativeAdLayout.removeAllViews();
             NativeBannerAds myNativeAdss = new NativeBannerAds((Activity) context);
             myNativeAdss.loadNativeAd(holder.nativeAdLayout, false, "CAROUSEL_IMG_SQUARE_APP_INSTALL#102713349600103_116050314933073");
 
         }
         else if (position>1 && (position+1) % 13 == 0) {
+            holder.nativeAdLayout.removeAllViews();
             NativeBannerAds myNativeAdsss = new NativeBannerAds((Activity) context);
             myNativeAdsss.loadNativeAd(holder.nativeAdLayout, false, "PLAYABLE#102713349600103_102714542933317");
 
