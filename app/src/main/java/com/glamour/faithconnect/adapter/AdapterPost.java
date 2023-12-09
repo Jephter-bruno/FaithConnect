@@ -444,7 +444,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
         if (type.equals("video")){
             holder.mediaView.setVisibility(View.VISIBLE);
             holder.play.setVisibility(View.VISIBLE);
-            Glide.with(context).asBitmap().load(modelPosts.get(position).getVine()).thumbnail(0.1f).centerInside().into(holder.mediaView);
+            Glide.with(context).asBitmap().load(modelPosts.get(position).getVine()).thumbnail(0.1f).centerCrop().into(holder.mediaView);
 
         }
         if (type.equals("party")){
@@ -1421,7 +1421,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
         final CircleImageView dp;
         final ImageView verified;
         final ImageView activity;
-        final SelectableRoundedImageView mediaView;
+        final SelectableRoundedImageView mediaView,medias;
         final ImageView play;
         final ImageView like_img;
         final ImageView more;
@@ -1452,8 +1452,8 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
         final LinearLayout likeButtonTwo;
         final LinearLayout comment;
         final RelativeLayout line;
-        final RelativeLayout ad;
-        URLEmbeddedView urlEmbeddedView;
+        final RelativeLayout ad, media_layout;
+        final URLEmbeddedView urlEmbeddedView;
         final NativeAdLayout nativeAdLayout;
         final TemplateView template;
 
@@ -1465,8 +1465,11 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
 
             verified = itemView.findViewById(R.id.verified);
 
+            media_layout = itemView.findViewById(R.id.media_layout);
+            medias = itemView.findViewById(R.id.medias);
             name = itemView.findViewById(R.id.name);
             username = itemView.findViewById(R.id.username);
+
             comment = itemView.findViewById(R.id.comment);
             ad = itemView.findViewById(R.id.ad);
 
