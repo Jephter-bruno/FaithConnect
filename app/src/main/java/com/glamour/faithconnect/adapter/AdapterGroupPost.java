@@ -421,15 +421,18 @@ public class AdapterGroupPost extends RecyclerView.Adapter<AdapterGroupPost.MyHo
         }
 
         if (type.equals("image")){
+            holder.media_layout.setVisibility(View.VISIBLE);
             holder.mediaView.setVisibility(View.VISIBLE);
             Glide.with(context).asBitmap().load(modelPosts.get(position).getMeme()).thumbnail(0.1f).centerCrop().into(holder.mediaView);
         }
         if (type.equals("gif")){
+            holder.media_layout.setVisibility(View.VISIBLE);
             holder.mediaView.setVisibility(View.VISIBLE);
             Glide.with(context).load(modelPosts.get(position).getMeme()).thumbnail(0.1f).into(holder.mediaView);
         }
         if (type.equals("video")){
             holder.mediaView.setVisibility(View.VISIBLE);
+            holder.media_layout.setVisibility(View.VISIBLE);
             holder.play.setVisibility(View.VISIBLE);
             Glide.with(context).asBitmap().load(modelPosts.get(position).getVine()).thumbnail(0.1f).fitCenter().into(holder.mediaView);
         }
@@ -437,6 +440,7 @@ public class AdapterGroupPost extends RecyclerView.Adapter<AdapterGroupPost.MyHo
             holder.mediaView.setVisibility(View.GONE);
         }
         if (type.equals("bg")){
+            holder.media_layout.setVisibility(View.VISIBLE);
             Picasso.get().load(modelPosts.get(position).getMeme()).into(holder.mediaView);
             holder.bg_text.setLinkText(modelPosts.get(position).getText());
             holder.bg_text.setTextSize(20);
@@ -1272,13 +1276,14 @@ public class AdapterGroupPost extends RecyclerView.Adapter<AdapterGroupPost.MyHo
         final RelativeLayout ad;
         URLEmbeddedView urlEmbeddedView;
         final NativeAdLayout nativeAdLayout;
+        final RelativeLayout media_layout;
 
 
 
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
-
+            media_layout = itemView.findViewById(R.id.media_layout);
             urlEmbeddedView = itemView.findViewById(R.id.uev);
             dp = itemView.findViewById(R.id.dp);
             verified = itemView.findViewById(R.id.verified);

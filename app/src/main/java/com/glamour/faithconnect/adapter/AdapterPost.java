@@ -432,6 +432,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
         }
 
         if (type.equals("image")){
+            holder.media_layout.setVisibility(View.VISIBLE);
             holder.mediaView.setVisibility(View.VISIBLE);
             Glide.with(context).asBitmap().load(modelPosts.get(position).getMeme()).thumbnail(0.1f).centerCrop().into(holder.mediaView);
             /*Glide.with(context).asBitmap().load(modelPosts.get(position).getMeme()).thumbnail(0.1f).into(holder.mediaView);*/
@@ -439,15 +440,18 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
         }
         if (type.equals("gif")){
             holder.mediaView.setVisibility(View.VISIBLE);
+            holder.media_layout.setVisibility(View.VISIBLE);
             Glide.with(context).load(modelPosts.get(position).getMeme()).thumbnail(0.1f).into(holder.mediaView);
         }
         if (type.equals("video")){
             holder.mediaView.setVisibility(View.VISIBLE);
+            holder.media_layout.setVisibility(View.VISIBLE);
             holder.play.setVisibility(View.VISIBLE);
             Glide.with(context).asBitmap().load(modelPosts.get(position).getVine()).thumbnail(0.1f).centerCrop().into(holder.mediaView);
 
         }
         if (type.equals("party")){
+            holder.media_layout.setVisibility(View.VISIBLE);
             Picasso.get().load(modelPosts.get(position).getMeme()).into(holder.mediaView);
             holder.bg_text.setLinkText(modelPosts.get(position).getText());
             holder.bg_text.setVisibility(View.VISIBLE);
@@ -1416,12 +1420,12 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
         return modelPosts.size();
     }
 
-    static class MyHolder extends RecyclerView.ViewHolder{
+    static class MyHolder extends RecyclerView.ViewHolder {
 
         final CircleImageView dp;
         final ImageView verified;
         final ImageView activity;
-        final SelectableRoundedImageView mediaView,medias;
+        final SelectableRoundedImageView mediaView;
         final ImageView play;
         final ImageView like_img;
         final ImageView more;
@@ -1466,7 +1470,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
             verified = itemView.findViewById(R.id.verified);
 
             media_layout = itemView.findViewById(R.id.media_layout);
-            medias = itemView.findViewById(R.id.medias);
+            // medias = itemView.findViewById(R.id.medias);
             name = itemView.findViewById(R.id.name);
             username = itemView.findViewById(R.id.username);
 
@@ -1505,9 +1509,9 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
             template = itemView.findViewById(R.id.my_template);
 
             dp = itemView.findViewById(R.id.dp);
-            nativeAdLayout= itemView.findViewById(R.id.nativeBannerAd);
+            nativeAdLayout = itemView.findViewById(R.id.nativeBannerAd);
 
-           /* AudienceNetworkAds.initialize(itemView.getContext());*/
+            /* AudienceNetworkAds.initialize(itemView.getContext());*/
             AdLoader adLoader = new AdLoader.Builder(itemView.getContext(), itemView.getContext().getString(R.string.native_ad_unit_id))
                     .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
                         @Override
@@ -1524,9 +1528,8 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
         }
 
 
-
-
     }
+
 
     private void addToHisNotification(String hisUid, String message, String post){
         String timestamp = ""+System.currentTimeMillis();

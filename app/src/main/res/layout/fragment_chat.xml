@@ -77,13 +77,17 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
+        <com.facebook.ads.NativeAdLayout
+            android:id="@+id/nativeBannerAd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/chatList"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-          android:layout_centerInParent="true"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <TextView
             android:textSize="20sp"

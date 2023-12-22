@@ -108,12 +108,6 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
-        //nativeAdLayout = v.findViewById(R.id.native_ad_container);
-      //  AudienceNetworkAds.initialize(getContext());
-
-        // Inflate the Ad view. The layout referenced should be the one you created in the last step.
-       // adView = (LinearLayout) inflater.inflate(R.layout.native_ad_layout, nativeAdLayout, false);
-       // nativeAdLayout.addView(adView);
         //User
         circleImageView = v.findViewById(R.id.circleImageView);
 
@@ -270,13 +264,12 @@ public class HomeFragment extends Fragment {
                 }
 
                 // Remove the last item if it was included for reference
-/*
+
                 if (lastPostId != null) {
                     if (!modelPosts.isEmpty()) {
                         modelPosts.remove(modelPosts.size() - 1);
                     }
                 }
-*/
                 Collections.reverse(modelPosts);
                 initializePostsAdapter(modelPosts);
                 toggleProgressbarVisibility();

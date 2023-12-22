@@ -194,11 +194,10 @@
             android:layout_height="wrap_content">
         <RelativeLayout
             android:id="@+id/media_layout"
-            android:layout_width="0dp"
-            android:layout_height="300dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
             android:visibility="gone"
+            android:background="?attr/layoutcolor"
             android:backgroundTint="#2835383B"
             app:layout_constraintEnd_toEndOf="parent"
             >
@@ -209,17 +208,9 @@
                 app:sriv_left_bottom_corner_radius="10dip"
                 app:sriv_right_bottom_corner_radius="10dip"
                 app:sriv_oval="false"
-                android:id="@+id/medias"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </RelativeLayout>
-            <com.joooonho.SelectableRoundedImageView
-
-                app:sriv_oval="false"
                 android:id="@+id/mediaView"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
-               tools:ignore="ContentDescription" />
+                android:layout_height="match_parent" />
 
             <ImageView
                 android:id="@+id/play"
@@ -228,8 +219,8 @@
                 android:layout_centerInParent="true"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-
-               tools:ignore="ContentDescription" />
+                tools:ignore="ContentDescription" />
+        </RelativeLayout>
 
             <me.jagar.chatvoiceplayerlibrary.VoicePlayerView
                 android:visibility="gone"

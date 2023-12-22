@@ -58,11 +58,13 @@
                 android:layout_gravity="end"
                 android:id="@+id/text"
                 android:textSize="14sp"
+                android:background="@drawable/message_bg"
                 android:paddingStart="18dp"
                 android:paddingEnd="14dp"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
                 android:fontFamily="@font/bold_roboto"
+                android:textColor="#fff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 

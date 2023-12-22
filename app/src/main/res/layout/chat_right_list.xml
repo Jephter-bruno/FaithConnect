@@ -47,18 +47,18 @@
         android:layout_height="wrap_content">
 
         <com.tylersuehr.socialtextview.SocialTextView
-            app:mentionColor="@color/colorPrimary"
-            app:emailColor="@color/colorPrimary"
-            app:phoneColor="@color/colorPrimary"
-            app:hashtagColor="@color/colorPrimary"
-            app:selectedColor="@color/colorPrimary"
-            app:urlColor="@color/colorPrimary"
+            app:mentionColor="@color/colorAccent"
+            app:emailColor="@color/colorAccent"
+            app:phoneColor="@color/colorAccent"
+            app:hashtagColor="@color/colorAccent"
+            app:selectedColor="@color/colorAccent"
+            app:urlColor="@color/colorAccent"
             android:visibility="gone"
             android:id="@+id/text"
             android:layout_gravity="start"
             android:textSize="14sp"
             android:backgroundTint="?attr/backgroundcolor"
-            android:background="@drawable/gnt_btn_round"
+            android:background="@drawable/btn_round"
             android:paddingStart="18dp"
             android:paddingEnd="18dp"
             android:paddingTop="12dp"
@@ -157,7 +157,7 @@
                 android:layout_gravity="start"
                 android:orientation="horizontal"
                 android:backgroundTint="?attr/backgroundcolor"
-                android:background="@drawable/gnt_btn_round"
+                android:background="@drawable/btn_round"
                 android:paddingStart="18dp"
                 android:paddingEnd="18dp"
                 android:paddingTop="12dp"
@@ -251,7 +251,7 @@
                 android:id="@+id/post_text"
                 android:textSize="16sp"
                 android:backgroundTint="?attr/backgroundcolor"
-                android:background="@drawable/gnt_btn_round"
+                android:background="@drawable/btn_round"
                 android:paddingStart="18dp"
                 android:paddingEnd="18dp"
                 android:paddingTop="12dp"
@@ -308,6 +308,7 @@
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
+
     <RelativeLayout
         android:id="@+id/ad"
         android:visibility="gone"
@@ -323,6 +324,5 @@
             app:gnt_template_type="@layout/gnt_small_template_view" />
 
     </RelativeLayout>
-
 
 </LinearLayout>

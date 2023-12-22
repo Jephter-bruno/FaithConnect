@@ -1,5 +1,6 @@
 package com.glamour.faithconnect.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -11,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.facebook.ads.NativeBannerAdView;
+import com.glamour.faithconnect.facebookmetaads.MyNativeBannerAd;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
@@ -42,7 +45,13 @@ public class ChatFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_chat, container, false);
-
+        MyNativeBannerAd nativeBannerAd = new MyNativeBannerAd((Activity)getContext());
+        nativeBannerAd.loadNativeBannerAd(
+                view.findViewById(R.id.nativeBannerAd),
+                NativeBannerAdView.Type.HEIGHT_120,
+                true,
+                "YOUR_PLACEMENT_ID"
+        );
         MobileAds.initialize(getContext(), initializationStatus -> {
         });
         AdView mAdView = view.findViewById(R.id.adView);

@@ -403,19 +403,23 @@ if(type.equals("text")){
     holder.mediaView.setVisibility(View.GONE);
 }
         if (type.equals("image")){
+            holder.media_layout.setVisibility(View.VISIBLE);
             holder.mediaView.setVisibility(View.VISIBLE);
             Glide.with(context).asBitmap().load(modelPosts.get(position).getMeme()).fitCenter().into(holder.mediaView);
         }
         if (type.equals("gif")){
+            holder.media_layout.setVisibility(View.VISIBLE);
             holder.mediaView.setVisibility(View.VISIBLE);
             Glide.with(context).load(modelPosts.get(position).getMeme()).thumbnail(0.1f).into(holder.mediaView);
         }
         if (type.equals("video")){
             holder.mediaView.setVisibility(View.VISIBLE);
+            holder.media_layout.setVisibility(View.VISIBLE);
             holder.play.setVisibility(View.VISIBLE);
             Glide.with(context).asBitmap().load(modelPosts.get(position).getVine()).thumbnail(0.1f).into(holder.mediaView);
         }
         if (type.equals("bg")){
+            holder.media_layout.setVisibility(View.VISIBLE);
             Picasso.get().load(modelPosts.get(position).getMeme()).into(holder.mediaView);
             holder.bg_text.setLinkText(modelPosts.get(position).getText());
             holder.bg_text.setOnLinkClickListener((i, s) -> {
@@ -1247,14 +1251,14 @@ if(type.equals("text")){
         final LinearLayout likeButtonTwo;
         final LinearLayout comment;
         final RelativeLayout line;
-        final RelativeLayout ad;
+        final RelativeLayout ad,media_layout;
         URLEmbeddedView urlEmbeddedView;
         final NativeAdLayout nativeAdLayout;
 
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
-
+            media_layout = itemView.findViewById(R.id.media_layout);
             urlEmbeddedView = itemView.findViewById(R.id.uev);
             dp = itemView.findViewById(R.id.dp);
             verified = itemView.findViewById(R.id.verified);

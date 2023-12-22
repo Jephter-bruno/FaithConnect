@@ -477,6 +477,7 @@ public class GroupProfileActivity extends AppCompatActivity {
 
     }
 
+
     private void getAllPost(int pageSize, String lastPostId) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Groups").child(groupId).child("Posts");
 
@@ -517,6 +518,7 @@ reference.addValueEventListener(new ValueEventListener() {
             }
         });
     }
+
 
     private void options() {
         if (more_options == null){

@@ -245,6 +245,7 @@ public class GroupFragment extends AppCompatActivity {
         });
     }
 
+
     private void getAllPost(int pageSize, String lastPostId) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Groups");
 
@@ -313,6 +314,7 @@ public class GroupFragment extends AppCompatActivity {
             }
         });
     }
+
 
     private void getMyGroups() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Groups");

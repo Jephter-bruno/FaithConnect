@@ -22,7 +22,7 @@
       <com.google.android.gms.ads.nativead.MediaView
           android:id="@+id/media_view"
           android:layout_width="match_parent"
-          android:layout_height="250dp"
+          android:layout_height="wrap_content"
           android:layout_marginTop="10dp"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintHorizontal_bias="1.0"
@@ -163,7 +163,6 @@
               </RatingBar>
               <TextView
                   android:id="@+id/secondary"
-                  android:fontFamily="@font/bold_roboto"
                   android:textColor="?attr/textcolor"
                   android:layout_width="wrap_content"
                   android:layout_height="match_parent"
@@ -194,11 +193,9 @@
           android:id="@+id/body"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginEnd="105dp"
+          android:layout_marginEnd="15dp"
           android:ellipsize="end"
-          android:fontFamily="@font/bold_roboto"
           android:gravity="center_vertical"
-          android:lines="2"
           android:textColor="?attr/textcolor"
           android:textSize="16sp"
           app:layout_constraintBottom_toBottomOf="parent"
@@ -215,7 +212,6 @@
           android:layout_weight="1"
           android:background="@drawable/gnt_btn_round"
           android:backgroundTint="@color/colorPrimary"
-          android:fontFamily="@font/bold_roboto"
           android:paddingLeft="3dp"
           android:paddingRight="3dp"
           android:layout_margin="10dp"

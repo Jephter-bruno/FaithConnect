@@ -679,9 +679,61 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
         currentPage++;
         getAllPost();
     }
-
     private void getAllPost() {
-        FirebaseDatabase.getInstance().getReference("Posts").limitToLast(currentPage*TOTAL_ITEM_EACH_LOAD)
+        FirebaseDatabase.getInstance().getReference("Posts")
+                .orderByChild("id").equalTo(hisUID)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        modelPosts.clear();
+
+                        for (DataSnapshot ds : snapshot.getChildren()) {
+                            ModelPost modelPost = ds.getValue(ModelPost.class);
+
+                            // Check for null to avoid potential NullPointerException
+                            if (modelPost != null) {
+                                modelPosts.add(modelPost);
+                            }
+                        }
+
+                        // Initialize the adapter outside the loop
+                        adapterPost = new AdapterPost(UserProfileActivity.this, modelPosts);
+                        post.setAdapter(adapterPost);
+
+                        findViewById(R.id.progressBar).setVisibility(View.GONE);
+
+                        if (modelPosts.isEmpty()) {
+                            post.setVisibility(View.GONE);
+                            nothing.setVisibility(View.VISIBLE);
+                        } else {
+                            post.setVisibility(View.VISIBLE);
+                            nothing.setVisibility(View.GONE);
+
+                            if (adapterPost.getItemCount() == initial) {
+                                load.setVisibility(View.GONE);
+                                currentPage--;
+                            } else {
+                                load.setVisibility(View.VISIBLE);
+                            }
+                        }
+
+                        if (!snapshot.exists()) {
+                            findViewById(R.id.progressBar).setVisibility(View.GONE);
+                            post.setVisibility(View.GONE);
+                            nothing.setVisibility(View.VISIBLE);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        // Handle onCancelled event
+                    }
+                });
+    }
+
+/*
+    private void getAllPost() {
+        FirebaseDatabase.getInstance().getReference("Posts")
                 .orderByChild("id").equalTo(hisUID)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -725,6 +777,7 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
                     }
                 });
     }
+*/
 
     private void checkBlocked() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");

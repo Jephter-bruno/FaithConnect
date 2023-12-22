@@ -260,7 +260,10 @@ dependencies {
     //admob Implementation
     implementation 'com.google.android.gms:play-services-ads:22.3.0'
     implementation 'com.google.errorprone:error_prone_annotations:2.16'
+/*
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 
+    implementation 'com.daimajia.androidanimations:library:2.4@aar'*/
 
 
 
