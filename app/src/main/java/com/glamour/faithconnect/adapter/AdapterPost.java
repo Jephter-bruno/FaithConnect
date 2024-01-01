@@ -1511,7 +1511,6 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
             dp = itemView.findViewById(R.id.dp);
             nativeAdLayout = itemView.findViewById(R.id.nativeBannerAd);
 
-            /* AudienceNetworkAds.initialize(itemView.getContext());*/
             AdLoader adLoader = new AdLoader.Builder(itemView.getContext(), itemView.getContext().getString(R.string.native_ad_unit_id))
                     .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
                         @Override

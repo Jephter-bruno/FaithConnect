@@ -147,7 +147,7 @@
         <activity android:name=".watchParty.PartyPrivacyActivity" />
         <activity android:name=".watchParty.InviteActivity" />
         <activity android:name=".watchParty.StartWatchPartyActivity" />
-      <!--  <activity android:name=".meeting.MeetingActivity" />-->
+    <activity android:name=".meeting.MeetingActivity" />
         <activity
             android:name=".groupVideoCall.openvcall.ui.VideoGroupCallActivity"
             android:theme="@style/FullScreenVideoTheme" />

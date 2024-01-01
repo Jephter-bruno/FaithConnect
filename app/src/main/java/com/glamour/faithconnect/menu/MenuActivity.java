@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.glamour.faithconnect.meeting.MeetingActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -113,7 +114,7 @@ public class MenuActivity extends AppCompatActivity {
 
         });
 
-       /* findViewById(R.id.meeting).setOnClickListener(v -> startActivity(new Intent(MenuActivity.this, MeetingActivity.class)));*/
+       findViewById(R.id.meeting).setOnClickListener(v -> startActivity(new Intent(MenuActivity.this, MeetingActivity.class)));
 
         findViewById(R.id.podcast).setOnClickListener(v -> {
 

@@ -97,6 +97,7 @@ public class AdapterComment extends RecyclerView.Adapter<AdapterComment.MyHolder
             holder.ad.setVisibility(View.VISIBLE);
         }
         else if (position>1 && (position+1) % 6 == 0) {
+            holder.fad.setVisibility(View.VISIBLE);
             MyNativeBannerAd nativeBannerAd = new MyNativeBannerAd((Activity) context);
             nativeBannerAd.loadNativeBannerAd(
                     holder.nativeAdLayout,
@@ -772,7 +773,7 @@ public class AdapterComment extends RecyclerView.Adapter<AdapterComment.MyHolder
         final ImageView angry;
         final ImageView sad;
         TextView reply;
-       final RelativeLayout ad;
+       final RelativeLayout fad, ad;
         final NativeAdLayout nativeAdLayout;
         public MyHolder(@NonNull View itemView) {
             super(itemView);
@@ -800,6 +801,7 @@ public class AdapterComment extends RecyclerView.Adapter<AdapterComment.MyHolder
 
 
             ad = itemView.findViewById(R.id.ad);
+            fad = itemView.findViewById(R.id.fad);
 
             AdLoader adLoader = new AdLoader.Builder(itemView.getContext(), itemView.getContext().getString(R.string.native_ad_unit_id_comments))
                     .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {

@@ -25,7 +25,6 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             app:tint="?attr/textcolor"
-
            tools:ignore="ContentDescription" />
 
         <TextView

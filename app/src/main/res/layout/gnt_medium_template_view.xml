@@ -22,7 +22,7 @@
       <com.google.android.gms.ads.nativead.MediaView
           android:id="@+id/media_view"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
+          android:layout_height="300dp"
           android:layout_marginTop="10dp"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintHorizontal_bias="1.0"
@@ -96,7 +96,6 @@
                   android:textSize="16sp"
                   android:id="@+id/primary"
                   android:textStyle="bold"
-                  android:fontFamily="@font/bold_roboto"
                   android:textColor="?attr/textcolor"
                   android:lines="1"
                   android:layout_height="match_parent"

@@ -41,7 +41,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/gnt_btn_round"
-      android:backgroundTint="?attr/backgroundcolor"
+        android:backgroundTint="?attr/backgroundcolor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,11 +64,19 @@
             android:textSize="20sp"
             tools:ignore="Autofill" />
     </RelativeLayout>
+    <com.facebook.ads.NativeAdLayout
+        android:id="@+id/nativeBannerAd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/layout"
+        />
 
     <Button
         android:id="@+id/nextMeet"
         android:layout_width="0dp"
         android:layout_height="45dp"
+        android:layout_marginTop="100dp"
         android:layout_marginStart="24dp"
         android:background="@drawable/gnt_btn_round"
         android:backgroundTint="@color/colorPrimary"
@@ -78,14 +86,12 @@
         android:textColor="#fff"
         android:stateListAnimator="@null"
         android:fontFamily="@font/bold_roboto"
-        android:gravity="center"
         android:layout_marginLeft="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout"
+        app:layout_constraintTop_toBottomOf="@+id/nativeBannerAd"
         tools:ignore="UnusedAttribute" />
 
     <com.google.android.material.progressindicator.CircularProgressIndicator

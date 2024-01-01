@@ -97,7 +97,7 @@ android {
 
     defaultConfig {
         applicationId "com.glamour.faithconnect"
-        minSdkVersion 23
+        minSdkVersion 24
         //noinspection OldTargetApi
         targetSdkVersion 32
         versionCode 1
@@ -208,7 +208,7 @@ dependencies {
     //noinspection GradleDependency
     androidTestImplementation 'com.jayway.android.robotium:robotium-solo:5.6.3'
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
-   /* implementation ('org.jitsi.react:jitsi-meet-sdk:6.0.0') { transitive = true }*/
+implementation ('org.jitsi.react:jitsi-meet-sdk:6.0.0') { transitive = true }
     //noinspection GradleDependency
     implementation files('libs/YouTubeAndroidPlayerApi.jar')
 
