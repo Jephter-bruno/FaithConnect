@@ -103,7 +103,7 @@ public class AdapterComment extends RecyclerView.Adapter<AdapterComment.MyHolder
                     holder.nativeAdLayout,
                     NativeBannerAdView.Type.HEIGHT_120,
                     true,
-                    "YOUR_PLACEMENT_ID"
+                    "102713349600103_116057628265675"
             );
         }
 

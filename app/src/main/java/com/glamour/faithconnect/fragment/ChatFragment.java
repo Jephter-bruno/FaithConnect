@@ -50,7 +50,7 @@ public class ChatFragment extends Fragment {
                 view.findViewById(R.id.nativeBannerAd),
                 NativeBannerAdView.Type.HEIGHT_120,
                 true,
-                "YOUR_PLACEMENT_ID"
+                "102713349600103_116057628265675"
         );
         MobileAds.initialize(getContext(), initializationStatus -> {
         });

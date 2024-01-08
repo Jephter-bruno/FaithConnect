@@ -126,7 +126,7 @@ public class AdapterReel extends RecyclerView.Adapter<AdapterReel.AdapterReelHol
         }
    /*     else if (position>1 && (position+1) % 8 == 0) {
             ReelNativeBannerAds myNativeAds = new ReelNativeBannerAds((Activity) context);
-            myNativeAds.loadNativeAd(holder.nativeAdLayout, false, "YOUR_PLACEMENT_ID");
+            myNativeAds.loadNativeAd(holder.nativeAdLayout, false, "102713349600103_116057628265675");
 
         }
 */

@@ -92,7 +92,7 @@ public class AdapterCommentPosts extends RecyclerView.Adapter<AdapterCommentPost
         if (position>1 && (position+1) % 3 == 0) {
             holder.fad.setVisibility(View.VISIBLE);
             MyNativeBannerAd myNativeBannerAds = new MyNativeBannerAd((Activity) context);
-            myNativeBannerAds.loadNativeBannerAd(holder.nativeAdLayout, NativeBannerAdView.Type.HEIGHT_120,false, "YOUR_PLACEMENT_ID");
+            myNativeBannerAds.loadNativeBannerAd(holder.nativeAdLayout, NativeBannerAdView.Type.HEIGHT_120,false, "102713349600103_116057628265675");
 
         }
 
